@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 
+import { AuthGuard } from './_guards';
+import { AuthService } from './_services';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +27,10 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
