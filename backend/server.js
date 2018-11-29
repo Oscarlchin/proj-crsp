@@ -1,45 +1,17 @@
 // Name: Chan Wang Wai ;    SID: 1155063885
 var express = require('express');
 var Passport = require( 'passport' );
-var LocalStrategy = require( 'passport-local' ).Strategy;
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var errorHandler = require('./_helpers/error-handle');
+var jwt = require('jsonwebtoken');
+var config = require('./config');
+var passStrat = require('./_helpers/passport-strats');
 
-var users = {
-  userone: {
-    username: 'userone',
-    password: '1234',
-    token: 'jwt1',
-  },
-  usertwo: {
-    username: 'usertwo',
-    password: '5678',
-    token: 'jwt2',
-  },
-}
-
-var localStrategy = new LocalStrategy({
-    usernameField: 'username',
-    passwordField: 'password',
-  },
-  function(username, password, done) {
-    user = users[ username ];
-
-    if ( user == null ) {
-      return done( null, false, { message: 'Invalid user' } );
-    };
-
-    if ( user.password !== password ) {
-      return done( null, false, { message: 'Invalid password' } );
-    };
-
-    done( null, user );
-}
-)
-
-Passport.use( 'local', localStrategy );
+Passport.use( 'local', passStrat.localStrategy() );
+Passport.use( 'admin', passStrat.adminStrategy() );
 
 var app = express();
 app.use(bodyParser.urlencoded({extended:false}));
@@ -49,6 +21,8 @@ app.use(cors({
   origin: 'http://localhost:4200',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }));
+app.use(errorHandler);
+
 
 
 /**
@@ -90,13 +64,25 @@ app.post('/users/authenticate', (req,res,next) => {
      if (err) { return next(err);};
 
      if (passportUser){
-        const user = passportUser;
-        return res.json(user);
+        const token = jwt.sign({ username: passportUser.username }, config.secret, { audience: 'user'});
+        const { password, ...userWithoutPassword } = passportUser;
+        return res.json({...userWithoutPassword, token});
      }
      return status(400).info;
    } )(req,res,next);
-}
+});
 
-);
+app.post('/admin/authenticate', (req,res,next) => {
+  return Passport.authenticate('admin',{session:false}, (err, passportUser, info) =>{
+    if (err) { return next(err);};
+
+    if (passportUser){
+       const token = jwt.sign({ username: passportUser.username }, config.secret, { audience: 'admin'});
+       const { password, ...userWithoutPassword } = passportUser;
+       return res.json({...userWithoutPassword, token});
+    }
+    return status(400).info;
+  } )(req,res,next);
+});
 
 var server = app.listen(3000);

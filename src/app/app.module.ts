@@ -9,10 +9,14 @@ import { NavComponent } from './nav/nav.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
+import { EventslistComponent } from './eventslist/eventslist.component';
 
-import { AuthGuard } from './_guards';
+
+import { AuthGuard, AdminGuard } from './_guards';
 import { AuthService, UserService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { AdminComponent } from './admin/admin.component';
+
 
 
 @NgModule({
@@ -21,7 +25,9 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
     NavComponent,
     HomeComponent,
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    EventslistComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +38,7 @@ import { JwtInterceptor, ErrorInterceptor } from './_helpers';
   ],
   providers: [
     AuthGuard,
+    AdminGuard,
     AuthService,
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
