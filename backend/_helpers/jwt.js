@@ -2,15 +2,10 @@ var expressJwt = require('express-jwt');
 var config = require('../config.json');
 
 module.exports = {
-  jwtuser,
-  jwtadmin
+  jwtuser:() => {return jwtuser;},
+  jwtadmin:() => {return jwtadmin;}
 };
 
-function jwtuser(){
-  return expressJwt({secret: config.secret, audience: 'user'});
-}
-function jwtadmin(){
-  return expressJwt({secret: config.secret, audience: 'admin'});
-}
+var jwtuser = expressJwt({secret: config.secret, audience: 'user'});
 
-
+var jwtadmin = expressJwt({secret: config.secret, audience: 'admin'});
