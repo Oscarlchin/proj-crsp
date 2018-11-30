@@ -9,6 +9,7 @@ var errorHandler = require('./_helpers/error-handle');
 var jwt = require('jsonwebtoken');
 var config = require('./config');
 var passStrat = require('./_helpers/passport-strats');
+var bcrypt = require('bcryptjs');
 
 Passport.use( 'local', passStrat.localStrategy );
 Passport.use( 'admin', passStrat.adminStrategy );
@@ -41,6 +42,8 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function () { console.log("Connection is open...");
 });
 
+var User = require('./_models/UserSchema.js');
+
 
 app.post('/users/authenticate', (req,res,next) => {
    return Passport.authenticate('local',{session:false}, (err, passportUser, info) =>{
@@ -48,7 +51,8 @@ app.post('/users/authenticate', (req,res,next) => {
 
      if (passportUser){
         const token = jwt.sign({ username: passportUser.username }, config.secret, { audience: 'user'});
-        const { password, ...userWithoutPassword } = passportUser;
+        const { password, ...userWithoutPassword } = passportUser._doc;
+        //console.log(passportUser);
         return res.json({...userWithoutPassword, token});
      }
      return status(400).info;
@@ -66,6 +70,26 @@ app.post('/admin/authenticate', (req,res,next) => {
     }
     return status(400).info;
   } )(req,res,next);
+});
+
+
+
+app.post('/users/register',(req,res,next) => {
+  bcrypt.genSalt(10, function(err, salt) {
+    if (err) return next(err);
+    bcrypt.hash(req.body.password, salt, function(err, hash) {
+      if (err) return next(err);
+      var user = new User({
+        username: req.body.username,
+        password: hash,
+        favevents: []
+      });
+      user.save(function(err){
+        if (err) res.json(err);
+        res.json({ "mess":"0 Succesfully registered"});
+      })
+    });
+  });
 });
 
 var server = app.listen(3000);
