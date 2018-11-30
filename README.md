@@ -12,8 +12,8 @@ Reference:
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
 ##Package used
-FE: Angular, Angular Material/""Bootstrap""????
-BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors
+FE: Angular, Bootstrap
+BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors, bcrypt
 Suggestion: multer, soctketio??
 
 ## Project Requirement
