@@ -11,8 +11,8 @@ export class EventService {
         return this.http.get<Event[]>(`${config.BASE_API_URL}/events`);
     }
 
-    getById(id: number) {
-        return this.http.get(`${config.BASE_API_URL}/events/` + id);
+    getById(program_id: number) {
+        return this.http.get(`${config.BASE_API_URL}/events/` + program_id);
     }
 
     create(event: Event) {
@@ -20,7 +20,7 @@ export class EventService {
     }
 
     update(event: Event) {
-        return this.http.put(`${config.BASE_API_URL}/events/` + event.id, event);
+        return this.http.put(`${config.BASE_API_URL}/events/` + event.program_id, event);
     }
 
     delete(id: number) {

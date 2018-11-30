@@ -1,4 +1,7 @@
+import { Comment } from './comment';
+
 export class Event {
+  program_id: number;
   program_name: string;
   district: string;
   venue: string;
@@ -14,4 +17,5 @@ export class Event {
   min_age: number;
   max_age: number;
   url: string;
+  comments: Comment[];
 }

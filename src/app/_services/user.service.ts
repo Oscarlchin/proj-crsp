@@ -11,8 +11,8 @@ export class UserService {
         return this.http.get<User[]>(`${config.BASE_API_URL}/users`);
     }
 
-    getById(id: number) {
-        return this.http.get(`${config.BASE_API_URL}/users/` + id);
+    getByName(username: string) {
+        return this.http.get(`${config.BASE_API_URL}/users/` + username);
     }
 
     register(user: User) {
@@ -20,7 +20,7 @@ export class UserService {
     }
 
     update(user: User) {
-        return this.http.put(`${config.BASE_API_URL}/users/` + user.id, user);
+        return this.http.put(`${config.BASE_API_URL}/users/` + user.username, user);
     }
 
     delete(id: number) {

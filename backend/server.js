@@ -23,8 +23,8 @@ app.use(cors({
 }));
 app.use(errorHandler);
 
-require('./extract')(app);
-
+require('./extract.js')(app);
+require('./useractions.js')(app);
 
 /**
 var options = {
