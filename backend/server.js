@@ -10,8 +10,8 @@ var jwt = require('jsonwebtoken');
 var config = require('./config');
 var passStrat = require('./_helpers/passport-strats');
 
-Passport.use( 'local', passStrat.localStrategy() );
-Passport.use( 'admin', passStrat.adminStrategy() );
+Passport.use( 'local', passStrat.localStrategy );
+Passport.use( 'admin', passStrat.adminStrategy );
 
 var app = express();
 app.use(bodyParser.urlencoded({extended:false}));

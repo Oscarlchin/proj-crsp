@@ -1,9 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
 
-module.exports = {
-  localStrategy: () => { return localStrategy;},
-  adminStrategy: () => { return adminStrategy;}
-}
 
 var users = {
   userone: {
@@ -57,6 +53,11 @@ function(username, password, done) {
   done( null, admin );
 }
 );
+
+module.exports = {
+  localStrategy: localStrategy,
+  adminStrategy: adminStrategy
+}
 
 
 
