@@ -1,3 +1,7 @@
 {
-  "secret": "THIS IS"
+  "secret": "THIS IS",
+  "dbURL": "mongodb+srv://cluster0-uowod.mongodb.net/proj-crsp",
+  "dbuser": "cadmin",
+  "dbpass": "8yKdsSjN23mhJTos",
+  "dbName": "proj-crsp"
 }

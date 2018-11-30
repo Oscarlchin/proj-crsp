@@ -26,15 +26,13 @@ app.use(errorHandler);
 require('./extract.js')(app);
 require('./useractions.js')(app);
 
-/**
-var options = {
-user: 'cadmin',
-pass: '8yKdsSjN23mhJTos',
-dbName: 'proj-crsp'
+var dboptions = {
+user: config.dbuser,
+pass: config.dbpass,
+dbName: config.dbName
 };
-var dbURL="mongodb+srv://cluster0-uowod.mongodb.net/proj-crsp";
 
-mongoose.connect(dbURL, options);
+mongoose.connect(config.dbURL, dboptions);
 
 var db = mongoose.connection;
 
@@ -43,22 +41,6 @@ db.on('error', console.error.bind(console, 'Connection error:'));
 db.once('open', function () { console.log("Connection is open...");
 });
 
-var EventSchema = mongoose.Schema({
-  eventId: { type: Number, required: true, unique: true },
-  name: { type: String, required: true },
-  loc: { type: ObjectId, ref:"Location" },
-  quota: { type: Number }
-  });
-
-var EventSchema = mongoose.Schema({
-    eventId: { type: Number, required: true, unique: true },
-    name: { type: String, required: true },
-    loc: { type: ObjectId, ref:"Location" },
-    quota: { type: Number }
-    });
-
-var Event = mongoose.model('Event', EventSchema);
- */
 
 app.post('/users/authenticate', (req,res,next) => {
    return Passport.authenticate('local',{session:false}, (err, passportUser, info) =>{
