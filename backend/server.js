@@ -23,6 +23,7 @@ app.use(cors({
 }));
 app.use(errorHandler);
 
+require('./extract')(app);
 
 
 /**

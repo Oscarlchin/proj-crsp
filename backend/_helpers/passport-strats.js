@@ -1,20 +1,8 @@
+var db = require('./db.js');
+
 var LocalStrategy = require('passport-local').Strategy;
 
-
-var users = {
-  userone: {
-    username: 'userone',
-    password: '1234'
-  },
-  usertwo: {
-    username: 'usertwo',
-    password: '5678'
-  },
-  admin:{
-    username: 'admin',
-    password: 'admin'
-  }
-}
+var users = db.users;
 
 var localStrategy = new LocalStrategy({
   usernameField: 'username',
