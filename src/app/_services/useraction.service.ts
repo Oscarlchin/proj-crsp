@@ -6,7 +6,7 @@ import { User, Event } from '../_models';
 @Injectable()
 export class UseractionService {
   constructor(private http: HttpClient) { }
-  getevent() {
+  getevent() {  // get the events for table
     return this.http.get<Event[]>(`${config.BASE_API_URL}/useraction/events`);
   }
   favevent(program_id: number) {

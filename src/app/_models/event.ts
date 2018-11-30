@@ -17,5 +17,5 @@ export class Event {
   min_age: number;
   max_age: number;
   url: string;
-  comments: Comment[];
+//  comments: Comment[];
 }
