@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../_services';
-
-
+import { User } from '../_models';
 
 @Component({
   selector: 'app-nav',
@@ -11,12 +10,16 @@ import { AuthService } from '../_services';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-
+  currentUsername = '' ;
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private user: User) { }
 
   ngOnInit() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUsername = currentUser['username'];
+    console.dir(this.currentUsername);
   }
 
   AdminLogin() {
