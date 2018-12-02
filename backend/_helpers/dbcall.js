@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Event = require('../_models/EventSchema.js');
-
+var User = require('../_models/UserSchema.js');
 exports.getAllEvents = getAllEvents;
 
 function getAllEvents() {
@@ -12,4 +12,6 @@ function getAllEvents() {
       });
     });
 }
+
+
 
