@@ -85,7 +85,7 @@ app.post('/users/register',(req,res,next) => {
         favevents: []
       });
       user.save(function(err){
-        if (err) res.json(err);
+        if (err) errorHandler(err);
         res.status(201);
       })
     });
