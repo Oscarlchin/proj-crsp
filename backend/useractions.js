@@ -49,7 +49,7 @@ module.exports = function (app){
       }
     });
   });
-  app.put("/useraction/:username/leavecomment", jwtuser, function(){
+  app.put("/useraction/:username/:progId/leavecomment", jwtuser, function(){
 
   });
 }
