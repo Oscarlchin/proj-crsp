@@ -86,7 +86,7 @@ app.post('/users/register',(req,res,next) => {
       });
       user.save(function(err){
         if (err) res.json(err);
-        res.json({ "mess":"0 Succesfully registered"});
+        res.status(201);
       })
     });
   });
