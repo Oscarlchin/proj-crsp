@@ -55,33 +55,63 @@ module.exports = function (app){
     });
   });
 
-    app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_id and update
-          Event.findOneAndUpdate({program_id: Number(req.params['program_id'])}, {
-            program_id: Number(req.body.program_id),
-            program_name: String(req.body.program_name),
-            district: String(req.body.district),
-            venue: String(req.body.venue),
-            start_date: String(req.body.start_date),
-            end_date: String(req.body.end_date),
-            dayinweek: String(req.body.dayinweek),
-            start_time: String(req.body.start_time),
-            end_time: String(req.body.end_time),
-            type_name: String(req.body.type_name),
-            fee: Number(req.body.fee),
-            quota: Number(req.body.quota),
-            quota_left: Number(req.body.quota_left),
-            min_age: Number(req.body.min_age),
-            max_age: Number(req.body.max_age),
-            url: String(req.body.url)
-          })
-          .exec(function(err,event){
-            console.log(event);
-            if (err) errorHandler(err);
-            if (event) res.status(202).json({Event: event.program_id});
-            else res.status(202).json(null);
-          });
+   
+    app.put('/events/:program_id',jwtadmin,function(req,res,next){
+        
+            var updateevent = new Event({
+                program_id: Number(req.body.program_id),
+                program_name: String(req.body.program_name),
+                district: String(req.body.district),
+                venue: String(req.body.venue),
+                start_date: String(req.body.start_date),
+                end_date: String(req.body.end_date),
+                dayinweek: String(req.body.dayinweek),
+                start_time: String(req.body.start_time),
+                end_time: String(req.body.end_time),
+                type_name: String(req.body.type_name),
+                fee: Number(req.body.fee),
+                quota: Number(req.body.quota),
+                quota_left: Number(req.body.quota_left),
+                min_age: Number(req.body.min_age),
+                max_age: Number(req.body.max_age),
+                url: String(req.body.url)
+            });
+            
+            Event.findOne({program_id : updateevent.program_id}, function (err, doc) {
+              if (doc){
+                  res.send('An event with this program_id exists already, update failed!');
+              }
+              else{
+                Event.findOneAndUpdate({program_id: Number(req.params['program_id'])}, 
+                {program_id: Number(updateevent.program_id),
+                    program_name: String(updateevent.program_name),
+                    district: String(updateevent.district),
+                    venue: String(updateevent.venue),
+                    start_date: String(updateevent.start_date),
+                    end_date: String(updateevent.end_date),
+                    dayinweek: String(updateevent.dayinweek),
+                    start_time: String(updateevent.start_time),
+                    end_time: String(updateevent.end_time),
+                    type_name: String(updateevent.type_name),
+                    fee: Number(updateevent.fee),
+                    quota: Number(updateevent.quota),
+                    quota_left: Number(updateevent.quota_left),
+                    min_age: Number(updateevent.min_age),
+                    max_age: Number(updateevent.max_age),
+                    url: String(updateevent.url)
+                })
+              
+                .exec(function(err,event){
+                console.log(event);
+                if (err) errorHandler(err);
+                if (event) res.status(202).json({Event: event.program_id});
+                else res.status(202).json(null);
+                });
+              }
+            });
     });
-
+    
+    
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
 
           Event.findOneAndDelete({program_id: Number(req.params['program_id'])})
