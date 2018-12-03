@@ -17,6 +17,7 @@ import { User} from './_models';
 import { AuthService, UserService, EventService, UseractionService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
+import {MaterialModule} from './app.material-module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -38,7 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     AuthGuard,
