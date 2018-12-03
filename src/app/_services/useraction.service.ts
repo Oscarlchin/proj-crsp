@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { config } from '../_globals';
 import { User, Event } from '../_models';
+import {map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UseractionService {
   constructor(private http: HttpClient) { }
-  getevent() {  // get the events for table
+  getevent() {
     return this.http.get<Event[]>(`${config.BASE_API_URL}/useraction/events`);
   }
   favevent(program_id: number) {
@@ -15,5 +17,4 @@ export class UseractionService {
   leavecomment(user_comment: string) {
     return this.http.put<Event>(`${config.BASE_API_URL}/useraction/leavecomment`, {user_comment: user_comment} );
   }
-
 }

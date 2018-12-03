@@ -41,11 +41,19 @@ module.exports = function (app){
             max_age: Number(req.body.max_age),
             url: String(req.body.url),
         });
-         event.save(function(err){
-            if (err) errorHandler(err);
-            res.status(201).json(null);
-        });
+        Event.findOne({program_id : event.program_id}, function (err, doc) {
+          if (doc){
+              res.send('Username exists already, create another one!');
+          }
+          else{
+              console.log(event);
+              event.save(function(err1){
+                 if (err1) errorHandler(err1);
+                 res.status(201).json(null);
+               });
+              }
     });
+  });
 
     app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_id and update
           Event.findOneAndUpdate({program_id: Number(req.params['program_id'])})
@@ -54,13 +62,11 @@ module.exports = function (app){
             if (event) res.status(204).json({event:program_id});
             else res.status(204).json(null);
           });
-
-
     });
 
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
 
-          Event.findOneAndRemove({program_id: Number(req.params['program_id'])})
+          Event.findOneAndDelete({program_id: Number(req.params['program_id'])})
           .exec(function(err,event){
             if (err) errorHandler(err);
             if (event) res.status(200).json({event:program_id});
