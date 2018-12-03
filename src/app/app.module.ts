@@ -17,6 +17,7 @@ import { User} from './_models';
 import { AuthService, UserService, EventService, UseractionService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
+import {MaterialModule} from './app.material-module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //  import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
@@ -33,7 +34,8 @@ const modules = [
   MatFormFieldModule,
   MatSortModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MaterialModule
 ];
 
 @NgModule({
