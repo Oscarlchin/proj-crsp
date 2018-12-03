@@ -8,14 +8,14 @@ var bcrypt =require('bcryptjs');
 
 module.exports = function (app){
     app.get('/events',jwtadmin,function(req,res){ //getallevents
-      User.find({}).exec(function(err,events){
+      Event.find({}).exec(function(err,events){
         if(err) errorHandler(err);
         res.json(events);
       });
     });
   
     app.get('/events/:program_id',jwtadmin,function(req,res){ //get event by program_name
-      User.findOne({event: req.params['program_id']}).exec(function(err,event){
+      Event.findOne({event: req.params['program_id']}).exec(function(err,event){
         if(err) errorHandler(err);
         if(event) res.json(event);
         else res.json(null);
