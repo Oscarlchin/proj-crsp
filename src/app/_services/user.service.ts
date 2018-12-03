@@ -16,7 +16,7 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post(`${config.BASE_API_URL}/users/register`, user);
+        return this.http.post(`${config.BASE_API_URL}/users/create`, user);
     }
 
     update(user: User) {

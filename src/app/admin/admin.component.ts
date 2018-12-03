@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
   newUsername;
   newPassword;
 
-  constructor( private userservice: UserService,
+  constructor( private userService: UserService,
     private formbuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -28,12 +28,12 @@ export class AdminComponent implements OnInit {
 
   createUser() {
     const newUser: User = {
-      username : JSON.stringify(this.newUsername['value']),
-      password : JSON.stringify(this.newPassword['value']),
+      username : 'carsten',
+      password : 'carsten',
       favevents : []
     };
     console.log(newUser);
-    this.userservice.createNewUser(this.registerForm.value).pipe(first()).subscribe((event) => {
+    this.userService.create(newUser).subscribe((event) => {
       console.log('Okay~');
     },
     error => {console.log('error'); }

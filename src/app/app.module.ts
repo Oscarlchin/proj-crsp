@@ -13,7 +13,6 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 
 
 import { AuthGuard, AdminGuard } from './_guards';
-import { User} from './_models';
 import { AuthService, UserService, EventService, UseractionService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
@@ -67,8 +66,6 @@ const modules = [
     EventService,
     UserService,
     UseractionService,
-    User,
-    NavComponent,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 
