@@ -15,7 +15,7 @@ export class UserService {
         return this.http.get(`${config.BASE_API_URL}/users/` + username);
     }
 
-    register(user: User) {
+    create(user: User) {
         return this.http.post(`${config.BASE_API_URL}/users/register`, user);
     }
 
