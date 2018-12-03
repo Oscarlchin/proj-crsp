@@ -22,7 +22,7 @@ module.exports = function (app){
     });
   });
 
-  app.post('/users/create',jwtadmin,function(req,res){
+  app.post('/users/create',jwtadmin,(req,res,next) => {
     bcrypt.genSalt(10, function(err, salt) {
       if (err) return next(err);
       bcrypt.hash(req.body.password, salt, function(err, hash) {
@@ -32,13 +32,26 @@ module.exports = function (app){
           password: hash,
           favevents: []
         });
-        user.save(function(err){
-          if (err) errorHandler(err);
-          res.status(201);
-        })
+
+       
+          User.findOne({username : user.username}, function (err, doc) {
+              if (doc){
+                  res.send('Username exists already, create another one!');
+              }
+              else{
+                user.save(function(err){
+                  if (err) errorHandler(err);
+                  res.status(201).json(null);
+                });
+              }    
+          });
+          
+      
       });
-    });
+    });  
   });
+  
+  
 
   app.put('/users/:username',jwtadmin,function(req,res,next){
     bcrypt.genSalt(10, function(err, salt) {
