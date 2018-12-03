@@ -43,7 +43,7 @@ module.exports = function (app){
         });
         Event.findOne({program_id : event.program_id}, function (err, doc) {
           if (doc){
-              res.send('Username exists already, create another one!');
+              res.send('Event exists already, create another one!');
           }
           else{
               console.log(event);
@@ -77,7 +77,6 @@ module.exports = function (app){
           .exec(function(err,event){
             console.log(event);
             if (err) errorHandler(err);
-            if (event == null) res.status(200).send('Event not found. Please check!');
             if (event) res.status(202).json({Event: event.program_id});
             else res.status(202).json(null);
           });
@@ -88,7 +87,7 @@ module.exports = function (app){
           Event.findOneAndDelete({program_id: Number(req.params['program_id'])})
           .exec(function(err,event){
             if (err) errorHandler(err);
-            if (event) res.status(200).json({event:program_id});
+            if (event) res.status(200).json({event:  event.program_id});
             else res.status(500).json(null);
           });
 
