@@ -5,7 +5,7 @@ exports.getAllEvents = getAllEvents;
 
 function getAllEvents() {
     return new Promise(function(resolve, reject){
-      Event.find({quota: 25})
+      Event.find({})
       .exec(function(err,events){
           if (err) reject({err: "Error in fetching events"});
           return resolve(events);

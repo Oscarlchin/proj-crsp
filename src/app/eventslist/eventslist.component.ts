@@ -19,7 +19,7 @@ export interface Field {
 })
 export class EventslistComponent implements OnInit {
 //  public allEvent$: Observable<Event[]>;
-   allevents: Event[] = [];
+   allevents: Event[];
    dataLoading = false;
    selected: number = 0;
   // Eve: String = null;
@@ -32,7 +32,7 @@ export class EventslistComponent implements OnInit {
 
   ];
 
-  displayedColumns: string[] = ['program_name', 'type_name', 'district', 'fee'];
+  displayedColumns: string[] = ['program_id','program_name', 'type_name', 'district', 'fee'];
   dataSource: MatTableDataSource<Event>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -44,35 +44,36 @@ export class EventslistComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllEvent();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.filterPredicate = function(data: Event , filter: string): boolean {
-      if (data && data.program_name && data.district && data.fee && data.type_name) {
-      switch (this.selected) {
+    this.dataSource.filterPredicate = function(data: Event , filter: any): boolean {
+      if (data && data.program_name && data.district && (data.fee  !== null) && data.type_name) {
+      switch (filter.field) {
         case 0: {
-          return data.program_name.toLowerCase().includes(filter) ||
-                  data.type_name.toLowerCase().includes(filter) ||
-                   data.district.toLowerCase().includes(filter) ||
-                   data.fee.toString().includes(filter);
+          return data.program_name.toLowerCase().includes(filter.fv) ||
+                  data.type_name.toLowerCase().includes(filter.fv) ||
+                   data.district.toLowerCase().includes(filter.fv) ||
+                   data.fee.toString().includes(filter.fv);
         }
 
         case 1: {
-          return data.program_name.toLowerCase().includes(filter.toLowerCase());
+          return data.program_name.toLowerCase().includes(filter.fv);
         }
         case 2: {
-          return data.type_name.toLowerCase().includes(filter);
+          return data.type_name.toLowerCase().includes(filter.fv);
         }
         case 3: {
-          return data.district.toLowerCase().includes(filter);
+          return data.district.toLowerCase().includes(filter.fv);
         }
         case 4: {
-          return data.fee.toString().includes(filter);
+          return data.fee.toString().includes(filter.fv);
         }
         default: {
-          return data.program_name.toLowerCase().includes(filter) ||
-                  data.type_name.toLowerCase().includes(filter) ||
-                   data.district.toLowerCase().includes(filter) ||
-                   data.fee.toString().includes(filter);
+          return data.program_name.toLowerCase().includes(filter.fv) ||
+                  data.type_name.toLowerCase().includes(filter.fv) ||
+                   data.district.toLowerCase().includes(filter.fv) ||
+                   data.fee.toString().includes(filter.fv);
         }
       }
       } else {return true; }
@@ -83,6 +84,7 @@ export class EventslistComponent implements OnInit {
     this.useraction.getevent().subscribe((events) => {
       this.dataSource.data = events;
       this.dataLoading = true;
+      console.log(events.length);
       console.log('succuess!');
 
 
@@ -90,8 +92,12 @@ export class EventslistComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    this.selected = 0;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const customf = {
+      fv: filterValue.trim().toLowerCase(),
+      field: this.selected
+     };
+
+    this.dataSource.filter = customf;
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
