@@ -14,8 +14,8 @@ module.exports = function (app){
       });
     });
   
-    app.get('/events/program_name',jwtadmin,function(req,res){ //get event by program_name
-      User.findOne({program_name: req.params['program_name']}).exec(function(err,event){
+    app.get('/events/:program_id',jwtadmin,function(req,res){ //get event by program_name
+      User.findOne({event: req.params['program_id']}).exec(function(err,event){
         if(err) errorHandler(err);
         if(event) res.json(event);
         else res.json(null);
@@ -47,20 +47,20 @@ module.exports = function (app){
         });
     });
   
-    app.put('/events/update',jwtadmin,function(req,res,next){ //find event by program_name and update
-          Event.findOneAndUpdate({program_name: req.params['program_name']}, {Event})
+    app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_name and update
+          Event.findOneAndUpdate({event: req.params['program_id']})
           .exec(function(err,event){
             if (err) errorHandler(err);
-            if (event) res.status(204).json({event});
+            if (event) res.status(204).json({event:program_id});
             else res.status(204).json(null);
           });
         
       
     });
   
-    app.delete('/events/delete',jwtadmin,function(req,res,next){
+    app.delete('/events/:program_id',jwtadmin,function(req,res,next){
       
-          Event.findOneAndRemove({program_name: req.params['program_name']})
+          Event.findOneAndRemove({program_name: req.params['program_id']})
           .exec(function(err,event){
             if (err) errorHandler(err);
             if (event) res.status(200).json({event:program_id});
