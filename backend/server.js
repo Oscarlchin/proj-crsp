@@ -26,6 +26,8 @@ app.use(errorHandler);
 
 require('./extract.js')(app);
 require('./useractions.js')(app);
+require('admin_eventcrud.js')(app);
+require('admin_usercrud.js')(app);
 
 var dboptions = {
 user: config.dbuser,
