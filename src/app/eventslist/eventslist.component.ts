@@ -13,7 +13,9 @@ import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 })
 export class EventslistComponent implements OnInit {
 //  public allEvent$: Observable<Event[]>;
- // public allEvent: Event[] = [];
+  allevents: Event[] = [];
+  Eve: String = null;
+
   constructor( private useraction: UseractionService
     ) {
   }
@@ -21,14 +23,12 @@ export class EventslistComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  get AllEvent() {
-    return this.useraction.getevent();
-  //  return 0;
-  }
-
-  getAllFavEvent() {
-    this.useraction.getevent();
+  getAllEvent() {
+    this.useraction.getevent().subscribe((events) => {
+      this.allevents = events;
+      console.log('succuess!');
+      console.log(this.allevents[0]);
+    });
   }
 
 }

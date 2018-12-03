@@ -1,7 +1,29 @@
-<h1>
+<p>
   List all events in a table, and allow sorting of the table with one of the listed fields
-</h1>
-<button>See All Event!</button>
-<button (click)="getAllFavEvent()">See All Favorite Event!</button>
+</p>
+<button (click)="getAllEvent()">See All Event!</button>
 
-<p [(ngModel)]="AllEvent" name="fieldName" ngDefaultControl>{{ AllEvent }}</p>
+<ul>
+
+</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Program Name</th>
+      <th scope="col">Program Type</th>
+      <th scope="col">District</th>
+      <th scope="col">FEE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of allevents; index as i">
+      <th scope="row"> {{ i+1 }}</th>
+      <td>{{ event.program_name }}</td>
+      <td>{{ event.type_name }}</td>
+      <td>{{ event.district }}</td>
+      <td>{{ event.fee }}</td>
+    </tr>
+  </tbody>
+</table>
