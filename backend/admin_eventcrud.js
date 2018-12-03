@@ -13,7 +13,7 @@ module.exports = function (app){
         res.json(events);
       });
     });
-  
+
     app.get('/events/:program_id',jwtadmin,function(req,res){ //get event by program_id
       Event.findOne({program_id: Number(req.params['program_id'])}).exec(function(err,event){
         if(err) errorHandler(err);
@@ -21,32 +21,32 @@ module.exports = function (app){
         else res.json(null);
       });
     });
-  
+
     app.post('/events/create',jwtadmin,function(req,res){
         var event = new Event({
-            program_id: req.body.program_id,
-            program_name: req.body.program_name,
-            district: req.body.district,
-            venue: req.body.venue,
-            start_date: req.body.start_date,
-            end_date: req.body.end_date,
-            dayinweek: req.body.dayinweek,
-            start_time: req.body.start_time,
-            end_time: req.body.end_time,
-            type_name: req.body.type_name,
-            fee: req.body.fee,
-            quota: req.body.quota,
-            quota_left: req.body.quota_left,
-            min_age: req.body.min_age,
-            max_age: req.body.max_age,
-            url: req.body.url,
+            program_id: Number(req.body.program_id),
+            program_name: String(req.body.program_name),
+            district: String(req.body.district),
+            venue: String(req.body.venue),
+            start_date: String(req.body.start_date),
+            end_date: String(req.body.end_date),
+            dayinweek: String(req.body.dayinweek),
+            start_time: String(req.body.start_time),
+            end_time: String(req.body.end_time),
+            type_name: String(req.body.type_name),
+            fee: Number(req.body.fee),
+            quota: Number(req.body.quota),
+            quota_left: Number(req.body.quota_left),
+            min_age: Number(req.body.min_age),
+            max_age: Number(req.body.max_age),
+            url: String(req.body.url),
         });
          event.save(function(err){
             if (err) errorHandler(err);
-            res.status(201);
+            res.status(201).json(null);
         });
     });
-  
+
     app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_id and update
           Event.findOneAndUpdate({program_id: Number(req.params['program_id'])})
           .exec(function(err,event){
@@ -54,20 +54,20 @@ module.exports = function (app){
             if (event) res.status(204).json({event:program_id});
             else res.status(204).json(null);
           });
-        
-      
+
+
     });
-  
+
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
-      
+
           Event.findOneAndRemove({program_id: Number(req.params['program_id'])})
           .exec(function(err,event){
             if (err) errorHandler(err);
             if (event) res.status(200).json({event:program_id});
             else res.status(500).json(null);
           });
-        
-      
+
+
     });
-  
+
   };
