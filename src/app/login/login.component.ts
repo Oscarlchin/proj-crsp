@@ -1,9 +1,8 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../_services';
-import { NavComponent } from '../nav/nav.component';
 
 @Component({
   selector: 'app-login',
@@ -15,8 +14,6 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
-
-//  @Output() currentUsername = new EventEmitter() ;
 
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -32,7 +29,6 @@ export class LoginComponent implements OnInit {
     });
     // reset login status
     this.authService.logout();
-    //this.nav.onLogoutUser();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -53,10 +49,8 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
+                this.loading = false;
                 this.router.navigate([this.returnUrl]);
-//                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-//                this.currentUsername.emit(currentUser['username']);
-//                this.nav.onUserDisplay();
             },
             error => {
                 //  this.alertService.error(error);
