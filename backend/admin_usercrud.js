@@ -55,5 +55,20 @@ module.exports = function (app){
     });
   });
 
+  app.delete('/users/delete',jwtadmin,function(req,res,next){
+    bcrypt.genSalt(10, function(err, salt) {
+      if (err) return next(err);
+      bcrypt.hash(req.body.password, salt, function(err, hash) {
+        if (err) return next(err);
+        User.findOneAndRemove({username: req.params['username']}, {username: req.body.username, password:hash})
+        .exec(function(err,user){
+          if (err) errorHandler(err);
+          if (user) res.status(500);
+          else res.status(500).json(null);
+        });
+      });
+    });
+  });
 
 };
+
