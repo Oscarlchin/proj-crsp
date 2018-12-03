@@ -87,7 +87,7 @@ app.post('/users/register',(req,res,next) => {
       user.save(function(err){
         if (err) errorHandler(err);
         res.status(201);
-      })
+      });
     });
   });
 });

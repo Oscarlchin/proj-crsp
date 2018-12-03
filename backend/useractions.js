@@ -1,5 +1,4 @@
 var jwtuser = require('./_helpers/jwt').jwtuser;
-var db = require('./_helpers/db');
 var dbcall = require('./_helpers/dbcall');
 var User = require('./_models/UserSchema');
 var Comment = require('./_models/CommentSchema.js');
