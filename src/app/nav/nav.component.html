@@ -8,10 +8,9 @@
   </div>
   <div id = "userItem" class="navbar-nav">
   <ul class="navbar-nav navbar-toggler-right">
-    <button (click)="checking()"></button>
-    <li class="nav-item"><a class="nav-link" id="userDisplay" [(ngModel)]="currentUsernameIn" name="fieldName" ngDefaultControl>Username: {{ currentUsernameIn }}</a></li>
-    <li class="nav-item"><a class="nav-link" [routerLink]="['/admin']" (click)="AdminLogin()">AdminLogin</a></li>
-    <li class="nav-item"><a class="nav-link" [routerLink]="['/login']">Log Out</a></li>
+    <li class="nav-item" *ngIf="isLogin"><a class="nav-link" id="userDisplay" [(ngModel)]="userName" name="fieldName" ngDefaultControl>Username: {{ userName }}</a></li>
+    <li class="nav-item" *ngIf="isLogin === false"><a class="nav-link" [routerLink]="['/admin']" (click)="AdminLogin()">AdminLogin</a></li>
+    <li class="nav-item" *ngIf="isLogin" ><a class="nav-link" [routerLink]="['/login']">Log Out</a></li>
   </ul>
 </div>
 </nav>
