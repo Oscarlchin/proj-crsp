@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services';
 import { User } from '../_models';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin',
@@ -9,16 +11,33 @@ import { User } from '../_models';
 })
 export class AdminComponent implements OnInit {
 
-  constructor( private userservice: UserService) { }
+  private registerForm: FormGroup;
+
+  newUsername;
+  newPassword;
+
+  constructor( private userservice: UserService,
+    private formbuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.registerForm = this.formbuilder.group({
+      newUsername : ['', Validators.required],
+      newPassword : ['', Validators.required]
+    });
   }
 
-  createUser(newUsername, newPassword) {
-    let newUser = new User;
-    newUser.username = newUsername;
-    newUser.password = newPassword;
-    this.userservice.create(newUser);
+  createUser() {
+    const newUser: User = {
+      username : JSON.stringify(this.newUsername['value']),
+      password : JSON.stringify(this.newPassword['value']),
+      favevents : []
+    };
+    console.log(newUser);
+    this.userservice.createNewUser(this.registerForm.value).pipe(first()).subscribe((event) => {
+      console.log('Okay~');
+    },
+    error => {console.log('error'); }
+    );
   }
 
 }

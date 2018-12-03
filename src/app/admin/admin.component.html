@@ -15,13 +15,13 @@
       </mat-expansion-panel-header>
 
       <mat-form-field>
-        <input matInput placeholder="New Username">
+        <input matInput placeholder="New Username" required class="form-control" formControlName="newUsername">
       </mat-form-field><br>
 
       <mat-form-field>
-        <input matInput placeholder="New Password">
+        <input matInput placeholder="New Password" required class="form-control" formControlName="newPassword">
       </mat-form-field><br>
-      <button mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="primary" (click)='createUser()'>Submit</button>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
