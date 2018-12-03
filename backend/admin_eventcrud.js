@@ -14,8 +14,8 @@ module.exports = function (app){
       });
     });
   
-    app.get('/events/:program_id',jwtadmin,function(req,res){ //get event by program_name
-      Event.findOne({event: req.params['program_id']}).exec(function(err,event){
+    app.get('/events/:program_id',jwtadmin,function(req,res){ //get event by program_id
+      Event.findOne({program_id: Number(req.params['program_id'])}).exec(function(err,event){
         if(err) errorHandler(err);
         if(event) res.json(event);
         else res.json(null);
@@ -47,8 +47,8 @@ module.exports = function (app){
         });
     });
   
-    app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_name and update
-          Event.findOneAndUpdate({event: req.params['program_id']})
+    app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_id and update
+          Event.findOneAndUpdate({program_id: Number(req.params['program_id'])})
           .exec(function(err,event){
             if (err) errorHandler(err);
             if (event) res.status(204).json({event:program_id});
@@ -60,7 +60,7 @@ module.exports = function (app){
   
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
       
-          Event.findOneAndRemove({program_name: req.params['program_id']})
+          Event.findOneAndRemove({program_id: Number(req.params['program_id'])})
           .exec(function(err,event){
             if (err) errorHandler(err);
             if (event) res.status(200).json({event:program_id});
