@@ -1,3 +1,7 @@
 <h1>
   List all events in a table, and allow sorting of the table with one of the listed fields
 </h1>
+<button>See All Event!</button>
+<button (click)="getAllFavEvent()">See All Favorite Event!</button>
+
+<p [(ngModel)]="AllEvent" name="fieldName" ngDefaultControl>{{ AllEvent }}</p>

@@ -14,7 +14,7 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 
 import { AuthGuard, AdminGuard } from './_guards';
 import { User} from './_models';
-import { AuthService, UserService, EventService } from './_services';
+import { AuthService, UserService, EventService, UseractionService } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
 
@@ -46,6 +46,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AuthService,
     EventService,
     UserService,
+    UseractionService,
     User,
     NavComponent,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
