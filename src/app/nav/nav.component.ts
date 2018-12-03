@@ -1,8 +1,7 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../_services';
-import { User } from '../_models';
 
 @Component({
   selector: 'app-nav',
@@ -10,17 +9,30 @@ import { User } from '../_models';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  currentUsername = '' ;
+  @Input()
+  currentUsernameIn = '';
+
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
-    private user: User) { }
+    private authService: AuthService
+    ) {}
 
   ngOnInit() {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.currentUsername = currentUser['username'];
-    console.dir(this.currentUsername);
+    const userI = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(userI);
+    if (userI != null) {this.currentUsernameIn = userI['username']; }
   }
+
+  onUserDisplay() {
+    this.currentUsernameIn = JSON.parse(localStorage.getItem('currentUser'));
+    console.log(this.currentUsernameIn );
+  }
+
+  checking() {
+    console.log(this.currentUsernameIn);
+  }
+
+  onLogoutUser() {this.currentUsernameIn = ''; }
 
   AdminLogin() {
     this.authService.adminlogin('admin', 'admin')
@@ -34,5 +46,4 @@ export class NavComponent implements OnInit {
                 console.log('adminloginerror');
             });
   }
-
 }
