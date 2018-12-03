@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { config } from '../_globals';
 import { User, Event } from '../_models';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class UseractionService {
   constructor(private http: HttpClient) { }
   getevent() {
-    return this.http.get<Event[]>(`${config.BASE_API_URL}/useraction/events`);
+    return this.http.get<Event[]>(`${config.BASE_API_URL}/useraction/events`) ;
   }
   favevent(program_id: number) {
     return this.http.put<User>(`${config.BASE_API_URL}/useraction/favevent`, {program_id: program_id} );

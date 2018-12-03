@@ -20,8 +20,23 @@ import { AdminComponent } from './admin/admin.component';
 import {MaterialModule} from './app.material-module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//  import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
-
+const modules = [
+  MatPaginatorModule,
+  MatTableModule,
+  MatFormFieldModule,
+  MatSortModule,
+  MatInputModule,
+  MatSelectModule,
+  MaterialModule
+];
 
 @NgModule({
   declarations: [
@@ -40,7 +55,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    ...modules,
+  ],
+  exports: [
+    ...modules
   ],
   providers: [
     AuthGuard,
@@ -58,3 +76,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
+
+
