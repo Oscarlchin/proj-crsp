@@ -61,8 +61,8 @@ module.exports = function (app){
         User.findOneAndUpdate({username: req.params['username']}, {username: req.body.username, password:hash})
         .exec(function(err,user){
           if (err) errorHandler(err);
-          if (user) res.status(204).json({username: user.username});
-          else res.status(204).json(null);
+          if (user) res.status(202).json({username: user.username});
+          else res.status(202).json(null);
         });
       });
     });
