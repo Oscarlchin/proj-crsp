@@ -60,10 +60,10 @@ module.exports = function (app){
   
     app.delete('/events/delete',jwtadmin,function(req,res,next){
       
-          Event.findOneAndRemove({program_name: req.params['program_name']}, {Event})
+          Event.findOneAndRemove({program_name: req.params['program_name']})
           .exec(function(err,event){
             if (err) errorHandler(err);
-            if (event) res.status(500);
+            if (event) res.status(200).json({event:program_id});
             else res.status(500).json(null);
           });
         
