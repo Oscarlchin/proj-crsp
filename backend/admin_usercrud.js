@@ -32,8 +32,6 @@ module.exports = function (app){
           password: hash,
           favevents: []
         });
-
-       
           User.findOne({username : user.username}, function (err, doc) {
               if (doc){
                   res.send('Username exists already, create another one!');
@@ -43,15 +41,13 @@ module.exports = function (app){
                   if (err) errorHandler(err);
                   res.status(201).json(null);
                 });
-              }    
+              }
           });
-          
-      
       });
-    });  
+    });
   });
-  
-  
+
+
 
   app.put('/users/:username',jwtadmin,function(req,res,next){
     bcrypt.genSalt(10, function(err, salt) {
@@ -60,9 +56,10 @@ module.exports = function (app){
         if (err) return next(err);
         User.findOneAndUpdate({username: req.params['username']}, {username: req.body.username, password:hash})
         .exec(function(err,user){
+          console.log(user);
           if (err) errorHandler(err);
-          if (user) res.status(202).json({username: user.username});
-          else res.status(202).json(null);
+          if (user) res.status(204).json({username: user.username});
+          else res.status(204).json(null);
         });
       });
     });

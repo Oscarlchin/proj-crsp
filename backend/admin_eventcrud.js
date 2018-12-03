@@ -56,11 +56,30 @@ module.exports = function (app){
   });
 
     app.put('/events/:program_id',jwtadmin,function(req,res,next){ //find event by program_id and update
-          Event.findOneAndUpdate({program_id: Number(req.params['program_id'])})
+          Event.findOneAndUpdate({program_id: Number(req.params['program_id'])}, {
+            program_id: Number(req.body.program_id),
+            program_name: String(req.body.program_name),
+            district: String(req.body.district),
+            venue: String(req.body.venue),
+            start_date: String(req.body.start_date),
+            end_date: String(req.body.end_date),
+            dayinweek: String(req.body.dayinweek),
+            start_time: String(req.body.start_time),
+            end_time: String(req.body.end_time),
+            type_name: String(req.body.type_name),
+            fee: Number(req.body.fee),
+            quota: Number(req.body.quota),
+            quota_left: Number(req.body.quota_left),
+            min_age: Number(req.body.min_age),
+            max_age: Number(req.body.max_age),
+            url: String(req.body.url)
+          })
           .exec(function(err,event){
+            console.log(event);
             if (err) errorHandler(err);
-            if (event) res.status(204).json({event:program_id});
-            else res.status(204).json(null);
+            if (event == null) res.status(200).send('Event not found. Please check!');
+            if (event) res.status(202).json({Event: event.program_id});
+            else res.status(202).json(null);
           });
     });
 
