@@ -1,11 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { config } from '../_globals';
 
 @Injectable()
 export class AuthService {
-    constructor(private http: HttpClient) { }
+
+  @Output() currentUsername = new EventEmitter() ;
+
+    constructor(private http: HttpClient
+      ) { }
 
     login(username: string, password: string) {
         return this.http.post<any>(`${config.BASE_API_URL}/users/authenticate`, { username: username, password: password })
