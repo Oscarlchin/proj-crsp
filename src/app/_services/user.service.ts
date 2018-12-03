@@ -23,7 +23,7 @@ export class UserService {
         return this.http.put(`${config.BASE_API_URL}/users/` + user.username, user);
     }
 
-    delete(id: number) {
-        return this.http.delete(`${config.BASE_API_URL}/users/` + id);
+    delete(username: string) {
+        return this.http.delete(`${config.BASE_API_URL}/users/` + username);
     }
 }
