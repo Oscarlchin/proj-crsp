@@ -21,8 +21,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService,
-    private nav: NavComponent
+    private authService: AuthService
     // private alertService: AlertService
     ) {}
 
@@ -33,7 +32,7 @@ export class LoginComponent implements OnInit {
     });
     // reset login status
     this.authService.logout();
-    this.nav.onLogoutUser();
+    //this.nav.onLogoutUser();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate([this.returnUrl]);
 //                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 //                this.currentUsername.emit(currentUser['username']);
-                this.nav.onUserDisplay();
+//                this.nav.onUserDisplay();
             },
             error => {
                 //  this.alertService.error(error);

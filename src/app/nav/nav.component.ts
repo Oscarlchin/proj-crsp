@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../_services';
@@ -9,30 +9,20 @@ import { AuthService } from '../_services';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  @Input()
-  currentUsernameIn = '';
-
   constructor(private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
     ) {}
 
   ngOnInit() {
-    const userI = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(userI);
-    if (userI != null) {this.currentUsernameIn = userI['username']; }
+  }
+  get userName(): string {
+    return this.authService.loginObject.username;
   }
 
-  onUserDisplay() {
-    this.currentUsernameIn = JSON.parse(localStorage.getItem('currentUser'));
-    console.log(this.currentUsernameIn );
+  get isLogin(): boolean {
+    return this.authService.isLoggedIn();
   }
-
-  checking() {
-    console.log(this.currentUsernameIn);
-  }
-
-  onLogoutUser() {this.currentUsernameIn = ''; }
 
   AdminLogin() {
     this.authService.adminlogin('admin', 'admin')
