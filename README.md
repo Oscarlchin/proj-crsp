@@ -12,9 +12,9 @@ Reference:
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
 ##Package used
-FE: Angular, Bootstrap
-BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors, bcrypt
-Suggestion: multer, soctketio??
+FE: Angular, Bootstrap, Angular Material
+BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors, bcrypt, multer
+Suggestion: soctketio??
 
 ## Project Requirement
 1) Two different access modes:
