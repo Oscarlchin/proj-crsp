@@ -11,6 +11,7 @@ var config = require('./config');
 var passStrat = require('./_helpers/passport-strats');
 var bcrypt = require('bcryptjs');
 
+
 Passport.use( 'local', passStrat.localStrategy );
 Passport.use( 'admin', passStrat.adminStrategy );
 
@@ -74,8 +75,6 @@ app.post('/admin/authenticate', (req,res,next) => {
   } )(req,res,next);
 });
 
-
-
 app.post('/users/register',(req,res,next) => {
   bcrypt.genSalt(10, function(err, salt) {
     if (err) return next(err);
@@ -93,5 +92,9 @@ app.post('/users/register',(req,res,next) => {
     });
   });
 });
+
+
+
+
 
 var server = app.listen(3000);

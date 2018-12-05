@@ -52,12 +52,12 @@ module.exports = function (app){
                  res.status(201).json(null);
                });
               }
-    });
+          });
   });
 
-   
+
     app.put('/events/:program_id',jwtadmin,function(req,res,next){
-        
+
             var updateevent = new Event({
                 program_id: Number(req.body.program_id),
                 program_name: String(req.body.program_name),
@@ -76,13 +76,13 @@ module.exports = function (app){
                 max_age: Number(req.body.max_age),
                 url: String(req.body.url)
             });
-            
+
             Event.findOne({program_id : updateevent.program_id}, function (err, doc) {
               if (doc){
                   res.send('An event with this program_id exists already, update failed!');
               }
               else{
-                Event.findOneAndUpdate({program_id: Number(req.params['program_id'])}, 
+                Event.findOneAndUpdate({program_id: Number(req.params['program_id'])},
                 {program_id: Number(updateevent.program_id),
                     program_name: String(updateevent.program_name),
                     district: String(updateevent.district),
@@ -100,7 +100,7 @@ module.exports = function (app){
                     max_age: Number(updateevent.max_age),
                     url: String(updateevent.url)
                 })
-              
+
                 .exec(function(err,event){
                 console.log(event);
                 if (err) errorHandler(err);
@@ -110,8 +110,8 @@ module.exports = function (app){
               }
             });
     });
-    
-    
+
+
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
 
           Event.findOneAndDelete({program_id: Number(req.params['program_id'])})

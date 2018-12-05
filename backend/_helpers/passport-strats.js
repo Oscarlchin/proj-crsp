@@ -14,14 +14,14 @@ var localStrategy = new LocalStrategy({
   passwordField: 'password',
 },
 function(username, password, done) {
-  User.findOne({ username }).then(function(user){
+  User.findOne({ username: username }).then(function(user){
      if ( user == null ) {
       return done( null, false, { message: 'Invalid user' } );
     };
     bcrypt.compare(password, user.password, function(err, res) {
       if (err) return done(err);
       if (res === false) {
-        return done(null, false, {message: 'incalid password' });
+        return done(null, false, {message: 'invalid password' });
       } else {
         return done(null, user);
       }
