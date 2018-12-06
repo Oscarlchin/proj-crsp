@@ -3,6 +3,7 @@ import { UserService } from '../_services';
 import { User } from '../_models';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-admin',
@@ -13,6 +14,14 @@ export class AdminComponent implements OnInit {
 
   registerForm: FormGroup;
   updateForm: FormGroup;
+  getOneForm: FormGroup;
+  deleteOneForm: FormGroup;
+
+  createOutput = '';
+  updateOutput = '';
+  getOneOutput = '';
+  deleteOneOutput = '';
+
 
   constructor( private userService: UserService,
     private formbuilder: FormBuilder) { }
@@ -28,6 +37,14 @@ export class AdminComponent implements OnInit {
       updateNewUsername : '',
       updateNewPassword : ''
     });
+
+    this.getOneForm = this.formbuilder.group({
+      getOneUsername : ''
+    });
+
+    this.deleteOneForm = this.formbuilder.group({
+      deleteOneUsername : ''
+    });
   }
 
   createUser() {
@@ -40,26 +57,66 @@ export class AdminComponent implements OnInit {
     };
     console.log(newUser);
     this.userService.create(newUser).subscribe((event) => {
-      console.log('Okay~');
+      console.log(event);
+      if (this.registerForm.get('newUsername').value === ''
+      || this.registerForm.get('newPassword').value === '') {
+        this.createOutput = 'Please enter something!';
+       } else {
+        this.createOutput = 'Username: ' + this.registerForm.get('newUsername').value + '/n'
+          + 'Password: ' + this.registerForm.get('newPassword').value;
+     }
     },
-    error => {console.log('error'); }
+    error => {this.createOutput = 'Error. Please Check!'; }
     );
   }
 
   updateUser() {
     const updateUser: User = {
-             username : 'oscar',
-             password : 'oscar2',
-      //     username : JSON.stringify(this.updateForm.get('updateNewUsername').value)),
-      //     password : JSON.stringify(this.updateForm.get('updateNewPassword').value)),
+      //       username : 'oscarUP',
+      //       password : 'oscarUP',
+             username : this.updateForm.get('updateNewUsername').value,
+             password : this.updateForm.get('updateNewPassword').value,
              favevents : []
          };
-         console.log(JSON.stringify(this.updateForm.get('preUpdateUsername').value));
-         console.log(updateUser);
-         this.userService.update(JSON.stringify(this.updateForm.get('preUpdateUsername').value), updateUser).subscribe((event) => {
-           console.log('Okay~');
-         },
-         error => {console.log('error'); }
+//         console.log(this.updateForm.get('preUpdateUsername').value);
+//         console.log(updateUser);
+         this.userService.update(this.updateForm.get('preUpdateUsername').value, updateUser).subscribe((event) => {
+          if (this.updateForm.get('preUpdateUsername').value === ''
+          || this.updateForm.get('updateNewUsername').value === ''
+          || this.updateForm.get('updateNewPassword').value === '') {
+            this.updateOutput = 'Please enter something!';
+          } else if (event == null) {
+            this.updateOutput = 'User not found on database. Please Check!';
+          } else {
+            this.updateOutput = 'Updated Username: ' + event['username'] + '/n' + 'Updated Password: ' + event['password'];
+         }
+        },
+        error => {this.updateOutput = 'Error. Please Check!'; }
          );
+  }
+
+  getOneUser() {
+         this.userService.getByName(this.getOneForm.get('getOneUsername').value).subscribe((event) => {
+           if (this.getOneForm.get('getOneUsername').value === '') {
+             this.getOneOutput = 'Please enter something!';
+            } else if (event == null) {
+              this.getOneOutput = 'User not found on database. Please Check!';
+            } else {
+             this.getOneOutput = 'Username: ' + event['username'] + '/n' + 'Password: ' + event['password'] +
+           '<br/> Favorite Event: ' + event['favevents'] + '<br/>';
+          }
+         },
+         error => {this.getOneOutput = 'Error. Please Check!'; }
+         );
+  }
+
+  deleteOneUser() {
+    this.deleteOneOutput = ''; // reset to look better
+    this.userService.delete(this.deleteOneForm.get('deleteOneUsername').value).subscribe((event) => {
+      console.log(event);
+      this.deleteOneOutput = 'User deleted!';
+    },
+    error => {this.deleteOneOutput = 'User not found on database. Please Check!'; }
+    );
   }
 }

@@ -24,6 +24,9 @@
       </mat-form-field><br>
       <button mat-raised-button color="primary" (click)='createUser()'>Submit</button>
     </form>
+    <br>
+    <p>{{createOutput}}</p>
+    <br>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -38,38 +41,42 @@
 
       <form [formGroup]="updateForm">
       <mat-form-field>
-        <input name="preUpdateUsername" matInput placeholder="Previous Username" required class="form-control" formControlName="preUpdateUsername" required>
+        <input name="preUpdateUsername" matInput placeholder="Previous Username" required class="form-control" formControlName="preUpdateUsername">
       </mat-form-field><br>
 
       <mat-form-field>
-        <input matInput placeholder="New Username" required class="form-control" formControlName="updateNewUsername" required>
+        <input matInput placeholder="New Username" required class="form-control" formControlName="updateNewUsername">
       </mat-form-field><br>
 
       <mat-form-field>
-        <input matInput placeholder="New Password" required class="form-control" formControlName="updateNewPassword" required>
+        <input matInput placeholder="New Password" required class="form-control" formControlName="updateNewPassword">
       </mat-form-field><br>
       <button mat-raised-button color="primary" [formGroup]="updateForm" (click)='updateUser()'>Submit</button>
     </form>
+    <br>
+    <p>{{updateOutput}}</p>
+    <br>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Retrieve User
+          Retrieve One User
         </mat-panel-title>
         <mat-panel-description>
-          Type username and password
+          Type username
         </mat-panel-description>
       </mat-expansion-panel-header>
-
+<form [formGroup]="getOneForm">
       <mat-form-field>
-        <input matInput placeholder="Username">
+        <input matInput placeholder="Username" required class="form-control" formControlName="getOneUsername">
       </mat-form-field><br>
 
-      <mat-form-field>
-        <input matInput placeholder="Password">
-      </mat-form-field><br>
-      <button mat-raised-button color="primary">Submit</button>
+      <button mat-raised-button color="primary" (click)='getOneUser()'>Submit</button>
+    </form>
+    <br>
+    <p>{{getOneOutput}}</p>
+    <br>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -78,18 +85,18 @@
           Delete User
         </mat-panel-title>
         <mat-panel-description>
-          Type username and password
+          Type username
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <mat-form-field>
-        <input matInput placeholder="Username">
-      </mat-form-field><br>
-
-      <mat-form-field>
-        <input matInput placeholder="Password">
-      </mat-form-field><br>
-      <button mat-raised-button color="primary">Submit</button>
+      <form [formGroup]="deleteOneForm">
+        <mat-form-field>
+          <input matInput placeholder="Username" required class="form-control" formControlName="deleteOneUsername">
+        </mat-form-field><br>
+        <button mat-raised-button color="primary" (click)='deleteOneUser()'>Submit</button>
+      </form>
+      <br>
+      <p>{{deleteOneOutput}}</p>
+      <br>
     </mat-expansion-panel>
   </mat-accordion>
  </mat-tab>
