@@ -33,8 +33,9 @@ export class UseractionService {
     return this.http.put(`${config.BASE_API_URL}/useraction/` + username + '/unlikeevent', {program_id: program_id} );
   }
 
-  leavecomment(user_comment: string) {
-    return this.http.put<EventComment>(`${config.BASE_API_URL}/useraction/leavecomment`, {user_comment: user_comment} );
+  leavecomment(username: string, program_id: number , user_comment: string) {
+    return this.http.put<EventComment>(`${config.BASE_API_URL}/useraction/` + username +
+     '/' +  program_id + '/leavecomment', {user_comment: user_comment} );
   }
 
   getcomment(program_id: number) {

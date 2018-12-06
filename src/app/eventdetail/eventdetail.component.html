@@ -2,6 +2,36 @@
 <p>
  Event Name: {{ event ? event.program_name : "" }}
 </p>
-<p>Event Comments</p>
-<p> {{ (comments.length !== 0 ) ? comments : "No comments" }}</p>
-<button (click)="gotoevents()">Back to Event List</button>
+<p>Event Comments:</p>
+<div class="container commentblk">
+  <div *ngIf="comments.length!==0">
+    <mat-card *ngFor="let comment of comments">
+        <mat-card-header>
+          <mat-card-title>
+            <h6>{{ comment.username }}</h6>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ comment.usercomment }}</p>
+        </mat-card-content>
+
+    </mat-card>
+  </div>
+  <div *ngIf="comments.length===0">
+    <p>No Comments</p>
+  </div>
+  <div>
+    <div>
+    <form (submit)="onSubmit(f)" #f="ngForm">
+      <mat-form-field>
+          <textarea matInput [(ngModel)]="currentusercomment" placeholder="Leave a comment" name="currentcomment" required></textarea>
+      </mat-form-field>
+      <div>
+          <button mat-flat-button type="submit" color="primary">Post</button>
+        </div>
+    </form>
+    </div>
+
+  </div>
+</div>
+<button mat-button (click)="gotoevents()">Back to Event List</button>
