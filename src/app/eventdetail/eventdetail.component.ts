@@ -3,7 +3,6 @@ import { switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UseractionService } from '../_services';
 import { EventComment, Event, User, Comment } from '../_models';
-import {  } from ''
 
 @Component({
   selector: 'app-eventdetail',
@@ -43,18 +42,10 @@ export class EventdetailComponent implements OnInit {
 
     console.log(this.eventid);
 
-    /**
-    this.comments$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        console.log(params);
-
-      })
-    );
-     */
   }
 
   gotoevents() {
-    this.router.navigate(['/eventslist']);
+    this.router.navigate(['/home/eventslist']);
   }
 
 }
