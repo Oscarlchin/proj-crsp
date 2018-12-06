@@ -31,11 +31,12 @@ export class NavComponent implements OnInit {
   }
 
   AdminLogin() {
+    //this.authService.loginObject = { username: "haha", password: "sfsdf", favevents: [] };
+
     this.authService.adminlogin('admin', 'admin')
         .pipe(first())
         .subscribe(
             data => {
-
                 this.router.navigate(['/admin']);
                 // console.log(this.authService.loginObject);
             },
@@ -43,5 +44,6 @@ export class NavComponent implements OnInit {
                 //  this.alertService.error(error);
                 console.log('adminloginerror');
             });
+
   }
 }

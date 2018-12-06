@@ -9,7 +9,7 @@
   <div id = "userItem" class="navbar-nav">
   <ul class="navbar-nav navbar-toggler-right">
     <li class="nav-item" *ngIf="isLogin"><a class="nav-link" id="userDisplay" [(ngModel)]="userName" name="fieldName" ngDefaultControl>Username: {{ userName }}</a></li>
-    <li class="nav-item" *ngIf="!isLogin"><a class="nav-link" [routerLink]="['/admin']" (click)="AdminLogin()">AdminLogin</a></li>
+    <li class="nav-item" *ngIf="!isLogin"><a class="nav-link" (click)="AdminLogin()">AdminLogin</a></li>
     <li class="nav-item" *ngIf="isLogin" ><a class="nav-link" [routerLink]="['/login']">Log Out</a></li>
   </ul>
 </div>
