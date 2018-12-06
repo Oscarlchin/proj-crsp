@@ -1,4 +1,4 @@
-<button (click)="getAllEvent()">See All Event!</button>
+<button (click)="refresh()">See All Event!</button>
 <div class="mx-auto">
 <mat-form-field>
     <mat-select [(value)]="selected" placeholder="Search Field">
@@ -15,7 +15,7 @@
 
     <ng-container matColumnDef="program_name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let row"> {{row.program_name}} </td>
+      <td mat-cell *matCellDef="let row"><a [routerLink]="['../event',row.program_id]" routerLinkActive="router-link-active"> {{row.program_name}} </a></td>
     </ng-container>
 
     <!-- Progress Column -->

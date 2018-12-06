@@ -6,6 +6,7 @@ import { LoginComponent} from './login/login.component';
 import { AuthGuard, AdminGuard } from './_guards';
 import { EventslistComponent } from './eventslist/eventslist.component';
 import { AdminComponent } from './admin/admin.component';
+import { EventdetailComponent } from './eventdetail/eventdetail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full'  },
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
        path: 'eventslist',
        component: EventslistComponent
+      },
+      {
+       path: 'event/:id',
+       component: EventdetailComponent
       }
   ]},
   { path: 'about', component: AboutComponent},

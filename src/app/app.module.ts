@@ -26,6 +26,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { EventdetailComponent } from './eventdetail/eventdetail.component';
 
 const modules = [
   MatPaginatorModule,
@@ -45,7 +46,8 @@ const modules = [
     AboutComponent,
     LoginComponent,
     EventslistComponent,
-    AdminComponent
+    AdminComponent,
+    EventdetailComponent
   ],
   imports: [
     BrowserModule,

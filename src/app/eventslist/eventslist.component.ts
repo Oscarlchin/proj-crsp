@@ -18,11 +18,8 @@ export interface Field {
   styleUrls: ['./eventslist.component.css']
 })
 export class EventslistComponent implements OnInit {
-//  public allEvent$: Observable<Event[]>;
-   allevents: Event[];
    dataLoading = false;
    selected: number = 0;
-  // Eve: String = null;
   fields: Field[] = [
     {value: 0, viewValue: 'All'},
     {value: 1, viewValue: 'Name'},
@@ -41,11 +38,15 @@ export class EventslistComponent implements OnInit {
 
   constructor( private useraction: UseractionService
     ) {
-      this.dataSource = new MatTableDataSource(this.allevents);
+      this.dataSource = new MatTableDataSource([]);
   }
 
   ngOnInit() {
-    this.getAllEvent();
+    this.useraction.Event$.subscribe(data => {
+      if (!data) { return; }
+      this.dataSource.data = data;
+    });
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filterPredicate = function(data: Event , filter: any): boolean {
@@ -86,15 +87,8 @@ export class EventslistComponent implements OnInit {
    };
   }
 
-  getAllEvent() {
-    this.useraction.getevent().subscribe((events) => {
-      this.dataSource.data = events;
-      this.dataLoading = true;
-      console.log(events.length);
-      console.log('succuess!');
-
-
-    });
+  refresh() {
+    this.useraction.getevent().subscribe(data => {});
   }
 
   applyFilter(filterValue: string) {

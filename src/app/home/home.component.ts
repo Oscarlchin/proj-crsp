@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { UseractionService } from '../_services';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   isBig = false;
-  constructor() { }
+  constructor( private useraction: UseractionService ) { }
 
   ngOnInit() {
-
+    this.useraction.refreshevent();
   }
 
   myclick() {
