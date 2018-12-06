@@ -32,10 +32,10 @@ export class AdminComponent implements OnInit {
 
   createUser() {
     const newUser: User = {
- //       username : 'oscar',
- //       password : 'oscar',
-      username : JSON.stringify(this.registerForm.get('newUsername').value),
-      password : JSON.stringify(this.registerForm.get('newPassword').value),
+//        username : 'oscar100',
+//       password : 'oscar100',
+      username : this.registerForm.get('newUsername').value,
+      password : this.registerForm.get('newPassword').value,
       favevents : []
     };
     console.log(newUser);
