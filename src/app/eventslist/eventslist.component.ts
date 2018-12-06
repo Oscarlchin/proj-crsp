@@ -27,12 +27,13 @@ export class EventslistComponent implements OnInit {
     {value: 0, viewValue: 'All'},
     {value: 1, viewValue: 'Name'},
     {value: 2, viewValue: 'Type'},
-    {value: 3, viewValue: 'District'},
-    {value: 4, viewValue: 'Fee'},
+    {value: 3, viewValue: 'Venue'},
+    {value: 4, viewValue: 'Day and Time'},
+    {value: 5, viewValue: 'Fee'},
 
   ];
 
-  displayedColumns: string[] = ['program_id','program_name', 'type_name', 'district', 'fee'];
+  displayedColumns: string[] = ['program_name', 'type_name', 'venue', 'day_time' , 'fee'];
   dataSource: MatTableDataSource<Event>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -53,7 +54,8 @@ export class EventslistComponent implements OnInit {
         case 0: {
           return data.program_name.toLowerCase().includes(filter.fv) ||
                   data.type_name.toLowerCase().includes(filter.fv) ||
-                   data.district.toLowerCase().includes(filter.fv) ||
+                   data.venue.toLowerCase().includes(filter.fv) ||
+                   (data.start_date.toString() + ' ' + data.start_time).includes(filter.fv) ||
                    data.fee.toString().includes(filter.fv);
         }
 
@@ -64,15 +66,19 @@ export class EventslistComponent implements OnInit {
           return data.type_name.toLowerCase().includes(filter.fv);
         }
         case 3: {
-          return data.district.toLowerCase().includes(filter.fv);
+          return data.venue.toLowerCase().includes(filter.fv);
         }
         case 4: {
+          return (data.start_date.toString() + ' ' + data.start_time).includes(filter.fv);
+        }
+        case 5: {
           return data.fee.toString().includes(filter.fv);
         }
         default: {
           return data.program_name.toLowerCase().includes(filter.fv) ||
                   data.type_name.toLowerCase().includes(filter.fv) ||
-                   data.district.toLowerCase().includes(filter.fv) ||
+                   data.venue.toLowerCase().includes(filter.fv) ||
+                   (data.start_date.toString() + ' ' + data.start_time).includes(filter.fv) ||
                    data.fee.toString().includes(filter.fv);
         }
       }
