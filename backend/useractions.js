@@ -58,6 +58,16 @@ module.exports = function (app){
     });
   });
 
+  app.get("/useraction/comment/:progId",function (req,res){
+    if (Number(req.params['progId'])){
+    Comment.findOne( {program_id: Number(req.params['progId'])}, function(err, progcomments) {
+      if (err) errorHandler(err);
+      if (progcomments) res.json(progcomments);
+      else res.json(null);
+    });
+    } else { res.json({ err: "invaliad program id" } ); }
+  });
+
   app.put("/useraction/:username/:progId/leavecomment", jwtuser, function(req,res){
     if (Number(req.params['progId'])){
     Comment.findOne( {program_id: Number(req.params['progId']) }, function(err, progcomments){
@@ -84,7 +94,7 @@ module.exports = function (app){
         });
       }
     });
-    } else res.send("no this program");
+    } else res.json({err : "invalid program id"});
   });
 
   app.post('/upload-csv', jwtuser, upload.single('file'), function (req,res,next){
