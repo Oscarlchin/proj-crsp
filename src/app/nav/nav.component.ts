@@ -15,6 +15,12 @@ export class NavComponent implements OnInit {
     ) {}
 
   ngOnInit() {
+    if (localStorage.currentUser) {
+      this.authService.loginObject = JSON.parse(localStorage.currentUser);
+
+    } else if (localStorage.adminUser) {
+      this.authService.loginObject = JSON.parse(localStorage.adminUser);
+    }
   }
   get userName(): string {
     return this.authService.loginObject.username;
@@ -29,7 +35,9 @@ export class NavComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
+
                 this.router.navigate(['/admin']);
+                // console.log(this.authService.loginObject);
             },
             error => {
                 //  this.alertService.error(error);

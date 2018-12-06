@@ -7,9 +7,7 @@ import { User } from '../_models';
 @Injectable()
 export class AuthService {
 
-   loginObject: User = null;
-
-
+    public loginObject: User = null;
 
     constructor(private http: HttpClient) { }
 
@@ -25,6 +23,7 @@ export class AuthService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                     this.loginObject = user;
+
                     console.log(user);
                 }
 
@@ -38,6 +37,7 @@ export class AuthService {
         // remove admin login
         localStorage.removeItem('adminUser');
         this.loginObject = null;
+
     }
     adminlogin(username: string, password: string) {
       return this.http.post<any>(`${config.BASE_API_URL}/admin/authenticate`, { username: username, password: password })
@@ -46,8 +46,9 @@ export class AuthService {
               if (admin && admin.token) {
                   // store user details and jwt token in local storage to keep user logged in between page refreshes
                   localStorage.setItem('adminUser', JSON.stringify(admin));
-                  this.loginObject = admin;
-                  console.log(admin);
+                  this.loginObject = { favevents: [] , ...admin};
+
+                  console.log(this.loginObject);
               }
 
               return admin;

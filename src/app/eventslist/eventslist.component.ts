@@ -49,7 +49,8 @@ export class EventslistComponent implements OnInit {
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.dataSource.filterPredicate = function(data: Event , filter: any): boolean {
+    this.dataSource.filterPredicate = function(data: Event , filterS: string): boolean {
+      const filter = JSON.parse(filterS);
       if (data && data.program_name && data.district && (data.fee  !== null) && data.type_name) {
       switch (filter.field) {
         case 0: {
@@ -97,7 +98,7 @@ export class EventslistComponent implements OnInit {
       field: this.selected
      };
 
-    this.dataSource.filter = customf;
+    this.dataSource.filter = JSON.stringify(customf);
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
