@@ -1,5 +1,3 @@
-import { Comment } from './comment';
-
 export class Event {
   program_id: number;
   program_name: string;
