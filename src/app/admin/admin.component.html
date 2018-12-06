@@ -1,5 +1,5 @@
 <h1>This is Admin Interface~</h1>
-<button (click)="createUser()">click</button>
+<!--<button (click)="createUser()">click</button>-->
 <mat-tab-group dynamicHeight>
 <!-- User -->
 <mat-tab label="Change User">
@@ -14,14 +14,16 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
-      <mat-form-field>
+<form [formGroup]="registerForm">
+      <mat-form-field class="form-group">
         <input matInput placeholder="New Username" required class="form-control" formControlName="newUsername">
       </mat-form-field><br>
 
-      <mat-form-field>
+      <mat-form-field class="form-group">
         <input matInput placeholder="New Password" required class="form-control" formControlName="newPassword">
       </mat-form-field><br>
       <button mat-raised-button color="primary" (click)='createUser()'>Submit</button>
+    </form>
     </mat-expansion-panel>
 
     <mat-expansion-panel>
@@ -34,14 +36,20 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
 
+      <form [formGroup]="updateForm">
       <mat-form-field>
-        <input matInput placeholder="Username">
+        <input name="preUpdateUsername" matInput placeholder="Previous Username" required class="form-control" formControlName="preUpdateUsername" required>
       </mat-form-field><br>
 
       <mat-form-field>
-        <input matInput placeholder="Password">
+        <input matInput placeholder="New Username" required class="form-control" formControlName="updateNewUsername" required>
       </mat-form-field><br>
-      <button mat-raised-button color="primary">Submit</button>
+
+      <mat-form-field>
+        <input matInput placeholder="New Password" required class="form-control" formControlName="updateNewPassword" required>
+      </mat-form-field><br>
+      <button mat-raised-button color="primary" [formGroup]="updateForm" (click)='updateUser()'>Submit</button>
+    </form>
     </mat-expansion-panel>
 
     <mat-expansion-panel>

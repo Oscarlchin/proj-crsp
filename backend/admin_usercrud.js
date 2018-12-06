@@ -59,15 +59,15 @@ module.exports = function (app){
           password: hash,
           favevents: []
         });
-        
-        
+
         User.findOne({username : updateuser.username}, function (err, doc) {
           if (doc){
+            console.log('Username exists already, update failed!');
               res.send('Username exists already, update failed!');
           }
           else{
             User.findOneAndUpdate({username: req.params['username']}, {username: updateuser.username, password: hash})
-          
+
             .exec(function(err,user){
             console.log(user);
             if (err) errorHandler(err);

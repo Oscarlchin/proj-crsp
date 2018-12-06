@@ -19,8 +19,8 @@ export class UserService {
         return this.http.post(`${config.BASE_API_URL}/users/create`, user);
     }
 
-    update(user: User) {
-        return this.http.put(`${config.BASE_API_URL}/users/` + user.username, user);
+    update(oldUsername, user: User) {
+        return this.http.put(`${config.BASE_API_URL}/users/` + oldUsername, user);
     }
 
     delete(username: string) {

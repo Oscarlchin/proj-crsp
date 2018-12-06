@@ -11,25 +11,31 @@ import { first } from 'rxjs/operators';
 })
 export class AdminComponent implements OnInit {
 
-  private registerForm: FormGroup;
-
-  newUsername;
-  newPassword;
+  registerForm: FormGroup;
+  updateForm: FormGroup;
 
   constructor( private userService: UserService,
     private formbuilder: FormBuilder) { }
 
   ngOnInit() {
     this.registerForm = this.formbuilder.group({
-      newUsername : ['', Validators.required],
-      newPassword : ['', Validators.required]
+      newUsername : '',
+      newPassword : ''
+    });
+
+    this.updateForm = this.formbuilder.group({
+      preUpdateUsername : '',
+      updateNewUsername : '',
+      updateNewPassword : ''
     });
   }
 
   createUser() {
     const newUser: User = {
-      username : 'carsten',
-      password : 'carsten',
+ //       username : 'oscar',
+ //       password : 'oscar',
+      username : JSON.stringify(this.registerForm.get('newUsername').value),
+      password : JSON.stringify(this.registerForm.get('newPassword').value),
       favevents : []
     };
     console.log(newUser);
@@ -40,4 +46,20 @@ export class AdminComponent implements OnInit {
     );
   }
 
+  updateUser() {
+    const updateUser: User = {
+             username : 'oscar',
+             password : 'oscar2',
+      //     username : JSON.stringify(this.updateForm.get('updateNewUsername').value)),
+      //     password : JSON.stringify(this.updateForm.get('updateNewPassword').value)),
+             favevents : []
+         };
+         console.log(JSON.stringify(this.updateForm.get('preUpdateUsername').value));
+         console.log(updateUser);
+         this.userService.update(JSON.stringify(this.updateForm.get('preUpdateUsername').value), updateUser).subscribe((event) => {
+           console.log('Okay~');
+         },
+         error => {console.log('error'); }
+         );
+  }
 }
