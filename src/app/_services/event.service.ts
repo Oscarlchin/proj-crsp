@@ -19,7 +19,7 @@ export class EventService {
         return this.http.post(`${config.BASE_API_URL}/events/create`, event);
     }
 
-    update(event: Event) {
+    update( Oldevent, event: Event) {
         return this.http.put(`${config.BASE_API_URL}/events/` + event.program_id, event);
     }
 
