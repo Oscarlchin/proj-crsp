@@ -13,7 +13,10 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 
 
 import { AuthGuard, AdminGuard } from './_guards';
-import { AuthService, UserService, EventService, UseractionService } from './_services';
+import {
+  AuthService, UserService, EventService,
+  UseractionService, AlertService
+} from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
 import {MaterialModule} from './app.material-module';
@@ -29,6 +32,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   MatPaginatorModule,
@@ -39,7 +43,8 @@ const modules = [
   MatSelectModule,
   MaterialModule,
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatSnackBarModule
 ];
 
 @NgModule({
@@ -72,6 +77,7 @@ const modules = [
     EventService,
     UserService,
     UseractionService,
+    AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
 

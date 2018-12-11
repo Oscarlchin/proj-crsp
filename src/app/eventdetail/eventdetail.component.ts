@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { UseractionService, AuthService } from '../_services';
+import { UseractionService, AuthService, AlertService } from '../_services';
 import { EventComment, Event, User, Comment } from '../_models';
 import { NgForm } from '@angular/forms';
 
@@ -19,7 +18,8 @@ export class EventdetailComponent implements OnInit {
   constructor(  private route: ActivatedRoute,
     private router: Router,
     private useractionservice: UseractionService,
-    private authservice: AuthService) { }
+    private authservice: AuthService,
+    private alert: AlertService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -70,17 +70,23 @@ export class EventdetailComponent implements OnInit {
 
   onclicklike() {
     if (this.isLike) {
-      const eventid = this.eventid;
-      const fav = this.authservice.loginObject.favevents.filter(function(value) {
-        console.log(eventid);
-        return Number(value) !== eventid;
+      this.useractionservice.unlikeevent(this.authservice.loginObject.username, this.eventid).subscribe(data => {
+        const eventid = this.eventid;
+        const fav = this.authservice.loginObject.favevents.filter(function(value) {
+          return Number(value) !== eventid;
+        });
+        this.authservice.loginObject.favevents = fav;
+        this.isLike = false;
+        this.alert.showAlert('Liked!!!!!');
       });
-      this.authservice.loginObject.favevents = fav;
-      this.isLike = false;
+
     } else {
-      this.authservice.loginObject.favevents.push(this.eventid);
-      console.log(this.authservice.loginObject);
-      this.isLike = true;
+      this.useractionservice.likeevent(this.authservice.loginObject.username, this.eventid).subscribe(data => {
+        this.authservice.loginObject.favevents.push(this.eventid);
+        this.isLike = true;
+        this.alert.showAlert('Unliked!!!');
+      });
+
     }
 
   }
