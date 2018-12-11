@@ -2,6 +2,11 @@
 <p>
  Event Name: {{ event ? event.program_name : "" }}
 </p>
+<button (click)="onclicklike()" mat-fab color="{{isLike ? 'accent' : 'primary'}}">
+  <mat-icon [hidden]="!isLike" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+  {{isLike ? '' : 'Like'}}
+</button>
+
 <p>Event Comments:</p>
 <div class="container commentblk">
   <div *ngIf="comments.length!==0">
@@ -31,7 +36,6 @@
         </div>
     </form>
     </div>
-
   </div>
 </div>
 <button mat-button (click)="gotoevents()">Back to Event List</button>

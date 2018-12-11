@@ -15,6 +15,7 @@ export class EventdetailComponent implements OnInit {
   event: Event = null;
   eventid: number;
   currentusercomment = '';
+  isLike: boolean;
   constructor(  private route: ActivatedRoute,
     private router: Router,
     private useractionservice: UseractionService,
@@ -23,6 +24,11 @@ export class EventdetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.eventid = params.id;
+      if (this.authservice.loginObject.favevents.includes(this.eventid)) {
+        this.isLike = true;
+      } else {
+        this.isLike = false;
+      }
       this.useractionservice.Event$.subscribe(data => {
         if (!data) { return; }
         for ( const e in data ) {
@@ -60,6 +66,23 @@ export class EventdetailComponent implements OnInit {
         this.currentusercomment = '';
        }
     });
+  }
+
+  onclicklike() {
+    if (this.isLike) {
+      const eventid = this.eventid;
+      const fav = this.authservice.loginObject.favevents.filter(function(value) {
+        console.log(eventid);
+        return Number(value) !== eventid;
+      });
+      this.authservice.loginObject.favevents = fav;
+      this.isLike = false;
+    } else {
+      this.authservice.loginObject.favevents.push(this.eventid);
+      console.log(this.authservice.loginObject);
+      this.isLike = true;
+    }
+
   }
 
 }
