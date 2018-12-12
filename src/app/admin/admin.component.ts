@@ -261,7 +261,7 @@ export class AdminComponent implements OnInit {
           } else if (event == null) {
             this.updateEventOutput = 'Event not found in database. Please Check!';
           } else {
-           
+            
             'Updated Program ID: ' + event['updateProgramID'] + '/n' +
             'Updated Program Name: ' + event['updateProgramName'] + '/n' +
             'Updated District: ' +  event['updateDistrict'] + '/n' +
