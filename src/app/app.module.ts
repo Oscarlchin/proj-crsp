@@ -15,7 +15,7 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 import { AuthGuard, AdminGuard } from './_guards';
 import {
   AuthService, UserService, EventService,
-  UseractionService, AlertService
+  UseractionService, AlertService, UploadService
 } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
@@ -94,6 +94,7 @@ const modules = [
     EventService,
     UserService,
     UseractionService,
+    UploadService,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

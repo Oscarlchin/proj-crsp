@@ -58,13 +58,24 @@ module.exports = function (app){
           password: hash,
           favevents: []
         });
+        if (updateuser.username !== req.params['username']){
+          User.findOne({username : updateuser.username}, function (err, doc) {
+            if (doc){
+              console.log('Username exists already, update failed!');
+                res.send('Username exists already, update failed!');
+            }
+            else{
+              User.findOneAndUpdate({username: req.params['username']}, {username: updateuser.username, password: hash})
 
-        User.findOne({username : updateuser.username}, function (err, doc) {
-          if (doc){
-            console.log('Username exists already, update failed!');
-              res.send('Username exists already, update failed!');
-          }
-          else{
+              .exec(function(err,user){
+              console.log(user);
+              if (err) errorHandler(err);
+              if (user) res.status(202).json({username: user.username});
+              else res.status(202).json(null);
+              });
+            }
+          });
+          } else {
             User.findOneAndUpdate({username: req.params['username']}, {username: updateuser.username, password: hash})
 
             .exec(function(err,user){
@@ -74,7 +85,6 @@ module.exports = function (app){
             else res.status(202).json(null);
             });
           }
-        });
       });
     });
   });
