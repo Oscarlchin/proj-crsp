@@ -1,0 +1,223 @@
+
+  <mat-accordion multi="false">
+       <mat-expansion-panel>
+           <mat-expansion-panel-header>
+             <mat-panel-title>
+               Create Event
+             </mat-panel-title>
+             <mat-panel-description>
+               Type event details
+             </mat-panel-description>
+           </mat-expansion-panel-header>
+
+           <form [formGroup]="registerEventForm">
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Program ID" required class="form-control" formControlName="newProgramID">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Program Name" required class="form-control" formControlName="newProgramName">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="District" required class="form-control" formControlName="newDistrict">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Venue" required class="form-control" formControlName="newVenue">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Start Date" required class="form-control" formControlName="newStartdate">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="End Date" required class="form-control" formControlName="newEnddate">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Day in week" required class="form-control" formControlName="newDayinweek">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Start Time" required class="form-control" formControlName="newStarttime">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="End Time" required class="form-control" formControlName="newEndtime">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Type Name" required class="form-control" formControlName="newTypename">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Fee" required class="form-control" formControlName="newFee">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Quota" required class="form-control" formControlName="newQuota">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Quota Left" required class="form-control" formControlName="newQuotaleft">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Minimum Age" required class="form-control" formControlName="newMinimumage">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="Maximum Age" required class="form-control" formControlName="newMaximumage">
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group">
+             <input matInput placeholder="URL" required class="form-control" formControlName="newURL">
+           </mat-form-field><br>
+
+
+           <button mat-raised-button color="primary" (click)='createEvent()'>Submit</button>
+           </form>
+           <br>
+           <p>{{createEventOutput}}</p>
+           <br>
+
+         </mat-expansion-panel>
+
+         <mat-expansion-panel>
+           <mat-expansion-panel-header>
+             <mat-panel-title>
+               Update Event
+             </mat-panel-title>
+             <mat-panel-description>
+               Type event details
+             </mat-panel-description>
+           </mat-expansion-panel-header>
+
+           <form [formGroup]="updateEventForm">
+
+             <mat-form-field>
+               <input name="preUpdateProgramID" matInput placeholder="Program ID of event to be updated" required class="form-control" formControlName="preUpdateProgramID">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Program ID" required class="form-control" formControlName="updateProgramID">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Program Name" required class="form-control" formControlName="updateProgramName">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated District" required class="form-control" formControlName="updateDistrict">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Venue" required class="form-control" formControlName="updateVenue">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Start Date" required class="form-control" formControlName="updateStartdate">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated End Date" required class="form-control" formControlName="updateEnddate">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Day in week" required class="form-control" formControlName="updateDayinweek">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Start Time" required class="form-control" formControlName="updateStarttime">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated End Time" required class="form-control" formControlName="updateEndtime">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Type Name" required class="form-control" formControlName="updateTypename">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Fee" required class="form-control" formControlName="updateFee">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Quota" required class="form-control" formControlName="updateQuota">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Quota Left" required class="form-control" formControlName="updateQuotaleft">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Minimum Age" required class="form-control" formControlName="updateMinimumage">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated Maximum Age" required class="form-control" formControlName="updateMaximumage">
+             </mat-form-field><br>
+
+             <mat-form-field>
+               <input matInput placeholder="Updated URL" required class="form-control" formControlName="updateURL">
+             </mat-form-field><br>
+
+
+             <button mat-raised-button color="primary" (click)='updateEvent()'>Submit</button>
+             </form>
+             <br>
+             <p>{{updateEventOutput}}</p>
+             <br>
+         </mat-expansion-panel>
+
+         <mat-expansion-panel>
+
+           <mat-expansion-panel-header>
+             <mat-panel-title>
+               Retrieve event
+             </mat-panel-title>
+             <mat-panel-description>
+               Type event details
+             </mat-panel-description>
+           </mat-expansion-panel-header>
+
+           <form [formGroup]="getOneEventForm">
+             <mat-form-field>
+               <input matInput placeholder="ProgramID" required class="form-control" formControlName="getOneProgramID">
+             </mat-form-field><br>
+
+
+           <button mat-raised-button color="primary" (click)='getOneEvent()'>Submit</button>
+             </form>
+             <br>
+             <p>{{getOneEventOutput}}</p>
+             <br>
+
+
+         </mat-expansion-panel>
+
+         <mat-expansion-panel>
+           <mat-expansion-panel-header>
+             <mat-panel-title>
+               Delete Event
+             </mat-panel-title>
+             <mat-panel-description>
+               Type event and details
+             </mat-panel-description>
+           </mat-expansion-panel-header>
+
+           <form [formGroup]="deleteOneEventForm">
+             <mat-form-field>
+               <input matInput placeholder="Program ID" required class="form-control" formControlName="deleteOneProgramID">
+             </mat-form-field><br>
+             <button mat-raised-button color="primary" (click)='deleteOneEvent()'>Submit</button>
+           </form>
+           <br>
+           <p>{{ deleteOneEventOutput }}</p>
+           <br>
+         </mat-expansion-panel>
+   </mat-accordion>
+
