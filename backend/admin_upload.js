@@ -5,8 +5,9 @@ var csv = require('fast-csv');
 var upload = multer({ dest: 'tmp/csv/' });
 var Event = require('./_models/EventSchema');
 
-module.export = function(app) {
+module.exports = function(app) {
   app.post('/upload-csv', jwtadmin, upload.single('file'), function (req,res,next){
+    console.log(req);
     csv.fromPath(req.file.path, {
       headers:  ["program_id", "program_name", "district", "venue", "start_date"
       , "end_date", "dayinweek", "start_time", "end_time", "type_name"
@@ -23,6 +24,7 @@ module.export = function(app) {
       //console.log('err');
     })
     .on("data", function (data) {
+      console.log("uploading");
       var event = new Event({
         program_id: Number(data.program_id),
         program_name: String(data.program_name),
@@ -52,10 +54,10 @@ module.export = function(app) {
       });
     })
     .on("end", function () {
-
+      console.log("something upload!");
       fs.unlinkSync(req.file.path);
       res.json({message: "success"});
     });
 
-  })
+  });
 }

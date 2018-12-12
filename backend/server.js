@@ -29,6 +29,7 @@ require('./extract.js')(app);
 require('./useractions.js')(app);
 require('./admin_eventcrud.js')(app);
 require('./admin_usercrud.js')(app);
+require('./admin_upload.js')(app);
 
 var dboptions = {
 user: config.dbuser,
