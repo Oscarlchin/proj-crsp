@@ -35,46 +35,46 @@ export class ChangeeventComponent implements OnInit {
       newProgramName : ['', [Validators.required]],
       newVenue : ['', [Validators.required]],
       newDistrict : ['', [Validators.required]],
-      newStartdate : '',
-      newEnddate : '',
-      newDayinweek : '',
-      newStarttime : '',
-      newEndtime : '',
-      newTypename : '',
-      newFee : '',
-      newQuota : '',
-      newQuotaleft : '',
-      newMinimumage : '',
-      newMaximumage : '',
-      newURL : ''
+      newStartdate : ['', [Validators.required]],
+      newEnddate : ['', [Validators.required]],
+      newDayinweek : ['', [Validators.required]],
+      newStarttime : ['', [Validators.required]],
+      newEndtime : ['', [Validators.required]],
+      newTypename : ['', [Validators.required]],
+      newFee : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newQuota : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newQuotaleft : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newMinimumage : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newMaximumage : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newURL : ['', [Validators.required]]
     });
 
     this.updateEventForm = this.formbuilder.group({
-      preUpdateProgramID : ['', [Validators.required]],
-      updateProgramID : ['', [Validators.required]],
+     
+      updateProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       updateProgramName : ['', [Validators.required]],
       updateVenue : ['', [Validators.required]],
-      updateDistrict : '',
-      updateStartdate : '',
-      updateEnddate : '',
-      updateDayinweek : '',
-      updateStarttime : '',
-      updateEndtime : '',
-      updateTypename : '',
-      updateFee : '',
-      updateQuota : '',
-      updateQuotaleft : '',
-      updateMinimumage : '',
-      updateMaximumage : '',
-      updateURL : ''
+      updateDistrict : ['', [Validators.required]],
+      updateStartdate : ['', [Validators.required]],
+      updateEnddate : ['', [Validators.required]],
+      updateDayinweek : ['', [Validators.required]],
+      updateStarttime : ['', [Validators.required]],
+      updateEndtime : ['', [Validators.required]],
+      updateTypename : ['', [Validators.required]],
+      updateFee : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateQuota : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateQuotaleft : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateMinimumage :['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateMaximumage : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateURL : ['', [Validators.required]]
     });
 
     this.getOneEventForm = this.formbuilder.group({
-      getOneProgramID : ['', [Validators.required]]
+      getOneProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
     });
 
     this.deleteOneEventForm = this.formbuilder.group({
-      deleteOneProgramID : ['', [Validators.required]]
+      deleteOneProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
     });
   }
 
@@ -161,18 +161,18 @@ export class ChangeeventComponent implements OnInit {
           url: this.updateEventForm.get('updateURL').value
          };
 
-         this.eventService.update(this.updateEventForm.get('preUpdateProgramID').value, updateEvent).subscribe((event) => {
-          if (this.updateEventForm.get('preUpdateProgramID').value === ''
-          || this.updateEventForm.get('updateProgramID').value === ''
-          || this.updateEventForm.get('updateProgramName').value === ''
-          || this.updateEventForm.get('updateDistrict').value === ''
-          || this.updateEventForm.get('updateVenue').value === '') {
-            this.updateEventOutput = 'Please enter something!';
-          } else if (event == null) {
+         this.eventService.update(updateEvent).subscribe((event) => {
+         // if (this.updateEventForm.get('preUpdateProgramID').value === ''
+         // || this.updateEventForm.get('updateProgramID').value === ''
+          //|| this.updateEventForm.get('updateProgramName').value === ''
+         // || this.updateEventForm.get('updateDistrict').value === ''
+         // || this.updateEventForm.get('updateVenue').value === '') {
+         //   this.updateEventOutput = 'Please enter something!';
+           if (event == null) {
             this.updateEventOutput = 'Event not found in database. Please Check!';
           } else {
             this.updateEventOutput =
-            'Updated Program ID: ' + event['updateProgramID'] + '/n' +
+            'Program ID: ' + event['updateProgramID'] + '/n' +
             'Updated Program Name: ' + event['updateProgramName'] + '/n' +
             'Updated District: ' +  event['updateDistrict'] + '/n' +
             'Updated Venue: ' +  event['updateVenue'] + '/n' +
@@ -190,7 +190,7 @@ export class ChangeeventComponent implements OnInit {
             'Updated URL: ' +   event['updateURL'];
          }
         },
-        error => {this.updateEventOutput = 'Error. Please Check!'; }
+        error => {this.alert.showAlert('Error. Please Check!') }
          );
 
 
@@ -200,10 +200,10 @@ export class ChangeeventComponent implements OnInit {
       return;
   }
     this.eventService.getById(this.getOneEventForm.get('getOneProgramID').value).subscribe((event) => {
-      if (this.getOneEventForm.get('getOneProgramID').value === '') {
-        this.getOneEventOutput = 'Please enter something!';
-       } else if (event == null) {
-         this.getOneEventOutput = 'Event not found in database. Please Check!';
+    //  if (this.getOneEventForm.get('getOneProgramID').value === '') {
+    //    this.getOneEventOutput = 'Please enter something!';
+       if (event == null) {
+        {this.alert.showAlert('Event not found in database. Please Check!')};
        } else {
         this.getOneEventOutput =
             'Program ID: ' + event['program_id'] + '/n' +
@@ -224,9 +224,10 @@ export class ChangeeventComponent implements OnInit {
             'URL: ' +   event['url'];
      }
     },
-    error => {this.getOneEventOutput = 'Error. Please Check!'; }
+    error => {this.alert.showAlert('Error. Please Check!') }
     );
   }
+
   deleteOneEvent() {
     if (this.deleteOneEventForm.invalid) {
       return;
@@ -236,7 +237,7 @@ export class ChangeeventComponent implements OnInit {
       console.log(event);
       this.deleteOneEventOutput = 'Event deleted!';
     },
-    error => {this.deleteOneEventOutput = 'Event not found in database. Please Check!'; }
+    error => {this.alert.showAlert('Event not found in database. Please Check!') }
     );
   }
 
