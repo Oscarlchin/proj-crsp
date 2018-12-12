@@ -1,24 +1,40 @@
 <div class="row mt-3 mx-auto">
 <div class="col-6">
+
 <p>
-Please upload CSV file with header in the following order:<br>
+<strong>Please upload CSV file with header in the following order:</strong><br>
 "program_id", "program_name", "district", "venue", "start_date",<br>
 "end_date", "dayinweek", "start_time", "end_time", "type_name",<br>
 "fee", "quota", "quota_left" , "min_age", "max_age", "url"<br>
 </p>
 <div>
-    <button mat-raised-button color="primary" (click)="openInput()">
+    <button mat-raised-button [disabled]="isLoading" color="primary" (click)="openInput()">
         Select File to Upload
     </button>
     <div class="mt-2 mb-2"><p>{{ uploadFile ? name : "No Selected File" }}</p></div>
   </div>
+
   <input id="fileInput" hidden type="file" (change)="fileChange($event.target.files)" >
+
   <mat-error *ngIf="!isCSV">The file is not a csv file.</mat-error>
   <div>
-  <button mat-flat-button [disabled]="!uploadFile || !isCSV" color="accent" (click)="upload()">Upload</button>
+  <button mat-flat-button [disabled]="!uploadFile || !isCSV || isLoading" color="accent" (click)="upload()">Upload</button>
   </div>
+  <mat-card *ngIf="isLoading">
+      <mat-card-content>
+        <h5>Result</h5>
+        <mat-progress-bar
+        class="example-margin"
+        color="primary"
+        mode="determine"
+        [value]="progressvalue">
+        </mat-progress-bar>
+      </mat-card-content>
+    </mat-card>
+
 </div>
 <div class="col-6">
+  <p>
     <strong>Note:<br></strong>
     <small>
     "program_id" should be unique and it should follow PGM_CODE from the data online.<br>
@@ -38,5 +54,6 @@ Please upload CSV file with header in the following order:<br>
     "max_age" is the maximum age limit, it should be a number<br>
     "url" is the url of the program<br>
     </small>
+  </p>
 </div>
 </div>

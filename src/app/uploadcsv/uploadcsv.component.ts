@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UploadService } from '../_services';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { Component, OnInit  } from '@angular/core';
+import { UploadService, AlertService } from '../_services';
 
 @Component({
   selector: 'app-uploadcsv',
@@ -8,10 +7,15 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
   styleUrls: ['./uploadcsv.component.css']
 })
 export class UploadcsvComponent implements OnInit {
+
+
   name: string = '';
   uploadFile: File;
   isCSV: boolean = true;
-  constructor(private uploadService: UploadService) { }
+  progressvalue: number = 0;
+  isLoading: boolean = false;
+  constructor(private uploadService: UploadService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -33,18 +37,21 @@ export class UploadcsvComponent implements OnInit {
     }
   }
   upload() {
+    this.isLoading = true;
     this.uploadService.upload(this.uploadFile).subscribe( (data: any) => {
       console.log(data);
       if (data.type == 1 && data.loaded && data.total) {
-        // This is an upload progress event. Compute and show the % done:
-        const percentDone = Math.round(100 * data.loaded / data.total);
-        console.log(`File is ${percentDone}% uploaded.`);
+        this.progressvalue = Math.round(100 * data.loaded / data.total);
       } else if (data.body) {
-        console.log('File is completely uploaded!');
-        console.log(data.body);
+        this.isLoading = false;
+        this.alertService.showAlert('Done!!');
+        document.getElementById('fileInput').value = null;
+        this.uploadFile = null;
+
+
       }
-    });
-    console.log('sending this to server', this.uploadFile);
+    },
+    error => console.log(error) );
   }
 
 }
