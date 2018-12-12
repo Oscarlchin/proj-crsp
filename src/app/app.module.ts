@@ -19,6 +19,7 @@ import {
 } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './app.material-module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -81,6 +82,7 @@ const modules = [
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     ...modules,
   ],

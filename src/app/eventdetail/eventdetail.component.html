@@ -1,12 +1,50 @@
-<p>Event Details</p>
-<p>
- Event Name: {{ event ? event.program_name : "" }}
-</p>
-<button (click)="onclicklike()" mat-fab color="{{isLike ? 'accent' : 'primary'}}">
-  <mat-icon [hidden]="!isLike" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
-  {{isLike ? '' : 'Like'}}
-</button>
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div fxFlex="50%">
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Event Details</span>
+    <span class="example-spacer"></span>
+    <button layout-align="end center" (click)="onclicklike()" mat-fab color="{{isLike ? 'accent' : 'primary'}}">
+        <mat-icon [hidden]="!isLike" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
+        {{isLike ? '' : 'Like'}}
+      </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-list>
+  <mat-list-item>
+    Program ID : {{ event ? event.program_id : "" }}
+  </mat-list-item>
+  <mat-list-item>
+    Program Name : {{ event ? event.program_name : "" }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    District : {{ event ? event.district : "" }}
+  </mat-list-item>
+  <mat-list-item>
+    Venue : {{ event ? event.venue : "" }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    Start Date : {{ event ? event.start_date : "" }}
+  </mat-list-item>
+  <mat-list-item>
+    End Date : {{ event ? event.end_date : "" }}
+  </mat-list-item>
+  <mat-list-item>
+    Days in Week : {{ event ? event.dayinweek : "" }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    Satrt Time : {{ event ? event.start_time : "" }}
+  </mat-list-item>
+  <mat-list-item>
+    End Time : {{ event ? event.end_time : "" }}
+  </mat-list-item>
+</mat-list>
+</div>
 
+<div fxFlex>
 <p>Event Comments:</p>
 <div class="container commentblk">
   <div *ngIf="comments.length!==0">
@@ -41,4 +79,7 @@
     </div>
   </div>
 </div>
+</div>
+</div>
+
 <button mat-button (click)="gotoevents()">Back to Event List</button>
