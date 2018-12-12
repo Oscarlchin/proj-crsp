@@ -2,7 +2,6 @@ var jwtadmin = require('./_helpers/jwt').jwtadmin;
 var dbcall = require('./_helpers/dbcall');
 var User = require('./_models/UserSchema');
 var Comment = require('./_models/CommentSchema.js');
-var Event = require('./_models/EventSchema');
 var errorHandler = require('./_helpers/error-handle');
 var bcrypt =require('bcryptjs');
 
