@@ -35,6 +35,7 @@ import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ChangeuserComponent } from './changeuser/changeuser.component';
 import { ChangeeventComponent } from './changeevent/changeevent.component';
+import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
 
 const modules = [
   MatPaginatorModule,
@@ -60,7 +61,8 @@ const modules = [
     AdminComponent,
     EventdetailComponent,
     ChangeuserComponent,
-    ChangeeventComponent
+    ChangeeventComponent,
+    UploadcsvComponent
   ],
   imports: [
     BrowserModule,
