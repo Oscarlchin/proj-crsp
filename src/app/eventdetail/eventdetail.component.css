@@ -3,3 +3,7 @@
   font-size: 1 rem;
   float: left;
 }
+
+.example-spacer {
+  flex: 1 1 auto;
+}
