@@ -51,9 +51,9 @@
       <mat-form-field>
         <input name="preUpdateUsername" matInput placeholder="Previous Username" required class="form-control" formControlName="preUpdateUsername">
         <div *ngIf="updatef.preUpdateUsername.errors">
-          <mat-error *ngIf="updatef.preUpdateUsername.errors.required">preUpdateUsername is required</mat-error>
-          <mat-error *ngIf="updatef.preUpdateUsername.errors.minlength">preUpdateUsername must be at least 4 characters long.</mat-error>
-          <mat-error *ngIf="updatef.preUpdateUsername.errors.maxlength">preUpdateUsername must be at most 20 characters long.</mat-error>
+          <mat-error *ngIf="updatef.preUpdateUsername.errors.required">Previous Username is required</mat-error>
+          <mat-error *ngIf="updatef.preUpdateUsername.errors.minlength">Previous Username must be at least 4 characters long.</mat-error>
+          <mat-error *ngIf="updatef.preUpdateUsername.errors.maxlength">Previous Username must be at most 20 characters long.</mat-error>
           </div>
 
       </mat-form-field><br>
@@ -61,18 +61,18 @@
       <mat-form-field>
         <input matInput placeholder="New Username" required class="form-control" formControlName="updateNewUsername">
         <div *ngIf="updatef.updateNewUsername.errors">
-          <mat-error *ngIf="updatef.updateNewUsername.errors.required">updateNewUsername is required</mat-error>
-          <mat-error *ngIf="updatef.updateNewUsername.errors.minlength">updateNewUsername must be at least 4 characters long.</mat-error>
-          <mat-error *ngIf="updatef.updateNewUsername.errors.maxlength">updateNewUsername must be at most 20 characters long.</mat-error>
+          <mat-error *ngIf="updatef.updateNewUsername.errors.required">New Username is required</mat-error>
+          <mat-error *ngIf="updatef.updateNewUsername.errors.minlength">New Username must be at least 4 characters long.</mat-error>
+          <mat-error *ngIf="updatef.updateNewUsername.errors.maxlength">New Username must be at most 20 characters long.</mat-error>
           </div>
       </mat-form-field><br>
 
       <mat-form-field>
         <input matInput placeholder="New Password" required class="form-control" formControlName="updateNewPassword">
         <div *ngIf="updatef.updateNewPassword.errors">
-          <mat-error *ngIf="updatef.updateNewPassword.errors.required">updateNewPassword is required</mat-error>
-          <mat-error *ngIf="updatef.updateNewPassword.errors.minlength">updateNewPassword must be at least 4 characters long.</mat-error>
-          <mat-error *ngIf="updatef.updateNewPassword.errors.maxlength">updateNewPassword must be at most 20 characters long.</mat-error>
+          <mat-error *ngIf="updatef.updateNewPassword.errors.required">New Password is required</mat-error>
+          <mat-error *ngIf="updatef.updateNewPassword.errors.minlength">New Password must be at least 4 characters long.</mat-error>
+          <mat-error *ngIf="updatef.updateNewPassword.errors.maxlength">New Password must be at most 20 characters long.</mat-error>
           </div>
       </mat-form-field><br>
       <button mat-raised-button color="primary" [formGroup]="updateForm" (click)='updateUser()'>Submit</button>

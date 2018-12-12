@@ -19,6 +19,7 @@ import {
 } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {MaterialModule} from './app.material-module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,8 +34,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { ChangeuserComponent, CreateuserDialogComponent } from './changeuser/changeuser.component';
+
+import { ChangeuserComponent, CreateuserDialogComponent,
+  UpdateuserDialogComponent, RetrieveuserDialogComponent, DeleteuserDialogComponent } from './changeuser/changeuser.component';
+
 import { ChangeeventComponent } from './changeevent/changeevent.component';
 import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
 
@@ -65,10 +70,16 @@ const modules = [
     ChangeuserComponent,
     ChangeeventComponent,
     UploadcsvComponent,
-    CreateuserDialogComponent
+    CreateuserDialogComponent,
+    UpdateuserDialogComponent,
+    RetrieveuserDialogComponent,
+    DeleteuserDialogComponent
   ],
   entryComponents: [
-    CreateuserDialogComponent
+    CreateuserDialogComponent,
+    UpdateuserDialogComponent,
+    RetrieveuserDialogComponent,
+    DeleteuserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -76,6 +87,7 @@ const modules = [
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     ...modules,
   ],
