@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserService, AlertService } from '../_services';
 import { User } from '../_models';
 import { EventService } from '../_services';
 import { Event } from '../_models';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+export interface CreateUserDialogData {
+  newUsername: string;
+  newPassword: string;
+}
 
 @Component({
   selector: 'app-changeuser',
@@ -25,8 +30,9 @@ export class ChangeuserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private alert:AlertService,
-    private formbuilder: FormBuilder
+    private alert: AlertService,
+    private formbuilder: FormBuilder,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -50,8 +56,17 @@ export class ChangeuserComponent implements OnInit {
     });
   }
 
-  get registerf() { return this.registerForm.controls;}
-  get updatef() { return this.updateForm.controls;}
+  get registerf() { return this.registerForm.controls; }
+  get updatef() { return this.updateForm.controls; }
+
+  openCreateUserDialog(u, p) {
+    this.dialog.open(CreateuserDialogComponent, {
+      data: {
+        newUsername: u,
+        newPassword: p
+      }
+    });
+  }
 
   createUser() {
     if (this.registerForm.invalid) {
@@ -66,16 +81,14 @@ export class ChangeuserComponent implements OnInit {
     };
     console.log(newUser);
     this.userService.create(newUser).subscribe((event) => {
-      //console.log(event);
-      //if (this.registerForm.get('newUsername').value === ''
-      //|| this.updateForm.get('newPassword').value === '') {
+      // console.log(event);
+      // if (this.registerForm.get('newUsername').value === ''
+      // || this.updateForm.get('newPassword').value === '') {
       //  this.updateOutput = 'Please enter something!';
-      //}
-        this.createOutput = 'Username: ' + this.registerForm.get('newUsername').value + '<br\>'
-          + 'Password: ' + this.registerForm.get('newPassword').value;
-     
+      // }
+      this.openCreateUserDialog(this.registerForm.get('newUsername').value, this.registerForm.get('newPassword').value);
     },
-    error => {this.alert.showAlert('This username already exist!') }
+    error => {this.alert.showAlert('This username already exist!'); }
     );
   }
 
@@ -98,12 +111,13 @@ export class ChangeuserComponent implements OnInit {
 //          || this.updateForm.get('updateNewPassword').value === '') {
 //            this.updateOutput = 'Please enter something!';
           if (event == null) {
-            {this.alert.showAlert('User not found on database. Please Check!')}
+            {this.alert.showAlert('User not found on database. Please Check!'); }
           } else {
             this.updateOutput = 'Updated Username: ' + event['username'] + '/n' + 'Updated Password: ' + event['password'];
          }
         },
-        error => {this.alert.showAlert('Either preUpdateUsername not found or updateNewUsername is identical to existing username, please change!') }
+        error => {this.alert.showAlert(
+          'Either preUpdateUsername not found or updateNewUsername is identical to existing username, please change!'); }
          );
   }
 
@@ -131,5 +145,19 @@ export class ChangeuserComponent implements OnInit {
     error => {this.deleteOneOutput = 'User not found on database. Please Check!'; }
     );
   }
+}
 
+@Component({
+  selector: 'app-changeuserdialog',
+  templateUrl: './createuserDialog.component.html',
+})
+export class CreateuserDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: CreateUserDialogData,
+   public dialogRef: MatDialogRef<CreateuserDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
 }
