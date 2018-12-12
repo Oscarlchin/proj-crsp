@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services';
+import { UserService, AlertService } from '../_services';
 import { User } from '../_models';
 import { EventService } from '../_services';
 import { Event } from '../_models';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-changeuser',
@@ -24,20 +25,20 @@ export class ChangeuserComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private eventService: EventService,
+    private alert:AlertService,
     private formbuilder: FormBuilder
   ) { }
 
   ngOnInit() {
     this.registerForm = this.formbuilder.group({
-      newUsername : '',
-      newPassword : ''
+      newUsername : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      newPassword : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
     });
 
     this.updateForm = this.formbuilder.group({
-      preUpdateUsername : '',
-      updateNewUsername : '',
-      updateNewPassword : ''
+      preUpdateUsername : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      updateNewUsername : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      updateNewPassword : ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]]
     });
 
     this.getOneForm = this.formbuilder.group({
@@ -49,8 +50,13 @@ export class ChangeuserComponent implements OnInit {
     });
   }
 
+  get registerf() { return this.registerForm.controls;}
+  get updatef() { return this.updateForm.controls;}
 
   createUser() {
+    if (this.registerForm.invalid) {
+      return;
+  }
     const newUser: User = {
 //        username : 'oscar100',
 //       password : 'oscar100',
@@ -60,20 +66,23 @@ export class ChangeuserComponent implements OnInit {
     };
     console.log(newUser);
     this.userService.create(newUser).subscribe((event) => {
-      console.log(event);
-      if (this.registerForm.get('newUsername').value === ''
-      || this.registerForm.get('newPassword').value === '') {
-        this.createOutput = 'Please enter something!';
-       } else {
-        this.createOutput = 'Username: ' + this.registerForm.get('newUsername').value + '/n'
+      //console.log(event);
+      //if (this.registerForm.get('newUsername').value === ''
+      //|| this.updateForm.get('newPassword').value === '') {
+      //  this.updateOutput = 'Please enter something!';
+      //}
+        this.createOutput = 'Username: ' + this.registerForm.get('newUsername').value + '<br\>'
           + 'Password: ' + this.registerForm.get('newPassword').value;
-     }
+     
     },
-    error => {this.createOutput = 'Error. Please Check!'; }
+    error => {this.alert.showAlert('This username already exist!') }
     );
   }
 
   updateUser() {
+    if (this.updateForm.invalid) {
+      return;
+  }
     const updateUser: User = {
       //       username : 'oscarUP',
       //       password : 'oscarUP',
@@ -84,17 +93,17 @@ export class ChangeuserComponent implements OnInit {
 //         console.log(this.updateForm.get('preUpdateUsername').value);
 //         console.log(updateUser);
          this.userService.update(this.updateForm.get('preUpdateUsername').value, updateUser).subscribe((event) => {
-          if (this.updateForm.get('preUpdateUsername').value === ''
-          || this.updateForm.get('updateNewUsername').value === ''
-          || this.updateForm.get('updateNewPassword').value === '') {
-            this.updateOutput = 'Please enter something!';
-          } else if (event == null) {
-            this.updateOutput = 'User not found on database. Please Check!';
+//          if (this.updateForm.get('preUpdateUsername').value === ''
+//          || this.updateForm.get('updateNewUsername').value === ''
+//          || this.updateForm.get('updateNewPassword').value === '') {
+//            this.updateOutput = 'Please enter something!';
+          if (event == null) {
+            {this.alert.showAlert('User not found on database. Please Check!')}
           } else {
             this.updateOutput = 'Updated Username: ' + event['username'] + '/n' + 'Updated Password: ' + event['password'];
          }
         },
-        error => {this.updateOutput = 'Error. Please Check!'; }
+        error => {this.alert.showAlert('Either preUpdateUsername not found or updateNewUsername is identical to existing username, please change!') }
          );
   }
 
