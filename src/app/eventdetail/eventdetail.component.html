@@ -27,14 +27,17 @@
   </div>
   <div>
     <div>
-    <form (submit)="onSubmit(f)" #f="ngForm">
-      <mat-form-field>
-          <textarea matInput [(ngModel)]="currentusercomment" placeholder="Leave a comment" name="currentcomment" required></textarea>
-      </mat-form-field>
-      <div>
-          <button mat-flat-button type="submit" color="primary">Post</button>
+      <form (submit)="onSubmit()" [formGroup]="commentForm">
+        <mat-form-field>
+            <textarea matInput [(ngModel)]="currentusercomment" formControlName="comment" placeholder="Leave a comment" name="currentcomment"  required></textarea>
+            <mat-error *ngIf="formcomment.errors.required">
+              Please leave your comment!
+            </mat-error>
+        </mat-form-field>
+        <div>
+            <button mat-flat-button type="submit" color="primary">Post</button>
         </div>
-    </form>
+      </form>
     </div>
   </div>
 </div>
