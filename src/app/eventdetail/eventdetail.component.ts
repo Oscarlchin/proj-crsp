@@ -23,7 +23,7 @@ export class EventdetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      this.eventid = params.id;
+      this.eventid = Number(params.id);
       if (this.authservice.loginObject.favevents.includes(this.eventid)) {
         this.isLike = true;
       } else {
@@ -41,7 +41,7 @@ export class EventdetailComponent implements OnInit {
       this.useractionservice
         .getcomment(Number(params.id))
         .subscribe(data => {
-          console.log(data);
+          // console.log(data);
           if (data === null) {this.comments = []; }
           if (!data) {return; }
           this.comments = data.eventcomments;
@@ -49,7 +49,7 @@ export class EventdetailComponent implements OnInit {
         });
     });
 
-    console.log(this.eventid);
+    // console.log(this.eventid);
 
   }
 
@@ -77,14 +77,14 @@ export class EventdetailComponent implements OnInit {
         });
         this.authservice.loginObject.favevents = fav;
         this.isLike = false;
-        this.alert.showAlert('Liked!!!!!');
+        this.alert.showAlert('Unliked!!!!!');
       });
 
     } else {
       this.useractionservice.likeevent(this.authservice.loginObject.username, this.eventid).subscribe(data => {
         this.authservice.loginObject.favevents.push(this.eventid);
         this.isLike = true;
-        this.alert.showAlert('Unliked!!!');
+        this.alert.showAlert('Liked!!!');
       });
 
     }

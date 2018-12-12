@@ -15,7 +15,7 @@ export class UseractionService {
 
   refreshevent() {
     this.getevent().subscribe( response => {
-      console.log(response[0]);
+      // console.log(response[0]);
       this._EventSource.next(response);
     });
     return;
