@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UseractionService, AuthService, AlertService } from '../_services';
 import { EventComment, Event, User, Comment } from '../_models';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-eventdetail',
@@ -10,6 +10,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./eventdetail.component.css']
 })
 export class EventdetailComponent implements OnInit {
+  commentForm: FormGroup;
   comments: Comment[] = [];
   event: Event = null;
   eventid: number;
@@ -19,9 +20,14 @@ export class EventdetailComponent implements OnInit {
     private router: Router,
     private useractionservice: UseractionService,
     private authservice: AuthService,
-    private alert: AlertService) { }
+    private alert: AlertService
+    ) { }
 
   ngOnInit() {
+    this.commentForm = new FormGroup({
+      'comment' : new FormControl([this.currentusercomment, [Validators.required] ])
+    });
+
     this.route.params.subscribe(params => {
       this.eventid = Number(params.id);
       if (this.authservice.loginObject.favevents.includes(this.eventid)) {
@@ -50,19 +56,23 @@ export class EventdetailComponent implements OnInit {
     });
 
     // console.log(this.eventid);
-
   }
+
+  get formcomment() { return this.commentForm.get('comment'); }
+
 
   gotoevents() {
     this.router.navigate(['/home/eventslist']);
   }
 
-  onSubmit(f: NgForm) {
+  onSubmit() {
+    if (this.commentForm.invalid) {
+      return;
+    }
     this.useractionservice.leavecomment( this.authservice.loginObject.username  , this.eventid , this.currentusercomment)
     .subscribe( data => {
       if (data.program_id) {
         this.comments = data.eventcomments;
-        f.resetForm();
         this.currentusercomment = '';
        }
     });
