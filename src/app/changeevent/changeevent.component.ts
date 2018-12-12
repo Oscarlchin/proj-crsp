@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../_services';
+import { UserService, AlertService } from '../_services';
 import { User } from '../_models';
 import { EventService } from '../_services';
 import { Event } from '../_models';
@@ -22,18 +22,19 @@ export class ChangeeventComponent implements OnInit {
   getOneEventOutput = '';
   deleteOneEventOutput = '';
 
-  constructor(private userService: UserService,
+  constructor(
     private eventService: EventService,
+    private alert:AlertService,
     private formbuilder: FormBuilder
     ) { }
 
   ngOnInit() {
 
     this.registerEventForm = this.formbuilder.group({
-      newProgramID : '',
-      newProgramName : '',
-      newVenue : '',
-      newDistrict : '',
+      newProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newProgramName : ['', [Validators.required]],
+      newVenue : ['', [Validators.required]],
+      newDistrict : ['', [Validators.required]],
       newStartdate : '',
       newEnddate : '',
       newDayinweek : '',
@@ -49,10 +50,10 @@ export class ChangeeventComponent implements OnInit {
     });
 
     this.updateEventForm = this.formbuilder.group({
-      preUpdateProgramID : '',
-      updateProgramID : '',
-      updateProgramName : '',
-      updateVenue : '',
+      preUpdateProgramID : ['', [Validators.required]],
+      updateProgramID : ['', [Validators.required]],
+      updateProgramName : ['', [Validators.required]],
+      updateVenue : ['', [Validators.required]],
       updateDistrict : '',
       updateStartdate : '',
       updateEnddate : '',
@@ -69,16 +70,24 @@ export class ChangeeventComponent implements OnInit {
     });
 
     this.getOneEventForm = this.formbuilder.group({
-      getOneProgramID : ''
+      getOneProgramID : ['', [Validators.required]]
     });
 
     this.deleteOneEventForm = this.formbuilder.group({
-      deleteOneProgramID : ['']
+      deleteOneProgramID : ['', [Validators.required]]
     });
   }
 
+  get registerEventf() { return this.registerEventForm.controls;}
+  get updateEventf() { return this.updateEventForm.controls;}
+  get getOneEventf() { return this.getOneEventForm.controls;}
+  get deleteOneEventf() { return this.deleteOneEventForm.controls;}
+
 
   createEvent() {
+    if (this.registerEventForm.invalid) {
+      return;
+  }
     const newEvent: Event = {
       program_id: this.registerEventForm.get('newProgramID').value,
       program_name: this.registerEventForm.get('newProgramName').value,
@@ -100,13 +109,13 @@ export class ChangeeventComponent implements OnInit {
     console.log(newEvent);
       this.eventService.create(newEvent).subscribe((newinfo) => {
       console.log(newinfo);
-    if (this.registerEventForm.get('newProgramID').value === ''
-    || this.registerEventForm.get('newProgramName').value === ''
-    || this.registerEventForm.get('newDistrict').value === ''
-    || this.registerEventForm.get('newVenue').value === ''
-     ) {
-      this.createEventOutput = 'Please enter something!';
-     } else {
+    //if (this.registerEventForm.get('newProgramID').value === ''
+    //|| this.registerEventForm.get('newProgramName').value === ''
+    //|| this.registerEventForm.get('newDistrict').value === ''
+    //|| this.registerEventForm.get('newVenue').value === ''
+     //) {
+      //this.createEventOutput = 'Please enter something!';
+     
       this.createEventOutput =
       'Program ID: ' + this.registerEventForm.get('newProgramID').value + '/n'
       + 'Program Name: ' + this.registerEventForm.get('newProgramName').value + '/n'
@@ -122,13 +131,16 @@ export class ChangeeventComponent implements OnInit {
       + 'Quota: ' + this.registerEventForm.get('newQuota').value + '/n'
       + 'Quota Left: ' + this.registerEventForm.get('newQuotaleft').value + '/n'
       + 'URL: ' + this.registerEventForm.get('newURL').value;
-      }
-    },
-  error => {this.createEventOutput = 'Error. Please Check!'; }
+      },
+       
+  error => {this.alert.showAlert('Event with this ID already exist!') }
   );
   }
 
   updateEvent() {
+    if (this.updateEventForm.invalid) {
+      return;
+  }
     const updateEvent: Event = {
 
           program_id: this.updateEventForm.get('updateProgramID').value,
@@ -184,6 +196,9 @@ export class ChangeeventComponent implements OnInit {
 
   }
   getOneEvent() {
+    if (this.getOneEventForm.invalid) {
+      return;
+  }
     this.eventService.getById(this.getOneEventForm.get('getOneProgramID').value).subscribe((event) => {
       if (this.getOneEventForm.get('getOneProgramID').value === '') {
         this.getOneEventOutput = 'Please enter something!';
@@ -213,6 +228,9 @@ export class ChangeeventComponent implements OnInit {
     );
   }
   deleteOneEvent() {
+    if (this.deleteOneEventForm.invalid) {
+      return;
+  }
     this.deleteOneEventOutput = '';
     this.eventService.delete(this.deleteOneEventForm.get('deleteOneProgramID').value).subscribe((event) => {
       console.log(event);

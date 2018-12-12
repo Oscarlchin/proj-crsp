@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 
 @Injectable()
 export class AlertService {
 
-    constructor(private snackBar: MatSnackBar) {
+    constructor(private snackBar: MatSnackBar,
+      public dialog: MatDialog) {
     }
 
     showAlert(msg: string) {

@@ -14,19 +14,32 @@
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Program ID" required class="form-control" formControlName="newProgramID">
+             <div *ngIf="registerEventf.newProgramID.errors">
+              <mat-error *ngIf="registerEventf.newProgramID.errors.required">Program ID is required</mat-error>
+              <mat-error *ngIf="registerEventf.newProgramID.errors.pattern">Program ID must be numbers</mat-error>
+              </div>
            </mat-form-field><br>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Program Name" required class="form-control" formControlName="newProgramName">
+             <div *ngIf="registerEventf.newProgramName.errors">
+              <mat-error *ngIf="registerEventf.newProgramName.errors.required">Program Name is required</mat-error>
+              </div>
            </mat-form-field><br>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="District" required class="form-control" formControlName="newDistrict">
+             <div *ngIf="registerEventf.newDistrict.errors">
+              <mat-error *ngIf="registerEventf.newDistrict.errors.required">District is required</mat-error>
+              </div>
            </mat-form-field><br>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Venue" required class="form-control" formControlName="newVenue">
-           </mat-form-field><br>
+             <div *ngIf="registerEventf.newVenue.errors">
+              <mat-error *ngIf="registerEventf.newVenue.errors.required">Venue is required</mat-error>
+              </div>
+            </mat-form-field><br>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Start Date" required class="form-control" formControlName="newStartdate">

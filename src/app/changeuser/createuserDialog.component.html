@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>New User Created!</h1>
+<div mat-dialog-content>
+  New User:
+  <ul>
+    <li>
+      {{ data.newUsername }}
+    </li>
+    <li>
+      {{ data.newPassword }}
+    </li>
+  </ul>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>
