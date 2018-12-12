@@ -8,8 +8,8 @@ var Event = require('./_models/EventSchema');
 module.export = function(app) {
   app.post('/upload-csv', jwtadmin, upload.single('file'), function (req,res,next){
     csv.fromPath(req.file.path, {
-      headers:  ["program_id", "program_name", "district", "venue", "start_data"
-      , "end_data", "dayinweek", "start_time", "end_time", "type_name"
+      headers:  ["program_id", "program_name", "district", "venue", "start_date"
+      , "end_date", "dayinweek", "start_time", "end_time", "type_name"
       , "fee", "quota", "quota_left" , "min_age", "max_age", "url"]
     })
     .on('error', function(err) {

@@ -31,7 +31,6 @@ export class NavComponent implements OnInit {
   }
 
   AdminLogin() {
-    //this.authService.loginObject = { username: "haha", password: "sfsdf", favevents: [] };
 
     this.authService.adminlogin('admin', 'admin')
         .pipe(first())

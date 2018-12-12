@@ -87,14 +87,14 @@ export class EventdetailComponent implements OnInit {
         });
         this.authservice.loginObject.favevents = fav;
         this.isLike = false;
-        this.alert.showAlert('Unliked!!!!!');
+        this.alert.showAlert('Unliked:(');
       });
 
     } else {
       this.useractionservice.likeevent(this.authservice.loginObject.username, this.eventid).subscribe(data => {
         this.authservice.loginObject.favevents.push(this.eventid);
         this.isLike = true;
-        this.alert.showAlert('Liked!!!');
+        this.alert.showAlert('Liked:)');
       });
 
     }
