@@ -33,7 +33,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ChangeuserComponent, CreateuserDialogComponent } from './changeuser/changeuser.component';
+import { ChangeuserComponent, CreateuserDialogComponent,
+  UpdateuserDialogComponent, RetrieveuserDialogComponent, DeleteuserDialogComponent } from './changeuser/changeuser.component';
 import { ChangeeventComponent } from './changeevent/changeevent.component';
 import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
 
@@ -63,10 +64,16 @@ const modules = [
     ChangeuserComponent,
     ChangeeventComponent,
     UploadcsvComponent,
-    CreateuserDialogComponent
+    CreateuserDialogComponent,
+    UpdateuserDialogComponent,
+    RetrieveuserDialogComponent,
+    DeleteuserDialogComponent
   ],
   entryComponents: [
-    CreateuserDialogComponent
+    CreateuserDialogComponent,
+    UpdateuserDialogComponent,
+    RetrieveuserDialogComponent,
+    DeleteuserDialogComponent
   ],
   imports: [
     BrowserModule,

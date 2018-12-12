@@ -11,6 +11,21 @@ export interface CreateUserDialogData {
   newPassword: string;
 }
 
+export interface UpdateUserDialogData {
+  preUsername: string;
+  newUsername: string;
+  newPassword: string;
+}
+
+export interface RetrieveUserDialogData {
+  username: string;
+  favevents: [];
+}
+
+export interface DeleteUserDialogData {
+  username: string;
+}
+
 @Component({
   selector: 'app-changeuser',
   templateUrl: './changeuser.component.html',
@@ -56,12 +71,10 @@ export class ChangeuserComponent implements OnInit {
     });
   }
 
-
-  get registerf() { return this.registerForm.controls;}
-  get updatef() { return this.updateForm.controls;}
-  get getOnef() { return this.getOneForm.controls;}
-  get deleteOnef() { return this.deleteOneForm.controls;}
-
+  get registerf() { return this.registerForm.controls; }
+  get updatef() { return this.updateForm.controls; }
+  get getOnef() { return this.getOneForm.controls; }
+  get deleteOnef() { return this.deleteOneForm.controls; }
 
   openCreateUserDialog(u, p) {
     this.dialog.open(CreateuserDialogComponent, {
@@ -72,6 +85,32 @@ export class ChangeuserComponent implements OnInit {
     });
   }
 
+  openUpdateUserDialog(preU, u, p) {
+    this.dialog.open(UpdateuserDialogComponent, {
+      data: {
+        preUsername: preU,
+        newUsername: u,
+        newPassword: p
+      }
+    });
+  }
+
+  openRetrieveUserDialog(u, f) {
+    this.dialog.open(RetrieveuserDialogComponent, {
+      data: {
+        username: u,
+        favevents: f
+      }
+    });
+  }
+
+  openDeleteUserDialog(u) {
+    this.dialog.open(DeleteuserDialogComponent, {
+      data: {
+        username: u
+      }
+    });
+  }
 
   createUser() {
     if (this.registerForm.invalid) {
@@ -118,8 +157,9 @@ export class ChangeuserComponent implements OnInit {
           if (event == null) {
             {this.alert.showAlert('User not found on database. Please Check!'); }
           } else {
-            this.updateOutput = 'Updated Username: ' + event['username'] + '/n' + 'Updated Password: ' + event['password'];
-         }
+            this.openUpdateUserDialog(this.updateForm.get('preUpdateUsername').value,
+            this.updateForm.get('updateNewUsername').value, this.updateForm.get('updateNewPassword').value);
+          }
         },
         error => {this.alert.showAlert(
           'Either preUpdateUsername not found or updateNewUsername is identical to existing username, please change!'); }
@@ -134,13 +174,12 @@ export class ChangeuserComponent implements OnInit {
           // if (this.getOneForm.get('getOneUsername').value === '') {
           // this.getOneOutput = 'Please enter something!';
             if (event == null) {
-              {this.alert.showAlert('User not found on database. Please Check!')}
+              {this.alert.showAlert('User not found on database. Please Check!'); }
             } else {
-             this.getOneOutput = 'Username: ' + event['username'] + '/n' + 'Password: ' + event['password'] +
-           '<br/> Favorite Event: ' + event['favevents'] + '<br/>';
+             this.openRetrieveUserDialog(event['username'], event['favevents']);
           }
          },
-         error => {this.alert.showAlert('Error. Please Check!') }
+         error => {this.alert.showAlert('Error. Please Check!'); }
          );
   }
 
@@ -151,21 +190,66 @@ export class ChangeuserComponent implements OnInit {
  //   this.deleteOneOutput = ''; // reset to look better
     this.userService.delete(this.deleteOneForm.get('deleteOneUsername').value).subscribe((event) => {
   //    console.log(event);
-      this.deleteOneOutput = 'Username:' + event['username'] +  '   deleted!';
+      this.openDeleteUserDialog(this.deleteOneForm.get('deleteOneUsername').value);
     },
-    error => {this.alert.showAlert('User not found on database. Please Check!') }
+    error => {this.alert.showAlert('User not found on database. Please Check!'); }
     );
   }
 }
 
 @Component({
-  selector: 'app-changeuserdialog',
+  selector: 'app-createuserdialog',
   templateUrl: './createuserDialog.component.html',
 })
 export class CreateuserDialogComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: CreateUserDialogData,
    public dialogRef: MatDialogRef<CreateuserDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-updateuserdialog',
+  templateUrl: './updateuserDialog.component.html',
+})
+export class UpdateuserDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: UpdateUserDialogData,
+   public dialogRef: MatDialogRef<UpdateuserDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-retrieveuserdialog',
+  templateUrl: './retrieveuserDialog.component.html',
+})
+export class RetrieveuserDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: RetrieveUserDialogData,
+   public dialogRef: MatDialogRef<RetrieveuserDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-deleteuserdialog',
+  templateUrl: './deleteuserDialog.component.html',
+})
+export class DeleteuserDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DeleteUserDialogData,
+   public dialogRef: MatDialogRef<DeleteuserDialogComponent>
    ) {}
 
    closeDialog() {
