@@ -42,16 +42,18 @@ export class ChangeuserComponent implements OnInit {
     });
 
     this.getOneForm = this.formbuilder.group({
-      getOneUsername : ''
+      getOneUsername : ['', [Validators.required]]
     });
 
     this.deleteOneForm = this.formbuilder.group({
-      deleteOneUsername : ''
+      deleteOneUsername : ['', [Validators.required]]
     });
   }
 
   get registerf() { return this.registerForm.controls;}
   get updatef() { return this.updateForm.controls;}
+  get getOnef() { return this.getOneForm.controls;}
+  get deleteOnef() { return this.deleteOneForm.controls;}
 
   createUser() {
     if (this.registerForm.invalid) {
@@ -108,27 +110,33 @@ export class ChangeuserComponent implements OnInit {
   }
 
   getOneUser() {
+    if (this.getOneForm.invalid) {
+      return;
+  }
          this.userService.getByName(this.getOneForm.get('getOneUsername').value).subscribe((event) => {
-           if (this.getOneForm.get('getOneUsername').value === '') {
-             this.getOneOutput = 'Please enter something!';
-            } else if (event == null) {
-              this.getOneOutput = 'User not found on database. Please Check!';
+          // if (this.getOneForm.get('getOneUsername').value === '') {
+          // this.getOneOutput = 'Please enter something!';
+            if (event == null) {
+              {this.alert.showAlert('User not found on database. Please Check!')}
             } else {
              this.getOneOutput = 'Username: ' + event['username'] + '/n' + 'Password: ' + event['password'] +
            '<br/> Favorite Event: ' + event['favevents'] + '<br/>';
           }
          },
-         error => {this.getOneOutput = 'Error. Please Check!'; }
+         error => {this.alert.showAlert('Error. Please Check!') }
          );
   }
 
   deleteOneUser() {
-    this.deleteOneOutput = ''; // reset to look better
+    if (this.deleteOneForm.invalid) {
+      return;
+  }
+ //   this.deleteOneOutput = ''; // reset to look better
     this.userService.delete(this.deleteOneForm.get('deleteOneUsername').value).subscribe((event) => {
-      console.log(event);
-      this.deleteOneOutput = 'User deleted!';
+  //    console.log(event);
+      this.deleteOneOutput = 'Username:' + event['username'] +  '   deleted!';
     },
-    error => {this.deleteOneOutput = 'User not found on database. Please Check!'; }
+    error => {this.alert.showAlert('User not found on database. Please Check!') }
     );
   }
 
