@@ -77,13 +77,13 @@ module.exports = function (app){
                 url: String(req.body.url)
             });
 
-            Event.findOne({program_id : updateevent.program_id}, function (err, doc) {
-              if (doc){
-                  res.send('An event with this program_id exists already, update failed!');
-              }
-              else{
-                Event.findOneAndUpdate({program_id: Number(req.params['program_id'])},
-                {program_id: Number(updateevent.program_id),
+            
+          
+                
+           
+                Event.findOneAndUpdate({program_id: Number(req.body.program_id)},
+                {   
+                    program_id: Number(updateevent.program_id),
                     program_name: String(updateevent.program_name),
                     district: String(updateevent.district),
                     venue: String(updateevent.venue),
@@ -100,18 +100,16 @@ module.exports = function (app){
                     max_age: Number(updateevent.max_age),
                     url: String(updateevent.url)
                 })
-
+              
                 .exec(function(err,event){
                 console.log(event);
                 if (err) errorHandler(err);
-                if (event) res.status(202).json({Event: event.program_id});
-                else res.status(202).json(null);
-                });
-              }
+                if (event) res.json(event);
+                else res.json({error:"event not found"});
+                });            
             });
-    });
-
-
+              
+  
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
 
           Event.findOneAndDelete({program_id: Number(req.params['program_id'])})
