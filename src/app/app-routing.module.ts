@@ -8,6 +8,11 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 import { AdminComponent } from './admin/admin.component';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { MyfaveventsComponent } from './myfavevents/myfavevents.component';
+import { ExtractComponent } from './extract/extract.component';
+import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
+import { ChangeeventComponent } from './changeevent/changeevent.component';
+import { ChangeuserComponent } from './changeuser/changeuser.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full'  },
@@ -28,7 +33,13 @@ const routes: Routes = [
   ]},
   { path: 'about', component: AboutComponent},
   { path: 'login', component: LoginComponent},
-  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard]},
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard],
+    children: [
+      {path: 'changeevent', component: ChangeuserComponent },
+      {path: 'changeuser', component: ChangeeventComponent },
+      {path: 'uploadcsv', component: UploadcsvComponent },
+      {path: 'flush', component: ExtractComponent}
+  ]},
   { path: '**', redirectTo: '/home' }
 ];
 

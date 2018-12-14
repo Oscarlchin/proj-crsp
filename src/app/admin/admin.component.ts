@@ -14,7 +14,12 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class AdminComponent implements OnInit {
 
-
+  navLinks = [
+    {label: 'User CRUD', path: './changeuser'} ,
+    {label: 'Event CRUD', path: './changeevent'},
+    {label: 'Upload CSV', path: './uploadcsv'},
+    {label: 'Flush', path: './flush'}
+  ];
 
 
 
