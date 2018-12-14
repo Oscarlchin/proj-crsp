@@ -50,7 +50,7 @@ export class ChangeeventComponent implements OnInit {
     });
 
     this.updateEventForm = this.formbuilder.group({
-     
+
       updateProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       updateProgramName : ['', [Validators.required]],
       updateVenue : ['', [Validators.required]],
@@ -115,7 +115,7 @@ export class ChangeeventComponent implements OnInit {
     //|| this.registerEventForm.get('newVenue').value === ''
      //) {
       //this.createEventOutput = 'Please enter something!';
-     
+
       this.createEventOutput =
       'Program ID: ' + this.registerEventForm.get('newProgramID').value + '/n'
       + 'Program Name: ' + this.registerEventForm.get('newProgramName').value + '/n'
@@ -132,7 +132,7 @@ export class ChangeeventComponent implements OnInit {
       + 'Quota Left: ' + this.registerEventForm.get('newQuotaleft').value + '/n'
       + 'URL: ' + this.registerEventForm.get('newURL').value;
       },
-       
+
   error => {this.alert.showAlert('Event with this ID already exist!') }
   );
   }
