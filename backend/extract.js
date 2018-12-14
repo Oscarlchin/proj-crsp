@@ -10,6 +10,9 @@ var Event = require('./_models/EventSchema');
 
 module.exports = function (app){
   app.get('/extracttolocal',function(req,res){
+    Event.deleteMany({}, (err)=> {
+      if (err) errorHandler(err);
+    });
     var httpsreq = https.get(httpsoptions, function(httpsres) {
       console.log('STATUS: ' + httpsres.statusCode);
       console.log('HEADERS: ' + JSON.stringify(httpsres.headers));

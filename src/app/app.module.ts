@@ -44,6 +44,7 @@ import { ChangeuserComponent, CreateuserDialogComponent,
 import { ChangeeventComponent } from './changeevent/changeevent.component';
 import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
 import { ExtractComponent } from './extract/extract.component';
+import { MyfaveventsComponent } from './myfavevents/myfavevents.component';
 
 const modules = [
   MatPaginatorModule,
@@ -77,7 +78,8 @@ const modules = [
     UpdateuserDialogComponent,
     RetrieveuserDialogComponent,
     DeleteuserDialogComponent,
-    ExtractComponent
+    ExtractComponent,
+    MyfaveventsComponent
   ],
   entryComponents: [
     CreateuserDialogComponent,

@@ -1,4 +1,15 @@
 <mat-toolbar-row><h2 id="homeTitle">Community Recreation and Sports Programme</h2></mat-toolbar-row><br>
-<p id="description"> Information on leisure activities to be held one and a half months later uploaded on the 15th of each month (e.g. information on activities in July will be made available on 15 May)</p>
-<a [routerLink]="['./eventslist']" routerLinkActive="router-link-active" >events</a>
-<router-outlet></router-outlet>
+
+<nav *ngIf="!isEvent" mat-tab-nav-bar dynamicHeight mat-stretch-tabs="always">
+    <a mat-tab-link
+       *ngFor="let link of navLinks"
+       [routerLink]="link.path"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">
+      {{link.label}}
+    </a>
+  </nav>
+  <router-outlet></router-outlet>
+  <p id="description"> Information on leisure activities to be held one and a half months later uploaded on the 15th of each month (e.g. information on activities in July will be made available on 15 May)</p>
+
+
