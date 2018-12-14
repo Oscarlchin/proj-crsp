@@ -168,26 +168,24 @@ export class ChangeeventComponent implements OnInit {
          // || this.updateEventForm.get('updateDistrict').value === ''
          // || this.updateEventForm.get('updateVenue').value === '') {
          //   this.updateEventOutput = 'Please enter something!';
-           if (event == null) {
+           if (event.error) {
             this.updateEventOutput = 'Event not found in database. Please Check!';
           } else {
             this.updateEventOutput =
-            'Program ID: ' + event['updateProgramID'] + '/n' +
-            'Updated Program Name: ' + event['updateProgramName'] + '/n' +
-            'Updated District: ' +  event['updateDistrict'] + '/n' +
-            'Updated Venue: ' +  event['updateVenue'] + '/n' +
-            'Updated Start Date: ' +  event['updateStartdate'] + '/n' +
-            'Updated End Date: ' +   event['updateEnddate'] + '/n' +
-            'Updated Day in week: ' +   event['updateDayinweek'] + '/n' +
-            'Updated Start Time: ' +   event['updateStarttime'] + '/n' +
-            'Updated End Time: ' +   event['updateEndtime'] + '/n' +
-            'Updated Type Name: ' +   event['updateTypename'] + '/n' +
-            'Updated Fee: ' +   event['updateFee'] + '/n' +
-            'Updated Quota: ' +   event['updateQuota'] + '/n' +
-            'Updated Quota Left: ' +   event['updateQuotaleft'] + '/n' +
-            'Updated Minimum Age: ' +   event['updateMinimumage'] + '/n' +
-            'Updated Maximum Age: ' +  event['updateMaximumage'] + '/n' +
-            'Updated URL: ' +   event['updateURL'];
+            'Program ID: ' + this.updateEventForm.get('updateProgramID').value + '/n' +
+            'Program Name: ' + this.updateEventForm.get('updateProgramName').value + '/n'
+              + 'District: ' + this.updateEventForm.get('updateDistrict').value + '/n'
+              + 'Venue: ' + this.updateEventForm.get('updateVenue').value + '/n'
+              + 'Start Date: ' + this.updateEventForm.get('updateStartdate').value + '/n'
+              + 'End Date: ' + this.updateEventForm.get('updateEnddate').value + '/n'
+              + 'Day in week: ' + this.updateEventForm.get('updateDayinweek').value + '/n'
+              + 'Start Time: ' + this.updateEventForm.get('updateStarttime').value + '/n'
+              + 'End Time: ' + this.updateEventForm.get('updateEndtime').value + '/n'
+              + 'Type Name: ' + this.updateEventForm.get('updateTypename').value + '/n'
+              + 'Fee: ' + this.updateEventForm.get('updateFee').value + '/n'
+              + 'Quota: ' + this.updateEventForm.get('updateQuota').value + '/n'
+              + 'Quota Left: ' + this.updateEventForm.get('updateQuotaleft').value + '/n'
+              + 'URL: ' + this.updateEventForm.get('updateURL').value;
          }
         },
         error => {this.alert.showAlert('Error. Please Check!') }
