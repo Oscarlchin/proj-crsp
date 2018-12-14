@@ -31,9 +31,22 @@ export interface CreateEventDialogData {
 }
 
 export interface UpdateEventDialogData {
-  preUsername: string;
-  newUsername: string;
-  newPassword: string;
+  updateprogram_id: Number;
+  updateprogram_name: String;
+  updatedistrict: String;
+  updatevenue: String;
+  updatestart_date: String;
+  updateend_date: String;
+  updatedayinweek: String;
+  updatestart_time: String;
+  updateend_time: String;
+  updatetype_name: String;
+  updatefee: Number;
+  updatequota: Number;
+  updatequota_left: Number;
+  updatemin_age: Number;
+  updatemax_age: Number;
+  updateurl: String;
 }
 
 export interface RetrieveEventDialogData {
@@ -176,12 +189,25 @@ export class ChangeeventComponent implements OnInit {
     });
   }
 
-  openUpdateEventDialog(preU, u, p) {
+  openUpdateEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
     this.dialog.open(UpdateeventDialogComponent, {
       data: {
-        preUsername: preU,
-        newUsername: u,
-        newPassword: p
+        updateprogram_id: id,
+        updateprogram_name: n,
+        updatedistrict: d,
+        updatevenue: v,
+        updatestart_date: sd,
+        updateend_date: ed,
+        updatedayinweek: diw,
+        updatestart_time: st,
+        updateend_time: et,
+        updatetype_name: tn,
+        updatefee: f,
+        updatequota: q,
+        updatequota_left: ql,
+        updatemin_age: mina,
+        updatemax_age: maxa,
+        updateurl: u
       }
     });
   }
@@ -264,22 +290,7 @@ export class ChangeeventComponent implements OnInit {
      //) {
       //this.createEventOutput = 'Please enter something!';
 
-      this.createEventOutput =
-      'Program ID: ' + this.registerEventForm.get('newProgramID').value + '/n'
-      + 'Program Name: ' + this.registerEventForm.get('newProgramName').value + '/n'
-      + 'District: ' + this.registerEventForm.get('newDistrict').value + '/n'
-      + 'Venue: ' + this.registerEventForm.get('newVenue').value + '/n'
-      + 'Start Date: ' + this.registerEventForm.get('newStartdate').value + '/n'
-      + 'End Date: ' + this.registerEventForm.get('newEnddate').value + '/n'
-      + 'Day in week: ' + this.registerEventForm.get('newDayinweek').value + '/n'
-      + 'Start Time: ' + this.registerEventForm.get('newStarttime').value + '/n'
-      + 'End Time: ' + this.registerEventForm.get('newEndtime').value + '/n'
-      + 'Type Name: ' + this.registerEventForm.get('newTypename').value + '/n'
-      + 'Fee: ' + this.registerEventForm.get('newFee').value + '/n'
-      + 'Quota: ' + this.registerEventForm.get('newQuota').value + '/n'
-      + 'Quota Left: ' + this.registerEventForm.get('newQuotaleft').value + '/n'
-      + 'URL: ' + this.registerEventForm.get('newURL').value;
-
+      
       this.openCreateEventDialog(
       this.registerEventForm.get('newProgramID').value,
       this.registerEventForm.get('newProgramName').value,
@@ -336,23 +347,28 @@ export class ChangeeventComponent implements OnInit {
          // || this.updateEventForm.get('updateVenue').value === '') {
          //   this.updateEventOutput = 'Please enter something!';
            if (event.error) {
-            this.updateEventOutput = 'Event not found in database. Please Check!';
+            this.alert.showAlert('Event not found in database. Please Check!')
           } else {
-            this.updateEventOutput =
-            'Program ID: ' + this.updateEventForm.get('updateProgramID').value + '/n' +
-            'Program Name: ' + this.updateEventForm.get('updateProgramName').value + '/n'
-              + 'District: ' + this.updateEventForm.get('updateDistrict').value + '/n'
-              + 'Venue: ' + this.updateEventForm.get('updateVenue').value + '/n'
-              + 'Start Date: ' + this.updateEventForm.get('updateStartdate').value + '/n'
-              + 'End Date: ' + this.updateEventForm.get('updateEnddate').value + '/n'
-              + 'Day in week: ' + this.updateEventForm.get('updateDayinweek').value + '/n'
-              + 'Start Time: ' + this.updateEventForm.get('updateStarttime').value + '/n'
-              + 'End Time: ' + this.updateEventForm.get('updateEndtime').value + '/n'
-              + 'Type Name: ' + this.updateEventForm.get('updateTypename').value + '/n'
-              + 'Fee: ' + this.updateEventForm.get('updateFee').value + '/n'
-              + 'Quota: ' + this.updateEventForm.get('updateQuota').value + '/n'
-              + 'Quota Left: ' + this.updateEventForm.get('updateQuotaleft').value + '/n'
-              + 'URL: ' + this.updateEventForm.get('updateURL').value;
+            
+
+              this.openUpdateEventDialog(
+                this.updateEventForm.get('updateProgramID').value,
+                this.updateEventForm.get('updateProgramName').value,
+                this.updateEventForm.get('updateDistrict').value,
+                this.updateEventForm.get('updateVenue').value,
+                this.updateEventForm.get('updateStartdate').value,
+                this.updateEventForm.get('updateEnddate').value,
+                this.updateEventForm.get('updateDayinweek').value,
+                this.updateEventForm.get('updateStarttime').value,
+                this.updateEventForm.get('updateEndtime').value,
+                this.updateEventForm.get('updateTypename').value,
+                this.updateEventForm.get('updateFee').value,
+                this.updateEventForm.get('updateQuota').value,
+                this.updateEventForm.get('updateQuotaleft').value,
+                this.updateEventForm.get('updateMinimumage').value,
+                this.updateEventForm.get('updateMaximumage').value,
+                this.updateEventForm.get('updateURL').value
+                );
          }
         },
         error => {this.alert.showAlert('Error. Please Check!'); }
