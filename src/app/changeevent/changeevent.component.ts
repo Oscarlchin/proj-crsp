@@ -37,12 +37,41 @@ export interface UpdateEventDialogData {
 }
 
 export interface RetrieveEventDialogData {
-  username: string;
-  favevents: [];
+  newprogram_id: Number;
+  newprogram_name: String;
+  newdistrict: String;
+  newvenue: String;
+  newstart_date: String;
+  newend_date: String;
+  newdayinweek: String;
+  newstart_time: String;
+  newend_time: String;
+  newtype_name: String;
+  newfee: Number;
+  newquota: Number;
+  newquota_left: Number;
+  newmin_age: Number;
+  newmax_age: Number;
+  newurl: String;
 }
 
 export interface DeleteEventDialogData {
-  username: string;
+  newprogram_id: Number;
+  newprogram_name: String;
+  newdistrict: String;
+  newvenue: String;
+  newstart_date: String;
+  newend_date: String;
+  newdayinweek: String;
+  newstart_time: String;
+  newend_time: String;
+  newtype_name: String;
+  newfee: Number;
+  newquota: Number;
+  newquota_left: Number;
+  newmin_age: Number;
+  newmax_age: Number;
+  newurl: String;
 }
 
 @Component({
@@ -157,19 +186,48 @@ export class ChangeeventComponent implements OnInit {
     });
   }
 
-  openRetrieveEventDialog(u, f) {
+  openRetrieveEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
     this.dialog.open(RetrieveeventDialogComponent, {
       data: {
-        username: u,
-        favevents: f
+        newprogram_id: id,
+        newprogram_name: n,
+        newdistrict: d,
+        newvenue: v,
+        newstart_date: sd,
+        newend_date: ed,
+        newdayinweek: diw,
+        newstart_time: st,
+        newend_time: et,
+        newtype_name: tn,
+        newfee: f,
+        newquota: q,
+        newquota_left: ql,
+        newmin_age: mina,
+        newmax_age: maxa,
+        newurl: u
       }
     });
   }
 
-  openDeleteEventDialog(u) {
+  openDeleteEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
     this.dialog.open(DeleteeventDialogComponent, {
       data: {
-        username: u
+        newprogram_id: id,
+        newprogram_name: n,
+        newdistrict: d,
+        newvenue: v,
+        newstart_date: sd,
+        newend_date: ed,
+        newdayinweek: diw,
+        newstart_time: st,
+        newend_time: et,
+        newtype_name: tn,
+        newfee: f,
+        newquota: q,
+        newquota_left: ql,
+        newmin_age: mina,
+        newmax_age: maxa,
+        newurl: u
       }
     });
   }
@@ -297,7 +355,7 @@ export class ChangeeventComponent implements OnInit {
               + 'URL: ' + this.updateEventForm.get('updateURL').value;
          }
         },
-        error => {this.alert.showAlert('Error. Please Check!') }
+        error => {this.alert.showAlert('Error. Please Check!'); }
          );
 
 
@@ -310,7 +368,7 @@ export class ChangeeventComponent implements OnInit {
     //  if (this.getOneEventForm.get('getOneProgramID').value === '') {
     //    this.getOneEventOutput = 'Please enter something!';
        if (event == null) {
-        {this.alert.showAlert('Event not found in database. Please Check!')};
+        {this.alert.showAlert('Event not found in database. Please Check!'); }
        } else {
         this.getOneEventOutput =
             'Program ID: ' + event['program_id'] + '/n' +
@@ -330,6 +388,26 @@ export class ChangeeventComponent implements OnInit {
             'Maximum Age: ' +  event['max_age'] + '/n' +
             'URL: ' +   event['url'];
      }
+
+     this.openRetrieveEventDialog(
+      event['program_id'],
+      event['program_name'],
+      event['district'],
+      event['venue'],
+      event['start_date'],
+      event['end_date'],
+      event['dayinweek'],
+      event['start_time'],
+      event['end_time'],
+      event['type_name'],
+      event['fee'],
+      event['quota'],
+      event['quota_left'],
+      event['min_age'],
+      event['max_age'],
+      event['url']
+     );
+
     },
     error => {this.alert.showAlert('Error. Please Check!') }
     );
@@ -343,6 +421,26 @@ export class ChangeeventComponent implements OnInit {
     this.eventService.delete(this.deleteOneEventForm.get('deleteOneProgramID').value).subscribe((event) => {
       console.log(event);
       this.deleteOneEventOutput = 'Event deleted!';
+
+      this.openDeleteEventDialog(
+        event['program_id'],
+        event['program_name'],
+        event['district'],
+        event['venue'],
+        event['start_date'],
+        event['end_date'],
+        event['dayinweek'],
+        event['start_time'],
+        event['end_time'],
+        event['type_name'],
+        event['fee'],
+        event['quota'],
+        event['quota_left'],
+        event['min_age'],
+        event['max_age'],
+        event['url']
+       );
+
     },
     error => {this.alert.showAlert('Event not found in database. Please Check!') }
     );
