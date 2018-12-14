@@ -15,7 +15,7 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 import { AuthGuard, AdminGuard } from './_guards';
 import {
   AuthService, UserService, EventService,
-  UseractionService, AlertService, UploadService
+  UseractionService, AlertService, UploadService, FlushService
 } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
@@ -42,6 +42,7 @@ import { ChangeuserComponent, CreateuserDialogComponent,
 
 import { ChangeeventComponent } from './changeevent/changeevent.component';
 import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
+import { ExtractComponent } from './extract/extract.component';
 
 const modules = [
   MatPaginatorModule,
@@ -73,7 +74,8 @@ const modules = [
     CreateuserDialogComponent,
     UpdateuserDialogComponent,
     RetrieveuserDialogComponent,
-    DeleteuserDialogComponent
+    DeleteuserDialogComponent,
+    ExtractComponent
   ],
   entryComponents: [
     CreateuserDialogComponent,
@@ -102,6 +104,7 @@ const modules = [
     UserService,
     UseractionService,
     UploadService,
+    FlushService,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
