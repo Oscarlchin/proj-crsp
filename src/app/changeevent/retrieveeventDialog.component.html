@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Event Retrieved!</h1>
+<div mat-dialog-content>
+  Event Details:
+  <ul>
+    <li>
+      Program ID : {{ data.newprogram_id }}
+    </li>
+    <li>
+      Program Name : {{ data.newprogram_name }}
+    </li>
+    <li>
+      District : {{ data.newdistrict }}
+    </li>
+    <li>
+      Venue : {{ data.newvenue }}
+    </li>
+    <li>
+      Start Date : {{ data.newstart_date }}
+    </li>
+    <li>
+      Days of Week : {{ data.newdayinweek }}
+    </li>
+    <li>
+      Start Time : {{ data.newstart_time }}
+    </li>
+    <li>
+      End Time : {{ data.newend_time }}
+    </li>
+    <li>
+      Program Type Name : {{ data.newtype_name }}
+    </li>
+    <li>
+      Fee: {{ data.newfee }}
+    </li>
+    <li>
+      Quota : {{ data.newquota }}
+    </li>
+    <li>
+      Quota Left : {{ data.newquota_left }}
+    </li>
+    <li>
+      Minimum Age : {{ data.newmin_age }}
+    </li>
+    <li>
+      Maximum Age : {{ data.newmax_age }}
+    </li>
+    <li>
+      URL Link : {{ data.newurl }}
+    </li>
+  </ul>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

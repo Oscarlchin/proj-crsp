@@ -274,7 +274,9 @@
 
              <mat-form-field>
                <input matInput placeholder="Updated URL" required class="form-control" formControlName="updateURL">
-
+               <div *ngIf="updateEventf.updateURL.errors">
+                  <mat-error *ngIf="updateEventf.updateURL.errors.required">URL is required</mat-error>
+                </div>
               </mat-form-field><br>
 
 

@@ -1,9 +1,91 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserService, AlertService } from '../_services';
 import { User } from '../_models';
 import { EventService } from '../_services';
 import { Event } from '../_models';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { identifierModuleUrl } from '@angular/compiler';
+import { setDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { EDEADLK } from 'constants';
+import { min, max } from 'rxjs/operators';
+import { url } from 'inspector';
+
+export interface CreateEventDialogData {
+  newprogram_id: Number;
+  newprogram_name: String;
+  newdistrict: String;
+  newvenue: String;
+  newstart_date: String;
+  newend_date: String;
+  newdayinweek: String;
+  newstart_time: String;
+  newend_time: String;
+  newtype_name: String;
+  newfee: Number;
+  newquota: Number;
+  newquota_left: Number;
+  newmin_age: Number;
+  newmax_age: Number;
+  newurl: String;
+}
+
+export interface UpdateEventDialogData {
+  updateprogram_id: Number;
+  updateprogram_name: String;
+  updatedistrict: String;
+  updatevenue: String;
+  updatestart_date: String;
+  updateend_date: String;
+  updatedayinweek: String;
+  updatestart_time: String;
+  updateend_time: String;
+  updatetype_name: String;
+  updatefee: Number;
+  updatequota: Number;
+  updatequota_left: Number;
+  updatemin_age: Number;
+  updatemax_age: Number;
+  updateurl: String;
+}
+
+export interface RetrieveEventDialogData {
+  newprogram_id: Number;
+  newprogram_name: String;
+  newdistrict: String;
+  newvenue: String;
+  newstart_date: String;
+  newend_date: String;
+  newdayinweek: String;
+  newstart_time: String;
+  newend_time: String;
+  newtype_name: String;
+  newfee: Number;
+  newquota: Number;
+  newquota_left: Number;
+  newmin_age: Number;
+  newmax_age: Number;
+  newurl: String;
+}
+
+export interface DeleteEventDialogData {
+  newprogram_id: Number;
+  newprogram_name: String;
+  newdistrict: String;
+  newvenue: String;
+  newstart_date: String;
+  newend_date: String;
+  newdayinweek: String;
+  newstart_time: String;
+  newend_time: String;
+  newtype_name: String;
+  newfee: Number;
+  newquota: Number;
+  newquota_left: Number;
+  newmin_age: Number;
+  newmax_age: Number;
+  newurl: String;
+}
 
 @Component({
   selector: 'app-changeevent',
@@ -24,8 +106,9 @@ export class ChangeeventComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private alert:AlertService,
-    private formbuilder: FormBuilder
+    private alert: AlertService,
+    private formbuilder: FormBuilder,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -83,6 +166,97 @@ export class ChangeeventComponent implements OnInit {
   get getOneEventf() { return this.getOneEventForm.controls;}
   get deleteOneEventf() { return this.deleteOneEventForm.controls;}
 
+  openCreateEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
+    this.dialog.open(CreateeventDialogComponent, {
+      data: {
+        newprogram_id: id,
+        newprogram_name: n,
+        newdistrict: d,
+        newvenue: v,
+        newstart_date: sd,
+        newend_date: ed,
+        newdayinweek: diw,
+        newstart_time: st,
+        newend_time: et,
+        newtype_name: tn,
+        newfee: f,
+        newquota: q,
+        newquota_left: ql,
+        newmin_age: mina,
+        newmax_age: maxa,
+        newurl: u
+      }
+    });
+  }
+
+  openUpdateEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
+    this.dialog.open(UpdateeventDialogComponent, {
+      data: {
+        updateprogram_id: id,
+        updateprogram_name: n,
+        updatedistrict: d,
+        updatevenue: v,
+        updatestart_date: sd,
+        updateend_date: ed,
+        updatedayinweek: diw,
+        updatestart_time: st,
+        updateend_time: et,
+        updatetype_name: tn,
+        updatefee: f,
+        updatequota: q,
+        updatequota_left: ql,
+        updatemin_age: mina,
+        updatemax_age: maxa,
+        updateurl: u
+      }
+    });
+  }
+
+  openRetrieveEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
+    this.dialog.open(RetrieveeventDialogComponent, {
+      data: {
+        newprogram_id: id,
+        newprogram_name: n,
+        newdistrict: d,
+        newvenue: v,
+        newstart_date: sd,
+        newend_date: ed,
+        newdayinweek: diw,
+        newstart_time: st,
+        newend_time: et,
+        newtype_name: tn,
+        newfee: f,
+        newquota: q,
+        newquota_left: ql,
+        newmin_age: mina,
+        newmax_age: maxa,
+        newurl: u
+      }
+    });
+  }
+
+  openDeleteEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
+    this.dialog.open(DeleteeventDialogComponent, {
+      data: {
+        newprogram_id: id,
+        newprogram_name: n,
+        newdistrict: d,
+        newvenue: v,
+        newstart_date: sd,
+        newend_date: ed,
+        newdayinweek: diw,
+        newstart_time: st,
+        newend_time: et,
+        newtype_name: tn,
+        newfee: f,
+        newquota: q,
+        newquota_left: ql,
+        newmin_age: mina,
+        newmax_age: maxa,
+        newurl: u
+      }
+    });
+  }
 
   createEvent() {
     if (this.registerEventForm.invalid) {
@@ -116,22 +290,26 @@ export class ChangeeventComponent implements OnInit {
      //) {
       //this.createEventOutput = 'Please enter something!';
 
-      this.createEventOutput =
-      'Program ID: ' + this.registerEventForm.get('newProgramID').value + '/n'
-      + 'Program Name: ' + this.registerEventForm.get('newProgramName').value + '/n'
-      + 'District: ' + this.registerEventForm.get('newDistrict').value + '/n'
-      + 'Venue: ' + this.registerEventForm.get('newVenue').value + '/n'
-      + 'Start Date: ' + this.registerEventForm.get('newStartdate').value + '/n'
-      + 'End Date: ' + this.registerEventForm.get('newEnddate').value + '/n'
-      + 'Day in week: ' + this.registerEventForm.get('newDayinweek').value + '/n'
-      + 'Start Time: ' + this.registerEventForm.get('newStarttime').value + '/n'
-      + 'End Time: ' + this.registerEventForm.get('newEndtime').value + '/n'
-      + 'Type Name: ' + this.registerEventForm.get('newTypename').value + '/n'
-      + 'Fee: ' + this.registerEventForm.get('newFee').value + '/n'
-      + 'Quota: ' + this.registerEventForm.get('newQuota').value + '/n'
-      + 'Quota Left: ' + this.registerEventForm.get('newQuotaleft').value + '/n'
-      + 'URL: ' + this.registerEventForm.get('newURL').value;
-      },
+      
+      this.openCreateEventDialog(
+      this.registerEventForm.get('newProgramID').value,
+      this.registerEventForm.get('newProgramName').value,
+      this.registerEventForm.get('newDistrict').value,
+      this.registerEventForm.get('newVenue').value,
+      this.registerEventForm.get('newStartdate').value,
+      this.registerEventForm.get('newEnddate').value,
+      this.registerEventForm.get('newDayinweek').value,
+      this.registerEventForm.get('newStarttime').value,
+      this.registerEventForm.get('newEndtime').value,
+      this.registerEventForm.get('newTypename').value,
+      this.registerEventForm.get('newFee').value,
+      this.registerEventForm.get('newQuota').value,
+      this.registerEventForm.get('newQuotaleft').value,
+      this.registerEventForm.get('newMinimumage').value,
+      this.registerEventForm.get('newMaximumage').value,
+      this.registerEventForm.get('newURL').value
+      );
+    },
 
   error => {this.alert.showAlert('Event with this ID already exist!') }
   );
@@ -168,29 +346,32 @@ export class ChangeeventComponent implements OnInit {
          // || this.updateEventForm.get('updateDistrict').value === ''
          // || this.updateEventForm.get('updateVenue').value === '') {
          //   this.updateEventOutput = 'Please enter something!';
-           if (event == null) {
-            this.updateEventOutput = 'Event not found in database. Please Check!';
+           if (event.error) {
+            this.alert.showAlert('Event not found in database. Please Check!')
           } else {
-            this.updateEventOutput =
-            'Program ID: ' + event['updateProgramID'] + '/n' +
-            'Updated Program Name: ' + event['updateProgramName'] + '/n' +
-            'Updated District: ' +  event['updateDistrict'] + '/n' +
-            'Updated Venue: ' +  event['updateVenue'] + '/n' +
-            'Updated Start Date: ' +  event['updateStartdate'] + '/n' +
-            'Updated End Date: ' +   event['updateEnddate'] + '/n' +
-            'Updated Day in week: ' +   event['updateDayinweek'] + '/n' +
-            'Updated Start Time: ' +   event['updateStarttime'] + '/n' +
-            'Updated End Time: ' +   event['updateEndtime'] + '/n' +
-            'Updated Type Name: ' +   event['updateTypename'] + '/n' +
-            'Updated Fee: ' +   event['updateFee'] + '/n' +
-            'Updated Quota: ' +   event['updateQuota'] + '/n' +
-            'Updated Quota Left: ' +   event['updateQuotaleft'] + '/n' +
-            'Updated Minimum Age: ' +   event['updateMinimumage'] + '/n' +
-            'Updated Maximum Age: ' +  event['updateMaximumage'] + '/n' +
-            'Updated URL: ' +   event['updateURL'];
+            
+
+              this.openUpdateEventDialog(
+                this.updateEventForm.get('updateProgramID').value,
+                this.updateEventForm.get('updateProgramName').value,
+                this.updateEventForm.get('updateDistrict').value,
+                this.updateEventForm.get('updateVenue').value,
+                this.updateEventForm.get('updateStartdate').value,
+                this.updateEventForm.get('updateEnddate').value,
+                this.updateEventForm.get('updateDayinweek').value,
+                this.updateEventForm.get('updateStarttime').value,
+                this.updateEventForm.get('updateEndtime').value,
+                this.updateEventForm.get('updateTypename').value,
+                this.updateEventForm.get('updateFee').value,
+                this.updateEventForm.get('updateQuota').value,
+                this.updateEventForm.get('updateQuotaleft').value,
+                this.updateEventForm.get('updateMinimumage').value,
+                this.updateEventForm.get('updateMaximumage').value,
+                this.updateEventForm.get('updateURL').value
+                );
          }
         },
-        error => {this.alert.showAlert('Error. Please Check!') }
+        error => {this.alert.showAlert('Error. Please Check!'); }
          );
 
 
@@ -203,7 +384,7 @@ export class ChangeeventComponent implements OnInit {
     //  if (this.getOneEventForm.get('getOneProgramID').value === '') {
     //    this.getOneEventOutput = 'Please enter something!';
        if (event == null) {
-        {this.alert.showAlert('Event not found in database. Please Check!')};
+        {this.alert.showAlert('Event not found in database. Please Check!'); }
        } else {
         this.getOneEventOutput =
             'Program ID: ' + event['program_id'] + '/n' +
@@ -223,6 +404,26 @@ export class ChangeeventComponent implements OnInit {
             'Maximum Age: ' +  event['max_age'] + '/n' +
             'URL: ' +   event['url'];
      }
+
+     this.openRetrieveEventDialog(
+      event['program_id'],
+      event['program_name'],
+      event['district'],
+      event['venue'],
+      event['start_date'],
+      event['end_date'],
+      event['dayinweek'],
+      event['start_time'],
+      event['end_time'],
+      event['type_name'],
+      event['fee'],
+      event['quota'],
+      event['quota_left'],
+      event['min_age'],
+      event['max_age'],
+      event['url']
+     );
+
     },
     error => {this.alert.showAlert('Error. Please Check!') }
     );
@@ -236,9 +437,88 @@ export class ChangeeventComponent implements OnInit {
     this.eventService.delete(this.deleteOneEventForm.get('deleteOneProgramID').value).subscribe((event) => {
       console.log(event);
       this.deleteOneEventOutput = 'Event deleted!';
+
+      this.openDeleteEventDialog(
+        event['program_id'],
+        event['program_name'],
+        event['district'],
+        event['venue'],
+        event['start_date'],
+        event['end_date'],
+        event['dayinweek'],
+        event['start_time'],
+        event['end_time'],
+        event['type_name'],
+        event['fee'],
+        event['quota'],
+        event['quota_left'],
+        event['min_age'],
+        event['max_age'],
+        event['url']
+       );
+
     },
     error => {this.alert.showAlert('Event not found in database. Please Check!') }
     );
   }
+}
 
+@Component({
+  selector: 'app-createeventdialog',
+  templateUrl: './createeventDialog.component.html',
+})
+export class CreateeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: CreateEventDialogData,
+   public dialogRef: MatDialogRef<CreateeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-updateeventdialog',
+  templateUrl: './updateeventDialog.component.html',
+})
+export class UpdateeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: UpdateEventDialogData,
+   public dialogRef: MatDialogRef<UpdateeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-retrieveeventdialog',
+  templateUrl: './retrieveeventDialog.component.html',
+})
+export class RetrieveeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: RetrieveEventDialogData,
+   public dialogRef: MatDialogRef<RetrieveeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-deleteeventdialog',
+  templateUrl: './deleteeventDialog.component.html',
+})
+export class DeleteeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DeleteEventDialogData,
+   public dialogRef: MatDialogRef<DeleteeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
 }

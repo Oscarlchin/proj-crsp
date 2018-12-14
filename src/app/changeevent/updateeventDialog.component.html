@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>Event Updated!</h1>
+<div mat-dialog-content>
+  Updated Event:
+  <ul>
+    <li>
+      Updated Event's Program ID : {{ data.updateprogram_id }}
+    </li>
+    <li>
+      Updated Program Name : {{ data.updateprogram_name }}
+    </li>
+    <li>
+      Updated District : {{ data.updatedistrict }}
+    </li>
+    <li>
+      Updated Venue : {{ data.updatevenue }}
+    </li>
+    <li>
+      Updated Start Date : {{ data.updatestart_date }}
+    </li>
+    <li>
+      Updated Days of Week : {{ data.updatedayinweek }}
+    </li>
+    <li>
+      Updated Start Time : {{ data.updatestart_time }}
+    </li>
+    <li>
+      Updated End Time : {{ data.updateend_time }}
+    </li>
+    <li>
+      Updated Program Type Name : {{ data.updatetype_name }}
+    </li>
+    <li>
+      Updated Fee: {{ data.updatefee }}
+    </li>
+    <li>
+      Updated Quota : {{ data.updatequota }}
+    </li>
+    <li>
+      Updated Quota Left : {{ data.updatequota_left }}
+    </li>
+    <li>
+      Updated Minimum Age : {{ data.updatemin_age }}
+    </li>
+    <li>
+      Updated Maximum Age : {{ data.updatemax_age }}
+    </li>
+    <li>
+      Updated URL Link : {{ data.updateurl }}
+    </li>
+  </ul>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>

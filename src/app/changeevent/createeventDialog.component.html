@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>New Event Created!</h1>
+<div mat-dialog-content>
+  New Event:
+  <ul>
+    <li>
+      New Program ID : {{ data.newprogram_id }}
+    </li>
+    <li>
+      New Program Name : {{ data.newprogram_name }}
+    </li>
+    <li>
+      New District : {{ data.newdistrict }}
+    </li>
+    <li>
+      New Venue : {{ data.newvenue }}
+    </li>
+    <li>
+      New Start Date : {{ data.newstart_date }}
+    </li>
+    <li>
+      New Days of Week : {{ data.newdayinweek }}
+    </li>
+    <li>
+      New Start Time : {{ data.newstart_time }}
+    </li>
+    <li>
+      New End Time : {{ data.newend_time }}
+    </li>
+    <li>
+      New Program Type Name : {{ data.newtype_name }}
+    </li>
+    <li>
+      New Fee: {{ data.newfee }}
+    </li>
+    <li>
+      New Quota : {{ data.newquota }}
+    </li>
+    <li>
+      New Quota Left : {{ data.newquota_left }}
+    </li>
+    <li>
+      New Minimum Age : {{ data.newmin_age }}
+    </li>
+    <li>
+      New Maximum Age : {{ data.newmax_age }}
+    </li>
+    <li>
+      New URL Link : {{ data.newurl }}
+    </li>
+  </ul>
+  <button mat-button (click)="closeDialog()">Close</button>
+</div>
