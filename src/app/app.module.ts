@@ -15,7 +15,7 @@ import { EventslistComponent } from './eventslist/eventslist.component';
 import { AuthGuard, AdminGuard } from './_guards';
 import {
   AuthService, UserService, EventService,
-  UseractionService, AlertService, UploadService
+  UseractionService, AlertService, UploadService, FlushService
 } from './_services';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AdminComponent } from './admin/admin.component';
@@ -34,10 +34,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import { ChangeuserComponent, CreateuserDialogComponent,
   UpdateuserDialogComponent, RetrieveuserDialogComponent, DeleteuserDialogComponent } from './changeuser/changeuser.component';
+
 import { ChangeeventComponent } from './changeevent/changeevent.component';
 import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
+import { ExtractComponent } from './extract/extract.component';
 
 const modules = [
   MatPaginatorModule,
@@ -49,7 +55,9 @@ const modules = [
   MaterialModule,
   MatCardModule,
   MatButtonModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
@@ -68,7 +76,8 @@ const modules = [
     CreateuserDialogComponent,
     UpdateuserDialogComponent,
     RetrieveuserDialogComponent,
-    DeleteuserDialogComponent
+    DeleteuserDialogComponent,
+    ExtractComponent
   ],
   entryComponents: [
     CreateuserDialogComponent,
@@ -97,6 +106,7 @@ const modules = [
     UserService,
     UseractionService,
     UploadService,
+    FlushService,
     AlertService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }

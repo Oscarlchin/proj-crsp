@@ -17,6 +17,12 @@
   <mat-list-item>
     Program Name : {{ event ? event.program_name : "" }}
   </mat-list-item>
+  <mat-list-item>
+    Program Type : {{ event ? event.type_name : "" }}
+  </mat-list-item>
+  <mat-list-item>
+    Fee (HKD) : {{ event ? event.fee : "" }}
+  </mat-list-item>
   <mat-divider></mat-divider>
   <mat-list-item>
     District : {{ event ? event.district : "" }}
@@ -36,16 +42,35 @@
   </mat-list-item>
   <mat-divider></mat-divider>
   <mat-list-item>
-    Satrt Time : {{ event ? event.start_time : "" }}
+    Time : {{ event.start_time ? event.start_time : "" }} - {{ event.end_time ? event.end_time : "" }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    Quota : {{ event ? event.quota : "" }}
   </mat-list-item>
   <mat-list-item>
-    End Time : {{ event ? event.end_time : "" }}
+    Quota Left : {{ event.quota_left != 0 ? event.quota_left : "" }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    Minimum enrollment age : {{ event ? event.min_age : "" }}
+  </mat-list-item>
+  <mat-list-item >
+    Maximum enrollment age : {{ event.max_age == 99 ? "No limit" : event.max_age }}
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    Link : <a class="event_linkDisplay" href="{{event.url}}'">{{ event ? event.url : "" }}</a>
   </mat-list-item>
 </mat-list>
 </div>
 
 <div fxFlex>
-<p>Event Comments:</p>
+    <mat-toolbar>
+        <mat-toolbar-row>
+<p>Event Comments</p>
+</mat-toolbar-row>
+</mat-toolbar>
 <div class="container commentblk">
   <div *ngIf="comments.length!==0">
     <mat-card *ngFor="let comment of comments">

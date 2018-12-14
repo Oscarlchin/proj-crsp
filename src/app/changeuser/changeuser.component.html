@@ -11,16 +11,16 @@
       </mat-expansion-panel-header>
 
 <form [formGroup]="registerForm">
-      <mat-form-field class="form-group" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-group twoalign" (ngSubmit)="onSubmit()">
         <input matInput placeholder="New Username" required class="form-control" formControlName="newUsername" />
             <div *ngIf="registerf.newUsername.errors">
             <mat-error *ngIf="registerf.newUsername.errors.required">Username is required</mat-error>
             <mat-error *ngIf="registerf.newUsername.errors.minlength">Username must be at least 4 characters long.</mat-error>
             <mat-error *ngIf="registerf.newUsername.errors.maxlength">Username must be at most 20 characters long.</mat-error>
             </div>
-      </mat-form-field><br>
+      </mat-form-field>
 
-      <mat-form-field class="form-group" >
+      <mat-form-field class="form-group twoalign" >
         <input matInput placeholder="New Password" required class="form-control" formControlName="newPassword">
             <div *ngIf="registerf.newPassword.errors">
             <mat-error *ngIf="registerf.newPassword.errors.required">Password is required</mat-error>
@@ -58,14 +58,14 @@
 
       </mat-form-field><br>
 
-      <mat-form-field>
+      <mat-form-field class="twoalign">
         <input matInput placeholder="New Username" required class="form-control" formControlName="updateNewUsername">
         <div *ngIf="updatef.updateNewUsername.errors">
           <mat-error *ngIf="updatef.updateNewUsername.errors.required">New Username is required</mat-error>
           <mat-error *ngIf="updatef.updateNewUsername.errors.minlength">New Username must be at least 4 characters long.</mat-error>
           <mat-error *ngIf="updatef.updateNewUsername.errors.maxlength">New Username must be at most 20 characters long.</mat-error>
           </div>
-      </mat-form-field><br>
+      </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="New Password" required class="form-control" formControlName="updateNewPassword">
@@ -96,7 +96,7 @@
         <input matInput placeholder="Username" required class="form-control" formControlName="getOneUsername">
         <div *ngIf="getOnef.getOneUsername.errors">
           <mat-error *ngIf="getOnef.getOneUsername.errors.required">Username is required</mat-error>
-          
+
           </div>
       </mat-form-field><br>
 
@@ -121,7 +121,7 @@
           <input matInput placeholder="Username" required class="form-control" formControlName="deleteOneUsername">
           <div *ngIf="deleteOnef.deleteOneUsername.errors">
             <mat-error *ngIf="deleteOnef.deleteOneUsername.errors.required">Username is required</mat-error>
-            
+
             </div>
         </mat-form-field><br>
         <button mat-raised-button color="primary" (click)='deleteOneUser()'>Submit</button>

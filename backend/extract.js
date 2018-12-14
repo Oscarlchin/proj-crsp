@@ -59,7 +59,7 @@ module.exports = function (app){
             Promise.all(promises)
             .then(function(){
               console.log("updated");
-              res.status(200).send('database updated!');
+              res.json({success: 'database updated!'});
             }).catch(console.error);
           } catch (e) {
               console.log(e);
