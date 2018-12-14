@@ -1,0 +1,40 @@
+<mat-accordion *ngIf="hasfav">
+    <mat-expansion-panel *ngFor="let fav of favevents" >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{fav.program_name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{fav.type_name}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <mat-list>
+              <mat-list-item> Program ID : {{fav.program_id}} </mat-list-item>
+              <mat-list-item> District : {{fav.district}} </mat-list-item>
+              <mat-list-item> Venue : {{fav.venue}} </mat-list-item>
+            </mat-list>
+          </div>
+          <div class="col-4">
+            <mat-list>
+                <mat-list-item> Date : {{fav.start_date}} - {{fav.start_date}} </mat-list-item>
+                <mat-list-item> Days in Week : {{fav.dayinweek}} </mat-list-item>
+                <mat-list-item> Time : {{fav.start_time}} - {{fav.end_time}} </mat-list-item>
+              </mat-list>
+          </div>
+          <div class="col-4">
+              <mat-list>
+                  <mat-list-item> Quota (Left) : {{fav.quota}} ({{fav.quota_left}}) </mat-list-item>
+                  <mat-list-item> Enrollemnt Age : {{fav.min_age}} - {{fav.max_age}} </mat-list-item>
+                  <mat-list-item> Fee (HKD) : {{fav.fee}}</mat-list-item>
+                </mat-list>
+          </div>
+        </div>
+        <p>Link : <a href="{{fav.url}}"  target="_blank">{{fav.url}}</a> </p>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <p *ngIf="!hasfav">You dont have any favourite events.</p>

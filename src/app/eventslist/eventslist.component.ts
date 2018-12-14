@@ -88,9 +88,9 @@ export class EventslistComponent implements OnInit {
    };
   }
 
-  refresh() {
-    this.useraction.getevent().subscribe(data => {});
-  }
+  //refresh() {
+  //  this.useraction.getevent().subscribe(data => {});
+  //}
 
   applyFilter(filterValue: string) {
     const customf = {

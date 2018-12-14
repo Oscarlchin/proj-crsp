@@ -7,6 +7,7 @@ import { AuthGuard, AdminGuard } from './_guards';
 import { EventslistComponent } from './eventslist/eventslist.component';
 import { AdminComponent } from './admin/admin.component';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
+import { MyfaveventsComponent } from './myfavevents/myfavevents.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home' , pathMatch: 'full'  },
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
        path: 'event/:id',
        component: EventdetailComponent
+      },
+      {
+        path: 'myfavevents',
+        component: MyfaveventsComponent
       }
   ]},
   { path: 'about', component: AboutComponent},
