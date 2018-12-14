@@ -45,7 +45,7 @@ export class UploadcsvComponent implements OnInit {
       } else if (data.body) {
         this.isLoading = false;
         this.alertService.showAlert('Done!!');
-        document.getElementById('fileInput').value = null;
+        document.getElementById('fileInput').textContent = null;
         this.uploadFile = null;
 
 

@@ -1,1 +1,9 @@
 .big {font-size: 5em;}
+
+#homeTitle {
+  background-color: lightcyan;
+}
+
+#description {
+  font-size: 70%;
+}

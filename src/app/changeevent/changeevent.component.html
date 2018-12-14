@@ -12,27 +12,34 @@
 
            <form [formGroup]="registerEventForm">
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="Program ID" required class="form-control" formControlName="newProgramID">
              <div *ngIf="registerEventf.newProgramID.errors">
               <mat-error *ngIf="registerEventf.newProgramID.errors.required">Program ID is required</mat-error>
               <mat-error *ngIf="registerEventf.newProgramID.errors.pattern">Program ID must be numbers</mat-error>
               </div>
-           </mat-form-field><br>
+           </mat-form-field>
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="Program Name" required class="form-control" formControlName="newProgramName">
              <div *ngIf="registerEventf.newProgramName.errors">
               <mat-error *ngIf="registerEventf.newProgramName.errors.required">Program Name is required</mat-error>
               </div>
-           </mat-form-field><br>
+           </mat-form-field>
 
            <mat-form-field class="form-group">
+            <input matInput placeholder="Type Name" required class="form-control" formControlName="newTypename">
+            <div *ngIf="registerEventf.newTypename.errors">
+             <mat-error *ngIf="registerEventf.newTypename.errors.required">Type Name is required</mat-error>
+             </div>
+           </mat-form-field><br>
+
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="District" required class="form-control" formControlName="newDistrict">
              <div *ngIf="registerEventf.newDistrict.errors">
               <mat-error *ngIf="registerEventf.newDistrict.errors.required">District is required</mat-error>
               </div>
-           </mat-form-field><br>
+           </mat-form-field>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Venue" required class="form-control" formControlName="newVenue">
@@ -41,19 +48,19 @@
               </div>
             </mat-form-field><br>
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="Start Date" required class="form-control" formControlName="newStartdate">
              <div *ngIf="registerEventf.newStartdate.errors">
               <mat-error *ngIf="registerEventf.newStartdate.errors.required">Start Date is required</mat-error>
               </div>
-            </mat-form-field><br>
+            </mat-form-field>
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="End Date" required class="form-control" formControlName="newEnddate">
              <div *ngIf="registerEventf.newEnddate.errors">
               <mat-error *ngIf="registerEventf.newEnddate.errors.required">End Date is required</mat-error>
               </div>
-            </mat-form-field><br>
+            </mat-form-field>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Day in week" required class="form-control" formControlName="newDayinweek">
@@ -62,12 +69,12 @@
               </div>
             </mat-form-field><br>
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="Start Time" required class="form-control" formControlName="newStarttime">
              <div *ngIf="registerEventf.newStarttime.errors">
               <mat-error *ngIf="registerEventf.newStarttime.errors.required">Start Time is required</mat-error>
               </div>
-            </mat-form-field><br>
+            </mat-form-field>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="End Time" required class="form-control" formControlName="newEndtime">
@@ -76,14 +83,7 @@
               </div>
             </mat-form-field><br>
 
-           <mat-form-field class="form-group">
-             <input matInput placeholder="Type Name" required class="form-control" formControlName="newTypename">
-             <div *ngIf="registerEventf.newTypename.errors">
-              <mat-error *ngIf="registerEventf.newTypename.errors.required">Type Name is required</mat-error>
-              </div>
-            </mat-form-field><br>
-
-           <mat-form-field class="form-group">
+            <mat-form-field class="form-group">
              <input matInput placeholder="Fee" required class="form-control" formControlName="newFee">
              <div *ngIf="registerEventf.newFee.errors">
               <mat-error *ngIf="registerEventf.newFee.errors.required">Fee is required</mat-error>
@@ -91,13 +91,13 @@
               </div>
             </mat-form-field><br>
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="Quota" required class="form-control" formControlName="newQuota">
              <div *ngIf="registerEventf.newQuota.errors">
               <mat-error *ngIf="registerEventf.newQuota.errors.required">Quota is required</mat-error>
               <mat-error *ngIf="registerEventf.newQuota.errors.pattern">Quota must be numbers</mat-error>
               </div>
-            </mat-form-field><br>
+            </mat-form-field>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Quota Left" required class="form-control" formControlName="newQuotaleft">
@@ -107,13 +107,13 @@
               </div>
             </mat-form-field><br>
 
-           <mat-form-field class="form-group">
+           <mat-form-field class="form-group twoalign">
              <input matInput placeholder="Minimum Age" required class="form-control" formControlName="newMinimumage">
              <div *ngIf="registerEventf.newMinimumage.errors">
               <mat-error *ngIf="registerEventf.newMinimumage.errors.required">Minimum Age is required</mat-error>
               <mat-error *ngIf="registerEventf.newMinimumage.errors.pattern">Minimum Age must be numbers</mat-error>
               </div>
-            </mat-form-field><br>
+            </mat-form-field>
 
            <mat-form-field class="form-group">
              <input matInput placeholder="Maximum Age" required class="form-control" formControlName="newMaximumage">
@@ -160,75 +160,75 @@
                   </div>
               </mat-form-field><br>
 
-             <mat-form-field>
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated Program Name" required class="form-control" formControlName="updateProgramName">
                <div *ngIf="updateEventf.updateProgramName.errors">
                   <mat-error *ngIf="updateEventf.updateProgramName.errors.required">Program Name is required</mat-error>
-                  
-                  </div>
-              </mat-form-field><br>
 
-             <mat-form-field>
+                  </div>
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput placeholder="Updated Type Name" required class="form-control" formControlName="updateTypename">
+                <div *ngIf="updateEventf.updateTypename.errors">
+                   <mat-error *ngIf="updateEventf.updateTypename.errors.required">Type Name is required</mat-error>
+
+                   </div>
+               </mat-form-field><br>
+
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated District" required class="form-control" formControlName="updateDistrict">
                <div *ngIf="updateEventf.updateDistrict.errors">
                   <mat-error *ngIf="updateEventf.updateDistrict.errors.required">District is required</mat-error>
-                  
+
                   </div>
-              </mat-form-field><br>
+              </mat-form-field>
 
              <mat-form-field>
                <input matInput placeholder="Updated Venue" required class="form-control" formControlName="updateVenue">
                <div *ngIf="updateEventf.updateVenue.errors">
                   <mat-error *ngIf="updateEventf.updateVenue.errors.required">Venue is required</mat-error>
-                  
+
                   </div>
               </mat-form-field><br>
 
-             <mat-form-field>
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated Start Date" required class="form-control" formControlName="updateStartdate">
                <div *ngIf="updateEventf.updateStartdate.errors">
                   <mat-error *ngIf="updateEventf.updateStartdate.errors.required">Start Date is required</mat-error>
-                  
-                  </div>
-              </mat-form-field><br>
 
-             <mat-form-field>
+                  </div>
+              </mat-form-field>
+
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated End Date" required class="form-control" formControlName="updateEnddate">
                <div *ngIf="updateEventf.updateEnddate.errors">
                   <mat-error *ngIf="updateEventf.updateEnddate.errors.required">End Date is required</mat-error>
-                  
+
                   </div>
-              </mat-form-field><br>
+              </mat-form-field>
 
              <mat-form-field>
                <input matInput placeholder="Updated Day in week" required class="form-control" formControlName="updateDayinweek">
                <div *ngIf="updateEventf.updateDayinweek.errors">
                   <mat-error *ngIf="updateEventf.updateDayinweek.errors.required">Day in Week is required</mat-error>
-                  
+
                   </div>
               </mat-form-field><br>
 
-             <mat-form-field>
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated Start Time" required class="form-control" formControlName="updateStarttime">
                <div *ngIf="updateEventf.updateStarttime.errors">
                   <mat-error *ngIf="updateEventf.updateStarttime.errors.required">Start Time is required</mat-error>
-                  
+
                   </div>
-              </mat-form-field><br>
+              </mat-form-field>
 
              <mat-form-field>
                <input matInput placeholder="Updated End Time" required class="form-control" formControlName="updateEndtime">
                <div *ngIf="updateEventf.updateEndtime.errors">
                   <mat-error *ngIf="updateEventf.updateEndtime.errors.required">End Time is required</mat-error>
-                  
-                  </div>
-              </mat-form-field><br>
 
-             <mat-form-field>
-               <input matInput placeholder="Updated Type Name" required class="form-control" formControlName="updateTypename">
-               <div *ngIf="updateEventf.updateTypename.errors">
-                  <mat-error *ngIf="updateEventf.updateTypename.errors.required">Type Name is required</mat-error>
-                  
                   </div>
               </mat-form-field><br>
 
@@ -240,13 +240,13 @@
                   </div>
               </mat-form-field><br>
 
-             <mat-form-field>
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated Quota" required class="form-control" formControlName="updateQuota">
                <div *ngIf="updateEventf.updateQuota.errors">
                   <mat-error *ngIf="updateEventf.updateQuota.errors.required">Quota is required</mat-error>
                   <mat-error *ngIf="updateEventf.updateQuota.errors.pattern">Quota must be numbers</mat-error>
                   </div>
-              </mat-form-field><br>
+              </mat-form-field>
 
              <mat-form-field>
                <input matInput placeholder="Updated Quota Left" required class="form-control" formControlName="updateQuotaleft">
@@ -256,13 +256,13 @@
                   </div>
               </mat-form-field><br>
 
-             <mat-form-field>
+             <mat-form-field class="twoalign">
                <input matInput placeholder="Updated Minimum Age" required class="form-control" formControlName="updateMinimumage">
                <div *ngIf="updateEventf.updateMinimumage.errors">
                   <mat-error *ngIf="updateEventf.updateMinimumage.errors.required">Minimum Age is required</mat-error>
                   <mat-error *ngIf="updateEventf.updateMinimumage.errors.pattern">Minimum Age must be numbers</mat-error>
                   </div>
-              </mat-form-field><br>
+              </mat-form-field>
 
              <mat-form-field>
                <input matInput placeholder="Updated Maximum Age" required class="form-control" formControlName="updateMaximumage">
@@ -274,7 +274,7 @@
 
              <mat-form-field>
                <input matInput placeholder="Updated URL" required class="form-control" formControlName="updateURL">
-                
+
               </mat-form-field><br>
 
 
@@ -301,7 +301,7 @@
                <input matInput placeholder="ProgramID" required class="form-control" formControlName="getOneProgramID">
                <div *ngIf="getOneEventf.getOneProgramID.errors">
                 <mat-error *ngIf="getOneEventf.getOneProgramID.errors.required">Program ID is required</mat-error>
-                <mat-error *ngIf="getOneEventf.getOneProgramID.errors.pattern">Program ID must be numbers</mat-error>  
+                <mat-error *ngIf="getOneEventf.getOneProgramID.errors.pattern">Program ID must be numbers</mat-error>
               </div>
               </mat-form-field><br>
 
@@ -331,7 +331,7 @@
              </mat-form-field><br>
              <div *ngIf="deleteOneEventf.deleteOneProgramID.errors">
                 <mat-error *ngIf="deleteOneEventf.deleteOneProgramID.errors.required">Program ID is required</mat-error>
-                <mat-error *ngIf="deleteOneEventf.deleteOneProgramID.errors.pattern">Program ID must be numbers</mat-error>  
+                <mat-error *ngIf="deleteOneEventf.deleteOneProgramID.errors.pattern">Program ID must be numbers</mat-error>
               </div>
              <button mat-raised-button color="primary" (click)='deleteOneEvent()'>Submit</button>
            </form>
