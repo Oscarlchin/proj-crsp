@@ -1,9 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { UserService, AlertService } from '../_services';
 import { User } from '../_models';
 import { EventService } from '../_services';
 import { Event } from '../_models';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { identifierModuleUrl } from '@angular/compiler';
+import { setDOM } from '@angular/platform-browser/src/dom/dom_adapter';
+import { EDEADLK } from 'constants';
+import { min, max } from 'rxjs/operators';
+import { url } from 'inspector';
+
+export interface CreateEventDialogData {
+  newprogram_id: Number;
+  newprogram_name: String;
+  newdistrict: String;
+  newvenue: String;
+  newstart_date: String;
+  newend_date: String;
+  newdayinweek: String;
+  newstart_time: String;
+  newend_time: String;
+  newtype_name: String;
+  newfee: Number;
+  newquota: Number;
+  newquota_left: Number;
+  newmin_age: Number;
+  newmax_age: Number;
+  newurl: String;
+}
+
+export interface UpdateEventDialogData {
+  preUsername: string;
+  newUsername: string;
+  newPassword: string;
+}
+
+export interface RetrieveEventDialogData {
+  username: string;
+  favevents: [];
+}
+
+export interface DeleteEventDialogData {
+  username: string;
+}
 
 @Component({
   selector: 'app-changeevent',
@@ -24,8 +64,9 @@ export class ChangeeventComponent implements OnInit {
 
   constructor(
     private eventService: EventService,
-    private alert:AlertService,
-    private formbuilder: FormBuilder
+    private alert: AlertService,
+    private formbuilder: FormBuilder,
+    public dialog: MatDialog
     ) { }
 
   ngOnInit() {
@@ -83,6 +124,55 @@ export class ChangeeventComponent implements OnInit {
   get getOneEventf() { return this.getOneEventForm.controls;}
   get deleteOneEventf() { return this.deleteOneEventForm.controls;}
 
+  openCreateEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
+    this.dialog.open(CreateeventDialogComponent, {
+      data: {
+        newprogram_id: id,
+        newprogram_name: n,
+        newdistrict: d,
+        newvenue: v,
+        newstart_date: sd,
+        newend_date: ed,
+        newdayinweek: diw,
+        newstart_time: st,
+        newend_time: et,
+        newtype_name: tn,
+        newfee: f,
+        newquota: q,
+        newquota_left: ql,
+        newmin_age: mina,
+        newmax_age: maxa,
+        newurl: u
+      }
+    });
+  }
+
+  openUpdateEventDialog(preU, u, p) {
+    this.dialog.open(UpdateeventDialogComponent, {
+      data: {
+        preUsername: preU,
+        newUsername: u,
+        newPassword: p
+      }
+    });
+  }
+
+  openRetrieveEventDialog(u, f) {
+    this.dialog.open(RetrieveeventDialogComponent, {
+      data: {
+        username: u,
+        favevents: f
+      }
+    });
+  }
+
+  openDeleteEventDialog(u) {
+    this.dialog.open(DeleteeventDialogComponent, {
+      data: {
+        username: u
+      }
+    });
+  }
 
   createEvent() {
     if (this.registerEventForm.invalid) {
@@ -131,7 +221,26 @@ export class ChangeeventComponent implements OnInit {
       + 'Quota: ' + this.registerEventForm.get('newQuota').value + '/n'
       + 'Quota Left: ' + this.registerEventForm.get('newQuotaleft').value + '/n'
       + 'URL: ' + this.registerEventForm.get('newURL').value;
-      },
+
+      this.openCreateEventDialog(
+      this.registerEventForm.get('newProgramID').value,
+      this.registerEventForm.get('newProgramName').value,
+      this.registerEventForm.get('newDistrict').value,
+      this.registerEventForm.get('newVenue').value,
+      this.registerEventForm.get('newStartdate').value,
+      this.registerEventForm.get('newEnddate').value,
+      this.registerEventForm.get('newDayinweek').value,
+      this.registerEventForm.get('newStarttime').value,
+      this.registerEventForm.get('newEndtime').value,
+      this.registerEventForm.get('newTypename').value,
+      this.registerEventForm.get('newFee').value,
+      this.registerEventForm.get('newQuota').value,
+      this.registerEventForm.get('newQuotaleft').value,
+      this.registerEventForm.get('newMinimumage').value,
+      this.registerEventForm.get('newMaximumage').value,
+      this.registerEventForm.get('newURL').value
+      );
+    },
 
   error => {this.alert.showAlert('Event with this ID already exist!') }
   );
@@ -240,5 +349,64 @@ export class ChangeeventComponent implements OnInit {
     error => {this.alert.showAlert('Event not found in database. Please Check!') }
     );
   }
+}
 
+@Component({
+  selector: 'app-createeventdialog',
+  templateUrl: './createeventDialog.component.html',
+})
+export class CreateeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: CreateEventDialogData,
+   public dialogRef: MatDialogRef<CreateeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-updateeventdialog',
+  templateUrl: './updateeventDialog.component.html',
+})
+export class UpdateeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: UpdateEventDialogData,
+   public dialogRef: MatDialogRef<UpdateeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-retrieveeventdialog',
+  templateUrl: './retrieveeventDialog.component.html',
+})
+export class RetrieveeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: RetrieveEventDialogData,
+   public dialogRef: MatDialogRef<RetrieveeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
+}
+
+@Component({
+  selector: 'app-deleteeventdialog',
+  templateUrl: './deleteeventDialog.component.html',
+})
+export class DeleteeventDialogComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DeleteEventDialogData,
+   public dialogRef: MatDialogRef<DeleteeventDialogComponent>
+   ) {}
+
+   closeDialog() {
+    this.dialogRef.close();
+  }
 }

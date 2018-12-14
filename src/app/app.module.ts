@@ -41,7 +41,10 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ChangeuserComponent, CreateuserDialogComponent,
   UpdateuserDialogComponent, RetrieveuserDialogComponent, DeleteuserDialogComponent } from './changeuser/changeuser.component';
 
-import { ChangeeventComponent } from './changeevent/changeevent.component';
+import { ChangeeventComponent, CreateeventDialogComponent,
+  UpdateeventDialogComponent,
+  RetrieveeventDialogComponent,
+  DeleteeventDialogComponent } from './changeevent/changeevent.component';
 import { UploadcsvComponent } from './uploadcsv/uploadcsv.component';
 import { ExtractComponent } from './extract/extract.component';
 import { MyfaveventsComponent } from './myfavevents/myfavevents.component';
@@ -78,6 +81,10 @@ const modules = [
     UpdateuserDialogComponent,
     RetrieveuserDialogComponent,
     DeleteuserDialogComponent,
+    CreateeventDialogComponent,
+    UpdateeventDialogComponent,
+    RetrieveeventDialogComponent,
+    DeleteeventDialogComponent,
     ExtractComponent,
     MyfaveventsComponent
   ],
@@ -85,7 +92,11 @@ const modules = [
     CreateuserDialogComponent,
     UpdateuserDialogComponent,
     RetrieveuserDialogComponent,
-    DeleteuserDialogComponent
+    DeleteuserDialogComponent,
+    CreateeventDialogComponent,
+    UpdateeventDialogComponent,
+    RetrieveeventDialogComponent,
+    DeleteeventDialogComponent
   ],
   imports: [
     BrowserModule,
