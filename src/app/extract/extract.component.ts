@@ -7,7 +7,7 @@ import { FlushService , AlertService } from '../_services';
   styleUrls: ['./extract.component.css']
 })
 export class ExtractComponent implements OnInit {
-
+  loading: boolean = false;
   constructor(private flushservice: FlushService,
     private alertservice: AlertService ) { }
 
@@ -15,9 +15,14 @@ export class ExtractComponent implements OnInit {
   }
 
   extract() {
+    this.loading = true;
     this.flushservice.flush().subscribe(data => {
+      this.loading = false;
       if (data) { this.alertservice.showAlert('Success'); }
-    }, error => console.log(error));
+    }, error => {
+      this.loading = false;
+      console.log(error);
+    });
   }
 
 }
