@@ -16,6 +16,7 @@ export class EventdetailComponent implements OnInit {
   eventid: number;
   currentusercomment = '';
   isLike: boolean;
+  isSubmit: boolean = false;
   constructor(  private route: ActivatedRoute,
     private router: Router,
     private useractionservice: UseractionService,
@@ -66,6 +67,7 @@ export class EventdetailComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmit=true;
     if (this.commentForm.invalid) {
       return;
     }
@@ -74,6 +76,9 @@ export class EventdetailComponent implements OnInit {
       if (data.program_id) {
         this.comments = data.eventcomments;
         this.currentusercomment = '';
+        this.commentForm.markAsPristine();
+        this.commentForm.markAsUntouched();
+        this.isSubmit = false;
        }
     });
   }
@@ -81,20 +86,20 @@ export class EventdetailComponent implements OnInit {
   onclicklike() {
     if (this.isLike) {
       this.useractionservice.unlikeevent(this.authservice.loginObject.username, this.eventid).subscribe(data => {
-        const eventid = this.eventid;
-        const fav = this.authservice.loginObject.favevents.filter(function(value) {
-          return Number(value) !== eventid;
-        });
-        this.authservice.loginObject.favevents = fav;
+        if (data.username) {
+          this.authservice.loginObject.favevents =  data.favevents;
         this.isLike = false;
         this.alert.showAlert('Unliked:(');
+      }
       });
 
     } else {
       this.useractionservice.likeevent(this.authservice.loginObject.username, this.eventid).subscribe(data => {
-        this.authservice.loginObject.favevents.push(this.eventid);
+        if (data.username) {
+        this.authservice.loginObject.favevents =  data.favevents;
         this.isLike = true;
         this.alert.showAlert('Liked:)');
+        }
       });
 
     }

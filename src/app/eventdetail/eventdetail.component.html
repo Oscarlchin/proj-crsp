@@ -59,8 +59,7 @@
     Maximum enrollment age : {{ event.max_age == 99 ? "No limit" : event.max_age }}
   </mat-list-item>
   <mat-divider></mat-divider>
-  <mat-list-item>
-    Link : <a class="event_linkDisplay" href="{{event.url}}" target="_blank">{{ event ? event.url : "" }}</a>
+  <mat-list-item>Link: <a class="event_linkDisplay" href="{{event.url}}" target="_blank">{{ event ? event.url : "" }}</a>
   </mat-list-item>
 </mat-list>
 </div>
@@ -93,9 +92,11 @@
       <form (submit)="onSubmit()" [formGroup]="commentForm">
         <mat-form-field>
             <textarea matInput [(ngModel)]="currentusercomment" formControlName="comment" placeholder="Leave a comment" name="currentcomment"  required></textarea>
-            <mat-error *ngIf="formcomment.errors.required">
+            <div *ngIf="isSubmit && formcomment.errors">
+              <mat-error *ngIf="formcomment.errors.required">
               Please leave your comment!
-            </mat-error>
+              </mat-error>
+            </div>
         </mat-form-field>
         <div>
             <button mat-flat-button type="submit" color="primary">Post</button>

@@ -114,6 +114,8 @@ export class ChangeuserComponent implements OnInit {
 
   createUser() {
     if (this.registerForm.invalid) {
+        this.registerForm.markAsPristine();
+        this.registerForm.markAsUntouched();
       return;
   }
     const newUser: User = {

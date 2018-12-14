@@ -19,14 +19,14 @@ module.exports = function (app){
         if (!user.favevents.includes(Number(req.body.program_id))) {
           user.favevents.push(Number(req.body.program_id));
           //console.log(user.favevents);
-          User.findOneAndUpdate({username: user.username}, {favevents: user.favevents})
+          User.findOneAndUpdate({username: user.username}, {favevents: user.favevents},  {new: true})
           .exec(function(err, result){
             if (err) errorHandler(err);
             if (result) {
-              res.status(204).json(null);
+              res.json(result);
             } else res.send("something went wrong!");
           });
-        } else res.status(200).json({message: "already liked"});
+        } else res.status(200).json({error: "already liked"});
       } else {
         res.status(200).json({message: "no user found!"});
       }
@@ -40,15 +40,15 @@ module.exports = function (app){
         var fav = user.favevents.filter(function(value){
           return value !== Number(req.body.program_id);
         });
-        User.findOneAndUpdate({username: user.username}, {favevents: fav})
+        User.findOneAndUpdate({username: user.username}, {favevents: fav},  {new: true})
         .exec(function(err, result){
           if (err) errorHandler(err);
           if (result) {
-            res.status(204).json(null);
+            res.json(result);
           }
         });
       } else {
-        res.status(200).json({message: "no user found!"});
+        res.json({error: "no user found!"});
       }
     });
   });

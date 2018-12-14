@@ -57,9 +57,9 @@ app.post('/users/authenticate', (req,res,next) => {
         const token = jwt.sign({ username: passportUser.username }, config.secret, { audience: 'user'});
         const { password, ...userWithoutPassword } = passportUser._doc;
         //console.log(passportUser);
-        return res.json({...userWithoutPassword, token});
-     }
-     return status(400).info;
+        res.json({...userWithoutPassword, token});
+     } else {res.json({error: "Username / password not correct!"})}
+
    } )(req,res,next);
 });
 

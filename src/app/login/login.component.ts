@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroupDirective, NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../_services';
+import { AuthService, AlertService } from '../_services';
 import { ErrorStateMatcher} from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-    // private alertService: AlertService
+    private alertService: AlertService
     ) {}
 
   ngOnInit() {
@@ -62,12 +62,22 @@ export class LoginComponent implements OnInit {
         .pipe(first())
         .subscribe(
             data => {
+              if (data.error) {
+                this.alertService.showAlert(data.error);
                 this.loading = false;
+                this.loginForm.reset();
+                this.loginForm.markAsPristine();
+                this.loginForm.markAsUntouched();
+              } else {
                 this.router.navigate([this.returnUrl]);
+              }
             },
             error => {
-                //  this.alertService.error(error);
+                this.alertService.showAlert(error.toString());
                 this.loading = false;
+                this.loginForm.reset();
+                this.loginForm.markAsPristine();
+                this.loginForm.markAsUntouched();
             });
   }
 }

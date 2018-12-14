@@ -5,16 +5,20 @@
         <input matInput maxlength="20" type="text" placeholder="Username" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
         <mat-hint align="start">Username : <strong>4-20</strong> characters</mat-hint>
         <mat-hint align="end">{{f.username.value.length}} / 20</mat-hint>
-        <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
-        <mat-error *ngIf="f.username.errors.minlength">Username must be at least 4 characters long</mat-error>
+        <div *ngIf="submitted && f.username.errors">
+          <mat-error *ngIf="f.username.errors.required">Username is required</mat-error>
+          <mat-error *ngIf="f.username.errors.minlength">Username must be at least 4 characters long</mat-error>
+        </div>
     </mat-form-field>
 
     <mat-form-field class="form-group example-full-width">
         <input matInput maxlength="20" type="password" placeholder="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
         <mat-hint align="start">Password : <strong>4-20</strong> characters</mat-hint>
         <mat-hint align="end">{{f.password.value.length}} / 20</mat-hint>
-        <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
-        <mat-error *ngIf="f.password.errors.minlength">Password must be at least 4 characters long</mat-error>
+        <div *ngIf="submitted && f.password.errors">
+          <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
+          <mat-error *ngIf="f.password.errors.minlength">Password must be at least 4 characters long</mat-error>
+        </div>
     </mat-form-field>
 
     <button mat-raised-button color="primary" (click)='onSubmit()'>Submit</button>
