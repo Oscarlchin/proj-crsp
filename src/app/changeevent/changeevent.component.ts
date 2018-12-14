@@ -290,7 +290,7 @@ export class ChangeeventComponent implements OnInit {
      //) {
       //this.createEventOutput = 'Please enter something!';
 
-      
+
       this.openCreateEventDialog(
       this.registerEventForm.get('newProgramID').value,
       this.registerEventForm.get('newProgramName').value,
@@ -349,7 +349,7 @@ export class ChangeeventComponent implements OnInit {
            if (event.error) {
             this.alert.showAlert('Event not found in database. Please Check!')
           } else {
-            
+
 
               this.openUpdateEventDialog(
                 this.updateEventForm.get('updateProgramID').value,
@@ -425,7 +425,7 @@ export class ChangeeventComponent implements OnInit {
      );
 
     },
-    error => {this.alert.showAlert('Error. Please Check!') }
+    error => {this.alert.showAlert('Error. Please Check!'); }
     );
   }
 
@@ -458,7 +458,7 @@ export class ChangeeventComponent implements OnInit {
        );
 
     },
-    error => {this.alert.showAlert('Event not found in database. Please Check!') }
+    error => {this.alert.showAlert('Event not found in database. Please Check!'); }
     );
   }
 }

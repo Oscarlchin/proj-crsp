@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
     private alertService: AlertService
     ) {}
 
@@ -63,17 +63,18 @@ export class LoginComponent implements OnInit {
         .subscribe(
             data => {
               if (data.error) {
-                this.alertService.showAlert(data.error);
+                // console.log(data.error);
+
                 this.loading = false;
                 this.loginForm.reset();
                 this.loginForm.markAsPristine();
                 this.loginForm.markAsUntouched();
+                this.alertService.showAlert(data.error.toString());
               } else {
                 this.router.navigate([this.returnUrl]);
               }
             },
             error => {
-                this.alertService.showAlert(error.toString());
                 this.loading = false;
                 this.loginForm.reset();
                 this.loginForm.markAsPristine();

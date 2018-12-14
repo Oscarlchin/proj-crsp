@@ -26,11 +26,11 @@ export class UseractionService {
     return this.http.get<Event[]>(`${config.BASE_API_URL}/useraction/events`) ;
   }
   likeevent(username: string , program_id: number) {
-    return this.http.put(`${config.BASE_API_URL}/useraction/` + username + '/likeevent', {program_id: program_id} );
+    return this.http.put<any>(`${config.BASE_API_URL}/useraction/` + username + '/likeevent', {program_id: program_id} );
   }
 
   unlikeevent(username: string , program_id: number) {
-    return this.http.put(`${config.BASE_API_URL}/useraction/` + username + '/unlikeevent', {program_id: program_id} );
+    return this.http.put<any>(`${config.BASE_API_URL}/useraction/` + username + '/unlikeevent', {program_id: program_id} );
   }
 
   leavecomment(username: string, program_id: number , user_comment: string) {
