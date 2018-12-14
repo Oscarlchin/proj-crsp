@@ -1,3 +1,7 @@
 <div class="mx-auto">
-<button mat-flat-button color="primary" (click)="extract()">Reload</button>
+<button mat-flat-button [disabled]="loading" color="primary" (click)="extract()">Reload</button>
+</div>
+<div class="mx-auto" *ngIf="loading">
+  <p>This may take around a minute because of processing thousands of data.</p>
+<mat-spinner></mat-spinner>
 </div>

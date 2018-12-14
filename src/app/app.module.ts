@@ -36,6 +36,7 @@ import { EventdetailComponent } from './eventdetail/eventdetail.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { ChangeuserComponent, CreateuserDialogComponent,
   UpdateuserDialogComponent, RetrieveuserDialogComponent, DeleteuserDialogComponent } from './changeuser/changeuser.component';
@@ -55,7 +56,8 @@ const modules = [
   MatCardModule,
   MatButtonModule,
   MatSnackBarModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({
