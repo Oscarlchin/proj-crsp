@@ -17,7 +17,7 @@
   <ul class="navbar-nav navbar-toggler-right">
     <li class="nav-item" *ngIf="isLogin"><a class="nav-link text-white" id="userDisplay" [(ngModel)]="userName" name="fieldName" ngDefaultControl>User: {{ userName }}</a></li>
     <li class="nav-item" *ngIf="!isLogin"><a class="nav-link text-white" [routerLink]="['#']" (click)="AdminLogin()">AdminLogin</a></li>
-    <li class="nav-item" *ngIf="isLogin" ><a class="nav-link text-white" [routerLink]="['/login']">Log Out</a></li>
+    <li class="nav-item" *ngIf="isLogin" ><a class="nav-link text-white" [routerLink]="['#']" (click)="logout()">Log Out</a></li>
   </ul>
 </div>
 </div>

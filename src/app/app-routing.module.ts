@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { LoginComponent} from './login/login.component';
-import { AuthGuard, AdminGuard } from './_guards';
+import { AuthGuard, AdminGuard, LoginGuard } from './_guards';
 import { EventslistComponent } from './eventslist/eventslist.component';
 import { AdminComponent } from './admin/admin.component';
 import { EventdetailComponent } from './eventdetail/eventdetail.component';
@@ -32,7 +32,7 @@ const routes: Routes = [
       }
   ]},
   { path: 'about', component: AboutComponent},
-  { path: 'login', component: LoginComponent},
+  { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard],
     children: [
       {path: 'changeevent', component: ChangeuserComponent },
