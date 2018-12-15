@@ -1,5 +1,9 @@
 .big {font-size: 5em;}
 
+#homeTitle {
+  background-color: #ffffff;
+}
+
 #description {
   font-size: 80%;
 }
