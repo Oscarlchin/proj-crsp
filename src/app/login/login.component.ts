@@ -39,10 +39,6 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required,
         Validators.minLength(4), Validators.maxLength(20)] ]
     });
-
-    // reset login status
-    this.authService.logout();
-
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
