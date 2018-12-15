@@ -1,3 +1,7 @@
+<!-- Name: Lai Chun Hin     SID: 1155064573
+     Name: Chan Wang Wai    SID: 1155063885
+     Name: Fong Kee Win     SID: 1155100567  -->
+
 <nav class="navbar navbar-light navbar-expand-xl bg-secondary shadow-sm">
 
 <div class="navbar-brand font-weight-bold text-white">Project CRSP</div>
@@ -14,7 +18,6 @@
     <li class="nav-item" *ngIf="isLogin"><a class="nav-link text-white" id="userDisplay" [(ngModel)]="userName" name="fieldName" ngDefaultControl><mat-icon>person</mat-icon> Username : {{ userName }}</a></li>
     <li class="nav-item" *ngIf="!isLogin"><a class="nav-link text-white" [routerLink]="['#']" (click)="AdminLogin()"><mat-icon>developer_mode</mat-icon> AdminLogin</a></li>
     <li class="nav-item" *ngIf="isLogin" ><a class="nav-link text-white" [routerLink]="['#']" (click)="logout()"><mat-icon>logout</mat-icon> Log Out</a></li>
-
   </ul>
 </div>
 </nav>

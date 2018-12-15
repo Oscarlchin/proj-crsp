@@ -1,3 +1,7 @@
+// Name: Lai Chun Hin     SID: 1155064573
+// Name: Chan Wang Wai    SID: 1155063885
+// Name: Fong Kee Win     SID: 1155100567
+
 var jwtadmin = require('./_helpers/jwt').jwtadmin;
 var dbcall = require('./_helpers/dbcall');
 var User = require('./_models/UserSchema');
@@ -77,12 +81,12 @@ module.exports = function (app){
                 url: String(req.body.url)
             });
 
-            
-          
-                
-           
+
+
+
+
                 Event.findOneAndUpdate({program_id: Number(req.body.program_id)},
-                {   
+                {
                     program_id: Number(updateevent.program_id),
                     program_name: String(updateevent.program_name),
                     district: String(updateevent.district),
@@ -100,16 +104,16 @@ module.exports = function (app){
                     max_age: Number(updateevent.max_age),
                     url: String(updateevent.url)
                 })
-              
+
                 .exec(function(err,event){
                 console.log(event);
                 if (err) errorHandler(err);
                 if (event) res.json(event);
                 else res.json({error:"event not found"});
-                });            
+                });
             });
-              
-  
+
+
     app.delete('/events/:program_id',jwtadmin,function(req,res,next){
 
           Event.findOneAndDelete({program_id: Number(req.params['program_id'])})

@@ -1,3 +1,7 @@
+// Name: Lai Chun Hin     SID: 1155064573
+// Name: Chan Wang Wai    SID: 1155063885
+// Name: Fong Kee Win     SID: 1155100567
+
 import { Component, OnInit, Inject } from '@angular/core';
 import { AlertService } from '../_services';
 import { EventService } from '../_services';
@@ -365,7 +369,7 @@ export class ChangeeventComponent implements OnInit {
        if (event == null) {
         {this.alert.showAlert('Event not found in database. Please Check!'); }
        } else {
-        
+
      }
 
      this.openRetrieveEventDialog(
@@ -399,7 +403,7 @@ export class ChangeeventComponent implements OnInit {
     this.deleteOneEventOutput = '';
     this.eventService.delete(this.deleteOneEventForm.get('deleteOneProgramID').value).subscribe((event) => {
       console.log(event);
-     
+
 
       this.openDeleteEventDialog(
         event['program_id'],
