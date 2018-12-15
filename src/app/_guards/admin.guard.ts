@@ -13,7 +13,7 @@ export class AdminGuard implements CanActivate {
             // logged in so return true
             return true;
         }
-        this.alertservice.showAlert('You are not logged in !');
+        this.alertservice.showAlert('You are not logged in!');
         // not logged in so redirect to login page
         this.router.navigate(['/login']);
         return false;
