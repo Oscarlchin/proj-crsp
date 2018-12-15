@@ -45,4 +45,9 @@ export class NavComponent implements OnInit {
             });
 
   }
+  logout() {
+    // reset login status
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

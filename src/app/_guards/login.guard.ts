@@ -3,19 +3,18 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AlertService } from '../_services';
 
 @Injectable()
-export class AdminGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
 
     constructor(private router: Router,
       private alertservice: AlertService) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if (localStorage.getItem('adminUser')) {
-            // logged in so return true
-            return true;
+        if ((localStorage.getItem('adminUser') !== null ) || (localStorage.getItem('currentUser') !== null )) {
+         this.alertservice.showAlert('You have logged in!');
+         this.router.navigate(['/home']);
+
+         return false;
         }
-        this.alertservice.showAlert('You are not logged in !');
-        // not logged in so redirect to login page
-        this.router.navigate(['/login']);
-        return false;
+        return true;
     }
 }

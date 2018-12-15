@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { EventslistComponent } from './eventslist/eventslist.component';
 
 
-import { AuthGuard, AdminGuard } from './_guards';
+import { AuthGuard, AdminGuard, LoginGuard } from './_guards';
 import {
   AuthService, UserService, EventService,
   UseractionService, AlertService, UploadService, FlushService
@@ -114,6 +114,7 @@ const modules = [
   providers: [
     AuthGuard,
     AdminGuard,
+    LoginGuard,
     AuthService,
     EventService,
     UserService,
