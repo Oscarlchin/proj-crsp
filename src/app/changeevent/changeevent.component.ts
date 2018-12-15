@@ -1,15 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { UserService, AlertService } from '../_services';
-import { User } from '../_models';
+import { AlertService } from '../_services';
 import { EventService } from '../_services';
 import { Event } from '../_models';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { identifierModuleUrl } from '@angular/compiler';
-import { setDOM } from '@angular/platform-browser/src/dom/dom_adapter';
-import { EDEADLK } from 'constants';
-import { min, max } from 'rxjs/operators';
-import { url } from 'inspector';
 
 export interface CreateEventDialogData {
   newprogram_id: Number;
@@ -114,7 +108,7 @@ export class ChangeeventComponent implements OnInit {
   ngOnInit() {
 
     this.registerEventForm = this.formbuilder.group({
-      newProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newProgramID : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       newProgramName : ['', [Validators.required]],
       newVenue : ['', [Validators.required]],
       newDistrict : ['', [Validators.required]],
@@ -124,17 +118,17 @@ export class ChangeeventComponent implements OnInit {
       newStarttime : ['', [Validators.required]],
       newEndtime : ['', [Validators.required]],
       newTypename : ['', [Validators.required]],
-      newFee : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      newQuota : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      newQuotaleft : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      newMinimumage : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      newMaximumage : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      newFee : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      newQuota : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      newQuotaleft : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      newMinimumage : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      newMaximumage : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       newURL : ['', [Validators.required]]
     });
 
     this.updateEventForm = this.formbuilder.group({
 
-      updateProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateProgramID : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       updateProgramName : ['', [Validators.required]],
       updateVenue : ['', [Validators.required]],
       updateDistrict : ['', [Validators.required]],
@@ -144,27 +138,27 @@ export class ChangeeventComponent implements OnInit {
       updateStarttime : ['', [Validators.required]],
       updateEndtime : ['', [Validators.required]],
       updateTypename : ['', [Validators.required]],
-      updateFee : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      updateQuota : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      updateQuotaleft : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      updateMinimumage :['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-      updateMaximumage : ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      updateFee : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      updateQuota : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      updateQuotaleft : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      updateMinimumage : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      updateMaximumage : ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       updateURL : ['', [Validators.required]]
     });
 
     this.getOneEventForm = this.formbuilder.group({
-      getOneProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
+      getOneProgramID : ['', [Validators.required, Validators.pattern('^[0-9]*$')]]
     });
 
     this.deleteOneEventForm = this.formbuilder.group({
-      deleteOneProgramID : ['', [Validators.required, Validators.pattern("^[0-9]*$")]]
+      deleteOneProgramID : ['', [Validators.required, Validators.pattern('^[0-9]*$')]]
     });
   }
 
-  get registerEventf() { return this.registerEventForm.controls;}
-  get updateEventf() { return this.updateEventForm.controls;}
-  get getOneEventf() { return this.getOneEventForm.controls;}
-  get deleteOneEventf() { return this.deleteOneEventForm.controls;}
+  get registerEventf() { return this.registerEventForm.controls; }
+  get updateEventf() { return this.updateEventForm.controls; }
+  get getOneEventf() { return this.getOneEventForm.controls; }
+  get deleteOneEventf() { return this.deleteOneEventForm.controls; }
 
   openCreateEventDialog(id, n, d, v, sd, ed, diw, st, et, tn, f, q, ql, mina, maxa, u) {
     this.dialog.open(CreateeventDialogComponent, {
@@ -283,13 +277,6 @@ export class ChangeeventComponent implements OnInit {
     console.log(newEvent);
       this.eventService.create(newEvent).subscribe((newinfo) => {
       console.log(newinfo);
-    //if (this.registerEventForm.get('newProgramID').value === ''
-    //|| this.registerEventForm.get('newProgramName').value === ''
-    //|| this.registerEventForm.get('newDistrict').value === ''
-    //|| this.registerEventForm.get('newVenue').value === ''
-     //) {
-      //this.createEventOutput = 'Please enter something!';
-
 
       this.openCreateEventDialog(
       this.registerEventForm.get('newProgramID').value,
@@ -311,7 +298,7 @@ export class ChangeeventComponent implements OnInit {
       );
     },
 
-  error => {this.alert.showAlert('Event with this ID already exist!') }
+  error => {this.alert.showAlert('Event with this ID already exist!'); }
   );
   }
 
@@ -340,17 +327,9 @@ export class ChangeeventComponent implements OnInit {
          };
 
          this.eventService.update(updateEvent).subscribe((event) => {
-         // if (this.updateEventForm.get('preUpdateProgramID').value === ''
-         // || this.updateEventForm.get('updateProgramID').value === ''
-          //|| this.updateEventForm.get('updateProgramName').value === ''
-         // || this.updateEventForm.get('updateDistrict').value === ''
-         // || this.updateEventForm.get('updateVenue').value === '') {
-         //   this.updateEventOutput = 'Please enter something!';
            if (event.error) {
-            this.alert.showAlert('Event not found in database. Please Check!')
+            this.alert.showAlert('Event not found in database. Please Check!');
           } else {
-
-
               this.openUpdateEventDialog(
                 this.updateEventForm.get('updateProgramID').value,
                 this.updateEventForm.get('updateProgramName').value,
@@ -368,13 +347,11 @@ export class ChangeeventComponent implements OnInit {
                 this.updateEventForm.get('updateMinimumage').value,
                 this.updateEventForm.get('updateMaximumage').value,
                 this.updateEventForm.get('updateURL').value
-                );
-         }
+              );
+          }
         },
         error => {this.alert.showAlert('Error. Please Check!'); }
-         );
-
-
+     );
   }
   getOneEvent() {
     if (this.getOneEventForm.invalid) {
@@ -456,7 +433,6 @@ export class ChangeeventComponent implements OnInit {
         event['max_age'],
         event['url']
        );
-
     },
     error => {this.alert.showAlert('Event not found in database. Please Check!'); }
     );

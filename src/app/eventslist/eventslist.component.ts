@@ -19,7 +19,7 @@ export interface Field {
 })
 export class EventslistComponent implements OnInit {
    dataLoading = false;
-   selected: number = 0;
+   selected = 0;
   fields: Field[] = [
     {value: 0, viewValue: 'All'},
     {value: 1, viewValue: 'Name'},
@@ -88,9 +88,9 @@ export class EventslistComponent implements OnInit {
    };
   }
 
-  //refresh() {
+  // refresh() {
   //  this.useraction.getevent().subscribe(data => {});
-  //}
+  // }
 
   applyFilter(filterValue: string) {
     const customf = {

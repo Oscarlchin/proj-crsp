@@ -8,7 +8,7 @@ import {Event } from '../_models';
 })
 export class MyfaveventsComponent implements OnInit {
   favevents: Event[] = [];
-  hasfav:boolean = false;
+  hasfav = false;
   constructor(private authservice: AuthService,
     private useractionservice: UseractionService) { }
 
