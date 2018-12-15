@@ -7,7 +7,7 @@ import { FlushService , AlertService } from '../_services';
   styleUrls: ['./extract.component.css']
 })
 export class ExtractComponent implements OnInit {
-  loading: boolean = false;
+  loading = false;
   constructor(private flushservice: FlushService,
     private alertservice: AlertService ) { }
 

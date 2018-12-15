@@ -35,8 +35,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AdminGuard],
     children: [
-      {path: 'changeevent', component: ChangeuserComponent },
-      {path: 'changeuser', component: ChangeeventComponent },
+      {path: 'changeuser', component: ChangeuserComponent },
+      {path: 'changeevent', component: ChangeeventComponent },
       {path: 'uploadcsv', component: UploadcsvComponent },
       {path: 'flush', component: ExtractComponent}
   ]},

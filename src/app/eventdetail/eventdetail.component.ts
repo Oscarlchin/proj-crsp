@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UseractionService, AuthService, AlertService } from '../_services';
-import { EventComment, Event, User, Comment } from '../_models';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { Event, Comment } from '../_models';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-eventdetail',
@@ -16,7 +16,7 @@ export class EventdetailComponent implements OnInit {
   eventid: number;
   currentusercomment = '';
   isLike: boolean;
-  isSubmit: boolean = false;
+  isSubmit = false;
   constructor(  private route: ActivatedRoute,
     private router: Router,
     private useractionservice: UseractionService,
@@ -67,7 +67,7 @@ export class EventdetailComponent implements OnInit {
   }
 
   onSubmit() {
-    this.isSubmit=true;
+    this.isSubmit = true;
     if (this.commentForm.invalid) {
       return;
     }

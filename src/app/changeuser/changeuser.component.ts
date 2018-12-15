@@ -1,9 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { UserService, AlertService } from '../_services';
 import { User } from '../_models';
-import { EventService } from '../_services';
-import { Event } from '../_models';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export interface CreateUserDialogData {

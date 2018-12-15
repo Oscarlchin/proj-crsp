@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services';
-import { User } from '../_models';
 import { EventService } from '../_services';
-import { Event } from '../_models';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { ThrowStmt } from '@angular/compiler';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
