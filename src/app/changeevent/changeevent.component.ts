@@ -365,23 +365,7 @@ export class ChangeeventComponent implements OnInit {
        if (event == null) {
         {this.alert.showAlert('Event not found in database. Please Check!'); }
        } else {
-        this.getOneEventOutput =
-            'Program ID: ' + event['program_id'] + '/n' +
-            'Program Name: ' + event['program_name'] + '/n' +
-            'District: ' +  event['district'] + '/n' +
-            'Venue: ' +  event['venue'] + '/n' +
-            'Start Date: ' +  event['start_date'] + '/n' +
-            'End Date: ' +   event['end_date'] + '/n' +
-            'Day in week: ' +   event['dayinweek'] + '/n' +
-            'Start Time: ' +   event['start_time'] + '/n' +
-            'End Time: ' +   event['end_time'] + '/n' +
-            'Type Name: ' +   event['type_name'] + '/n' +
-            'Fee: ' +   event['fee'] + '/n' +
-            'Quota: ' +   event['quota'] + '/n' +
-            'Quota Left: ' +   event['quota_left'] + '/n' +
-            'Minimum Age: ' +   event['min_age'] + '/n' +
-            'Maximum Age: ' +  event['max_age'] + '/n' +
-            'URL: ' +   event['url'];
+        
      }
 
      this.openRetrieveEventDialog(
@@ -415,7 +399,7 @@ export class ChangeeventComponent implements OnInit {
     this.deleteOneEventOutput = '';
     this.eventService.delete(this.deleteOneEventForm.get('deleteOneProgramID').value).subscribe((event) => {
       console.log(event);
-      this.deleteOneEventOutput = 'Event deleted!';
+     
 
       this.openDeleteEventDialog(
         event['program_id'],

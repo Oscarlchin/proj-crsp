@@ -154,15 +154,15 @@ export class ChangeuserComponent implements OnInit {
 //          || this.updateForm.get('updateNewUsername').value === ''
 //          || this.updateForm.get('updateNewPassword').value === '') {
 //            this.updateOutput = 'Please enter something!';
-          if (event == null) {
-            {this.alert.showAlert('User not found on database. Please Check!'); }
+          if (event==null){
+            {this.alert.showAlert('User not found in database. Please Check!'); }
           } else {
             this.openUpdateUserDialog(this.updateForm.get('preUpdateUsername').value,
             this.updateForm.get('updateNewUsername').value, this.updateForm.get('updateNewPassword').value);
           }
         },
         error => {this.alert.showAlert(
-          'Either preUpdateUsername not found or updateNewUsername is identical to existing username, please change!'); }
+          'Either previous username not found or new username already exist!'); }
          );
   }
 
