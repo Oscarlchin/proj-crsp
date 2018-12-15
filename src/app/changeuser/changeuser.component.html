@@ -11,7 +11,7 @@
       </mat-expansion-panel-header>
 
 <form [formGroup]="registerForm">
-      <mat-form-field class="form-group twoalign" (ngSubmit)="onSubmit()">
+      <mat-form-field class="form-group twoalign">
         <input matInput placeholder="New Username" required class="form-control" formControlName="newUsername" />
             <div *ngIf="registerf.newUsername.errors">
             <mat-error *ngIf="registerf.newUsername.errors.required">Username is required</mat-error>
