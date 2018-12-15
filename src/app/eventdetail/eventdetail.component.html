@@ -2,7 +2,7 @@
 <div fxFlex="50%">
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>Event Details</span>
+      <mat-icon>event</mat-icon><span> Event Details</span>
     <span class="example-spacer"></span>
     <button matTooltip="{{isLike ? 'Remove from Favorite' : 'Add to Favorite'}}" matTooltipPosition="above" layout-align="end center" (click)="onclicklike()" mat-fab color="{{isLike ? 'accent' : 'primary'}}">
         <mat-icon [hidden]="!isLike" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
@@ -67,7 +67,7 @@
 <div fxFlex>
     <mat-toolbar>
         <mat-toolbar-row>
-<p>Event Comments</p>
+            <mat-icon>comment</mat-icon><p class="my-auto"> Event Comments</p>
 </mat-toolbar-row>
 </mat-toolbar>
 <div class="container commentblk">
@@ -75,11 +75,11 @@
     <mat-card *ngFor="let comment of comments">
         <mat-card-header>
           <mat-card-title>
-            <h6>{{ comment.username }}</h6>
+            <h6><mat-icon>person</mat-icon> {{ comment.username }}</h6>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>{{ comment.usercomment }}</p>
+          <p><mat-icon>chat_bubble_outline</mat-icon> {{ comment.usercomment }}</p>
         </mat-card-content>
 
     </mat-card>
