@@ -13,11 +13,7 @@
   <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     <li class="nav-item" *ngIf="isLogin"><a class="nav-link text-white" id="userDisplay" [(ngModel)]="userName" name="fieldName" ngDefaultControl><mat-icon>person</mat-icon> Username : {{ userName }}</a></li>
     <li class="nav-item" *ngIf="!isLogin"><a class="nav-link text-white" [routerLink]="['#']" (click)="AdminLogin()"><mat-icon>developer_mode</mat-icon> AdminLogin</a></li>
-<<<<<<< HEAD
-    <li class="nav-item" *ngIf="isLogin" ><a class="nav-link text-white" [routerLink]="['login']" (click)="logout()"><mat-icon>logout</mat-icon> Log Out</a></li>
-=======
     <li class="nav-item" *ngIf="isLogin" ><a class="nav-link text-white" [routerLink]="['#']" (click)="logout()"><mat-icon>logout</mat-icon> Log Out</a></li>
->>>>>>> 8b4ef782bab2bb3f49a59155ac8382e07b6906c6
   </ul>
 </div>
 </nav>
