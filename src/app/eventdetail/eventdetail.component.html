@@ -4,7 +4,7 @@
   <mat-toolbar-row>
     <span>Event Details</span>
     <span class="example-spacer"></span>
-    <button layout-align="end center" (click)="onclicklike()" mat-fab color="{{isLike ? 'accent' : 'primary'}}">
+    <button matTooltip="{{isLike ? 'Remove from Favorite' : 'Add to Favorite'}}" matTooltipPosition="above" layout-align="end center" (click)="onclicklike()" mat-fab color="{{isLike ? 'accent' : 'primary'}}">
         <mat-icon [hidden]="!isLike" aria-label="Example icon-button with a heart icon">favorite</mat-icon>
         {{isLike ? '' : 'Like'}}
       </button>
@@ -108,4 +108,4 @@
 </div>
 </div>
 
-<button mat-button (click)="gotoevents()">Back to Event List</button>
+<button mat-raised-button color="primary" (click)="gotoevents()"><mat-icon>arrow_back</mat-icon>Back to Event List</button>
