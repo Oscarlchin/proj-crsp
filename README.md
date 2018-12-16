@@ -34,6 +34,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 # Package used
 
 FE: Angular, Bootstrap, Angular Material
+
 BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors, bcrypt, multer, fast-csv
 
 
