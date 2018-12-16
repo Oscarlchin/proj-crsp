@@ -1,6 +1,7 @@
 # ProjCrsp
 
  “How to” guideline of the project
+
     User:
     i.	Login with your username and password.
     ii.	All events will be displayed by default, you can search for your desired event by choosing a field (Name, type, etc.), then typing the keyword such as ‘Badminton’.
@@ -32,6 +33,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ##Package used
 FE: Angular, Bootstrap, Angular Material
+
 BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors, bcrypt, multer, fast-csv
 
 
