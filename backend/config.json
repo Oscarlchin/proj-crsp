@@ -1,8 +1,8 @@
 {
-  "secret": "THIS IS",
-  "dbURL": "mongodb+srv://cluster0-uowod.mongodb.net/proj-crsp",
-  "dbuser": "cadmin",
-  "dbpass": "8yKdsSjN23mhJTos",
+  "secret": "secret",
+  "dbURL": "dburl",
+  "dbuser": "dbuser",
+  "dbpass": "dbpassword",
   "dbName": "proj-crsp",
   "adminusername": "admin",
   "adminpwd": "admin"
