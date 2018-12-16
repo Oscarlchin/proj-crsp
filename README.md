@@ -31,13 +31,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
-#Package used
+# Package used
 
 FE: Angular, Bootstrap, Angular Material
 BE: nodejs, express, mongoose, body-parser, passport, passport-local, cors, bcrypt, multer, fast-csv
 
 
-Reference:
+# Reference
   1. http://jasonwatmore.com/post/2018/05/16/angular-6-user-registration-and-login-example-tutorial
   2. https://medium.freecodecamp.org/learn-how-to-handle-authentication-with-node-using-passport-js-4a56ed18e81e
   3. http://jasonwatmore.com/post/2018/08/06/nodejs-jwt-authentication-tutorial-with-example-api
